@@ -4,63 +4,77 @@
     {
       "protein": "KRAS",
       "pdb_id": "9IAY",
-      "pdb_file": "structures/9IAY.pdb",
+      "pdb_file": "structures\\9IAY.pdb",
       "ligands": [
         {
-          "name": "Daraxonrasib (RMC-6236)",
+          "name": "Daraxonrasib",
           "smiles": "CCn1c(-c2cc(N3CCN(C)CC3)cnc2C(C)OC)c2c3cc(ccc31)-c1csc(n1)CC(NC(=O)C1CC1C)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
           "mechanism": "RAS(ON) multi-selective inhibitor",
-          "fda_status": "Breakthrough therapy (PDAC)",
+          "fda_status": "Breakthrough Therapy (PDAC)",
           "source": "pubchem_cid_164726578"
+        },
+        {
+          "name": "RP03707",
+          "smiles": "C#Cc1c(F)ccc2cc(O)cc(-c3ncc4c(N5CC6CCC(C5)N6)nc(OCC5(CN6CCC7(CC6)CC(N6CCC(c8cc9c(cc8F)c(N8CCC(=O)NC8=O)nn9C)CC6)C7)CC5)nc4c3F)c12",
+          "mechanism": "Selective KRAS G12D inhibitor",
+          "fda_status": "Preclinical",
+          "source": "pubchem_cid_174313733"
         },
         {
           "name": "Tipifarnib",
           "smiles": "Cn1cncc1C(N)(c1ccc(Cl)cc1)c1ccc2c(c1)c(-c1cccc(Cl)c1)cc(=O)n2C",
           "mechanism": "Farnesyltransferase inhibitor",
-          "fda_status": "Phase II (no approval)",
+          "fda_status": "Phase II failure",
           "source": "pubchem_cid_159324"
-        },
-        {
-          "name": "Simvastatin",
-          "smiles": "CCC(C)(C)C(=O)OC1CC(C)C=C2C=CC(C)C(CCC3CC(O)CC(=O)O3)C21",
-          "mechanism": "Inhibits KRAS prenylation",
-          "fda_status": "Approved for hypercholesterolemia",
-          "source": "pubchem_cid_54454"
-        },
-        {
-          "name": "Metformin",
-          "smiles": "CN(C)C(=N)N=C(N)N",
-          "mechanism": "Activates AMPK inhibiting KRAS-driven proliferation",
-          "fda_status": "Approved for type 2 diabetes",
-          "source": "pubchem_cid_4091"
-        },
-        {
-          "name": "Aspirin",
-          "smiles": "CC(=O)Oc1ccccc1C(=O)O",
-          "mechanism": "Blocks NF-κB pathway downstream of KRAS",
-          "fda_status": "Approved for anti-inflammatory use",
-          "source": "pubchem_cid_2244"
-        },
-        {
-          "name": "Losartan",
-          "smiles": "CCCCc1nc(Cl)c(CO)n1Cc1ccc(-c2ccccc2-c2nn[nH]n2)cc1",
-          "mechanism": "Disrupts KRAS-fibroblast activation",
-          "fda_status": "Approved for hypertension",
-          "source": "pubchem_cid_3961"
-        },
-        {
-          "name": "Itraconazole",
-          "smiles": "CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn6)(c6ccc(Cl)cc6Cl)O5)cc4)CC3)cc2)c1=O",
-          "mechanism": "Inhibits KRAS-GLI1 axis and CD44-mediated angiogenesis",
-          "fda_status": "Approved for antifungal use",
-          "source": "pubchem_cid_55283"
         },
         {
           "name": "Disulfiram",
           "smiles": "CCN(CC)C(=S)SSC(=S)N(CC)CC",
-          "mechanism": "Chelates copper to block KRAS activity",
-          "fda_status": "Approved for alcohol aversion",
+          "mechanism": "Inhibits KRAS-driven proliferation via disulfiram-copper complex",
+          "fda_status": "FDA-approved for alcohol use disorder",
           "source": "pubchem_cid_3117"
+        },
+        {
+          "name": "Metformin",
+          "smiles": "CN(C)C(=N)N=C(N)N",
+          "mechanism": "Suppresses KRAS-mutant tumor growth by activating AMPK",
+          "fda_status": "FDA-approved for type 2 diabetes",
+          "source": "pubchem_cid_4091"
+        },
+        {
+          "name": "Simvastatin",
+          "smiles": "CCC(C)(C)C(=O)OC1CC(C)C=C2C=CC(C)C(CCC3CC(O)CC(=O)O3)C21",
+          "mechanism": "Blocks prenylation of KRAS",
+          "fda_status": "FDA-approved for hypercholesterolemia",
+          "source": "pubchem_cid_54454"
+        },
+        {
+          "name": "Itraconazole",
+          "smiles": "CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn6)(c6ccc(Cl)cc6Cl)O5)cc4)CC3)cc2)c1=O",
+          "mechanism": "Inhibits KRAS-dependent hedgehog signaling",
+          "fda_status": "FDA-approved for fungal infections",
+          "source": "pubchem_cid_55283"
+        },
+        {
+          "name": "Aspirin",
+          "smiles": "CC(=O)Oc1ccccc1C(=O)O",
+          "mechanism": "Inhibits PGE2-mediated KRAS activation",
+          "fda_status": "FDA-approved for anti-inflammatory use",
+          "source": "pubchem_cid_2244"
+        },
+        {
+          "name": "Verapamil",
+          "smiles": "COc1ccc(CCN(C)CCCC(C#N)(c2ccc(OC)c(OC)c2)C(C)C)cc1OC",
+          "mechanism": "Inhibits calcium-dependent KRAS membrane trafficking",
+          "fda_status": "FDA-approved for hypertension",
+          "source": "pubchem_cid_2520"
+        },
+        {
+          "name": "Chloroquine",
+          "smiles": "CCN(CC)CCCC(C)Nc1ccnc2cc(Cl)ccc12",
+          "mechanism": "Promotes autophagic clearance of oncogenic KRAS",
+          "fda_status": "FDA-approved for malaria",
+          "source": "pubchem_cid_2719"
         },
         {
           "name": "(2R,3S)-N-[(2S)-1-[[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N,2-dimethyl-1-prop-2-enoylpyrrolidine-3-carboxamide",
@@ -417,49 +431,28 @@
     {
       "protein": "CD44",
       "pdb_id": "4PZ3",
-      "pdb_file": "structures/4PZ3.pdb",
+      "pdb_file": "structures\\4PZ3.pdb",
       "ligands": [
         {
           "name": "Propranolol",
           "smiles": "CC(C)NCC(O)COc1cccc2ccccc12",
-          "mechanism": "Reduces CD44-mediated stemness",
-          "fda_status": "Approved for hypertension",
+          "mechanism": "Disrupts CD44-HA interactions",
+          "fda_status": "FDA-approved for hypertension",
           "source": "pubchem_cid_4946"
         },
         {
-          "name": "Doxycycline",
-          "smiles": "CC1c2cccc(O)c2C(O)=C2C(=O)C3(O)C(O)=C(C(N)=O)C(=O)C(N(C)C)C3C(O)C21",
-          "mechanism": "Inhibits CD44-dependent invasion",
-          "fda_status": "Approved for infections",
-          "source": "pubchem_cid_54671203"
-        },
-        {
-          "name": "Itraconazole",
-          "smiles": "CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn6)(c6ccc(Cl)cc6Cl)O5)cc4)CC3)cc2)c1=O",
-          "mechanism": "Inhibits KRAS-GLI1 axis and CD44-mediated angiogenesis",
-          "fda_status": "Approved for antifungal use",
-          "source": "pubchem_cid_55283"
-        },
-        {
-          "name": "Thalidomide",
-          "smiles": "O=C1CCC(N2C(=O)c3ccccc3C2=O)C(=O)N1",
-          "mechanism": "Downregulates CD44 expression",
-          "fda_status": "Approved for multiple myeloma",
-          "source": "pubchem_cid_5426"
+          "name": "Thioridazine",
+          "smiles": "CSc1ccc2c(c1)N(CCC1CCCCN1C)c1ccccc1S2",
+          "mechanism": "Targets CD44+ cancer stem cells",
+          "fda_status": "FDA-approved for schizophrenia",
+          "source": "pubchem_cid_5452"
         },
         {
           "name": "Cimetidine",
           "smiles": "CN=C(NC#N)NCCSCc1nc[nH]c1C",
-          "mechanism": "Blocks CD44-E-selectin adhesion",
-          "fda_status": "Approved for GERD",
+          "mechanism": "Inhibits CD44-mediated leukocyte adhesion",
+          "fda_status": "FDA-approved for peptic ulcers",
           "source": "pubchem_cid_2756"
-        },
-        {
-          "name": "Atenolol",
-          "smiles": "CC(C)NCC(O)COc1ccc(CC(N)=O)cc1",
-          "mechanism": "Suppresses stress-induced CD44 upregulation",
-          "fda_status": "Approved for hypertension",
-          "source": "pubchem_cid_2249"
         },
         {
           "name": "3a,4,5,9b-tetrahydro-3H-cyclopenta[c]quinoline-4,8-dicarboxylic acid",
@@ -481,20 +474,6 @@
           "mechanism": "Bioactive compound — discovered via PubChem target search",
           "fda_status": "Unknown — requires verification",
           "source": "pubchem_cid_90655423"
-        }
-      ]
-    },
-    {
-      "protein": "CA19-9",
-      "pdb_id": "6XUN",
-      "pdb_file": "structures/6XUN.pdb",
-      "ligands": [
-        {
-          "name": "Cimetidine",
-          "smiles": "CN=C(NC#N)NCCSCc1nc[nH]c1C",
-          "mechanism": "Blocks CD44-E-selectin adhesion",
-          "fda_status": "Approved for GERD",
-          "source": "pubchem_cid_2756"
         }
       ]
     }

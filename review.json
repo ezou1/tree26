@@ -1,22 +1,40 @@
 {
   "drugs": [
     {
-      "drug": "VS-7375 (GFH375)",
+      "drug": "VS-7375",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Oral KRAS G12D ON/OFF inhibitor",
-      "fda_status": "Fast track (PDAC)",
-      "category": "repurposing_candidate"
+      "mechanism": "KRAS G12D ON/OFF inhibitor",
+      "fda_status": "Fast Track (PDAC)",
+      "category": "mainstream"
     },
     {
-      "drug": "Daraxonrasib (RMC-6236)",
+      "drug": "Daraxonrasib",
       "proteins": [
         "KRAS"
       ],
       "mechanism": "RAS(ON) multi-selective inhibitor",
-      "fda_status": "Breakthrough therapy (PDAC)",
-      "category": "repurposing_candidate"
+      "fda_status": "Breakthrough Therapy (PDAC)",
+      "category": "mainstream"
+    },
+    {
+      "drug": "ASP3082",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "KRAS G12D degrader",
+      "fda_status": "Preclinical",
+      "category": "mainstream"
+    },
+    {
+      "drug": "RP03707",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Selective KRAS G12D inhibitor",
+      "fda_status": "Preclinical",
+      "category": "mainstream"
     },
     {
       "drug": "Tipifarnib",
@@ -24,16 +42,16 @@
         "KRAS"
       ],
       "mechanism": "Farnesyltransferase inhibitor",
-      "fda_status": "Phase II (no approval)",
-      "category": "repurposing_candidate"
+      "fda_status": "Phase II failure",
+      "category": "mainstream"
     },
     {
-      "drug": "Simvastatin",
+      "drug": "Disulfiram",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Inhibits KRAS prenylation",
-      "fda_status": "Approved for hypercholesterolemia",
+      "mechanism": "Inhibits KRAS-driven proliferation via disulfiram-copper complex",
+      "fda_status": "FDA-approved for alcohol use disorder",
       "category": "repurposing_candidate"
     },
     {
@@ -41,17 +59,17 @@
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Activates AMPK inhibiting KRAS-driven proliferation",
-      "fda_status": "Approved for type 2 diabetes",
+      "mechanism": "Suppresses KRAS-mutant tumor growth by activating AMPK",
+      "fda_status": "FDA-approved for type 2 diabetes",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Aspirin",
+      "drug": "Simvastatin",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Blocks NF-κB pathway downstream of KRAS",
-      "fda_status": "Approved for anti-inflammatory use",
+      "mechanism": "Blocks prenylation of KRAS",
+      "fda_status": "FDA-approved for hypercholesterolemia",
       "category": "repurposing_candidate"
     },
     {
@@ -59,80 +77,68 @@
       "proteins": [
         "CD44"
       ],
-      "mechanism": "Reduces CD44-mediated stemness",
-      "fda_status": "Approved for hypertension",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "Doxycycline",
-      "proteins": [
-        "CD44"
-      ],
-      "mechanism": "Inhibits CD44-dependent invasion",
-      "fda_status": "Approved for infections",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "Losartan",
-      "proteins": [
-        "KRAS"
-      ],
-      "mechanism": "Disrupts KRAS-fibroblast activation",
-      "fda_status": "Approved for hypertension",
+      "mechanism": "Disrupts CD44-HA interactions",
+      "fda_status": "FDA-approved for hypertension",
       "category": "repurposing_candidate"
     },
     {
       "drug": "Itraconazole",
       "proteins": [
-        "KRAS",
-        "CD44"
+        "KRAS"
       ],
-      "mechanism": "Inhibits KRAS-GLI1 axis and CD44-mediated angiogenesis",
-      "fda_status": "Approved for antifungal use",
+      "mechanism": "Inhibits KRAS-dependent hedgehog signaling",
+      "fda_status": "FDA-approved for fungal infections",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Thalidomide",
-      "proteins": [
-        "CD44"
-      ],
-      "mechanism": "Downregulates CD44 expression",
-      "fda_status": "Approved for multiple myeloma",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "Disulfiram",
+      "drug": "Aspirin",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Chelates copper to block KRAS activity",
-      "fda_status": "Approved for alcohol aversion",
+      "mechanism": "Inhibits PGE2-mediated KRAS activation",
+      "fda_status": "FDA-approved for anti-inflammatory use",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Thioridazine",
+      "proteins": [
+        "CD44"
+      ],
+      "mechanism": "Targets CD44+ cancer stem cells",
+      "fda_status": "FDA-approved for schizophrenia",
       "category": "repurposing_candidate"
     },
     {
       "drug": "Cimetidine",
       "proteins": [
-        "CD44",
-        "CA19-9"
+        "CD44"
       ],
-      "mechanism": "Blocks CD44-E-selectin adhesion",
-      "fda_status": "Approved for GERD",
+      "mechanism": "Inhibits CD44-mediated leukocyte adhesion",
+      "fda_status": "FDA-approved for peptic ulcers",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Atenolol",
+      "drug": "Verapamil",
       "proteins": [
-        "CD44"
+        "KRAS"
       ],
-      "mechanism": "Suppresses stress-induced CD44 upregulation",
-      "fda_status": "Approved for hypertension",
+      "mechanism": "Inhibits calcium-dependent KRAS membrane trafficking",
+      "fda_status": "FDA-approved for hypertension",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Chloroquine",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Promotes autophagic clearance of oncogenic KRAS",
+      "fda_status": "FDA-approved for malaria",
       "category": "repurposing_candidate"
     }
   ],
   "cancer_type": "pancreatic cancer",
   "protein_targets": [
     "KRAS",
-    "CD44",
-    "CA19-9"
+    "CD44"
   ]
 }

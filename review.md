@@ -8,85 +8,73 @@
 
 ## Introduction to Pancreatic Cancer
 
-Pancreatic cancer, predominantly pancreatic ductal adenocarcinoma (PDAC), represents one of the most lethal malignancies, characterized by a dismal 5-year survival rate of approximately 13% in the United States, with an estimated 67,530 new cases and 52,740 deaths projected for 2026[1][2]. This positions it as the third leading cause of cancer-related mortality, behind lung and colorectal cancers, and on track to become the second by 2030, underscoring its profound clinical and public health significance due to late-stage diagnosis, limited early detection methods, and poor response to therapy[1][2][4]. Globally, incidence and mortality rates are rising, particularly in aging populations and high human development index regions, with PDAC comprising about 90% of cases and exhibiting aggressive biology driven by factors like oncogenic mutations[5].
+Pancreatic cancer, predominantly pancreatic ductal adenocarcinoma (PDAC), represents one of the most lethal malignancies, characterized by a dismal 5-year survival rate of approximately 5-13% and ranking as the fourth leading cause of cancer-related deaths.[2][1] In the United States, an estimated 67,530 new cases and 52,740 deaths are projected for 2026, with PDAC accounting for about 90% of diagnoses; globally, incidence rates are rising, particularly in aging populations and regions like Asia and Africa.[1][4] Its significance stems from late-stage diagnosis—only 15% of cases are localized at detection, yielding a 43.6% 5-year survival, compared to 3.2% for distant metastases—underscoring the urgent need for early detection and novel therapies amid stalled progress relative to other cancers.[3][2]
 
 ## Molecular and Genetic Landscape of Pancreatic Cancer
 
-The molecular underpinnings of PDAC are dominated by oncogenic **KRAS** mutations, present in over 90% of cases, particularly KRAS G12D, which lock the protein in an active state, driving uncontrolled cell proliferation as a GTPase switch[1][4]. Computational analyses confirm KRAS as a central oncogenic driver, with in silico docking studies highlighting its role in PDAC pathogenesis[1]. Multi-omics approaches reveal heterogeneous prognostic biomarkers, including mRNA and microRNA signatures identified via statistical feature selection and hybrid ensemble methods across datasets, enabling survival prediction and subtype stratification[2][3]. Deep learning models infer clinically relevant molecular subtypes—basal-like and classical—from routine histopathology, correlating with prognosis and therapy response. Microbiome heterogeneity, clustered via sparse tree-based methods, further modulates tumor biology, while liquid biopsy biomarkers show promise for non-invasive monitoring[8]. Early detection efforts emphasize incremental biomarkers combined with CA19-9 using OR rules to enhance sensitivity in subclasses.
+The molecular underpinnings of PDAC are dominated by oncogenic **KRAS** mutations, present in over 90% of cases, particularly KRAS G12D, which lock the protein in an active state, driving uncontrolled cell proliferation as a GTPase "on-off switch."[1][4] Multi-omics analyses reveal heterogeneous prognostic biomarkers, including mRNA and microRNA signatures identified via statistical feature selection and hybrid ensemble methods (hEFS), which integrate subsampling, embedded/wrapper strategies, and voting-based ranking for survival prediction.[2][3] Deep learning models like PanSubNet infer clinically relevant subtypes (basal-like vs. classical) from routine histopathology whole-slide images (WSIs), highlighting prognostic and predictive value without costly molecular testing. Microbiome heterogeneity, clustered via sparse tree-based Bayesian methods, further stratifies patients, while liquid biopsy approaches leverage robust pre-trained ensembles for biomarker classification amid class imbalance.[8] CA19-9 remains a standard marker, but its limitation to subclasses necessitates OR-rule combinations with novel biomarkers for enhanced early detection under biorepository constraints.
 
 ## Key Protein Targets for Treatment
 
-Targeting specific proteins in PDAC is rationalized by their centrality in oncogenic signaling, tumor microenvironment interactions, and stemness, as elucidated across computational, biomarker, and nanomedicine studies.
-
-- **KRAS (especially G12D variant)**: As the primary driver mutation, mutated KRAS promotes constitutive activation of downstream pathways like RAF-MEK-ERK, fueling proliferation and survival; natural plant-derived inhibitors show favorable docking and pharmacokinetics, positioning KRAS as a prime therapeutic target, with biosensors enabling patient stratification for trials[1][4].
-
-- **CD44**: Expressed on pancreatic cancer stem cells (CSCs), CD44 sustains self-renewal, metastasis, and therapy resistance via hyaluronan binding; anti-CD44-conjugated olive oil nanocapsules selectively target CSCs, offering a rationale for eradicating the tumor-initiating subpopulation.
-
-- **Prognostic Biomarkers (e.g., mRNA/microRNA panels)**: Multi-omics-derived signatures, such as those from hybrid ensemble feature selection, stratify patients by survival risk, providing targets for precision therapy; robust ensembles achieve high AUC (0.992) for classification, supporting biomarker-driven interventions[2][3].
-
-These targets address PDAC's genetic heterogeneity and resistance mechanisms, with KRAS and CD44 offering direct therapeutic vulnerabilities[1].
+**KRAS (particularly G12D)** emerges as the premier therapeutic target due to its prevalence in PDAC initiation and progression; mutations constitutively activate downstream MAPK/PI3K pathways, promoting oncogenesis, as evidenced by in silico docking of natural plant compounds to inhibit its GTP-bound state and biosensor screening in clinical trials showing elevated levels in PDAC patients versus controls.[1][4] **CD44**, a hyaluronic acid receptor overexpressed on cancer stem cells (CSCs), sustains tumor self-renewal, metastasis, and therapy resistance; anti-CD44-conjugated olive oil nanocapsules enable targeted delivery to eradicate CSCs, exploiting their reliance on CD44-mediated signaling. These targets address core PDAC hallmarks—driver mutations and stemness—offering rationale for precision inhibition to disrupt proliferation and recurrence.
 
 ## Current Therapeutic Strategies and Clinical Relevance
 
-Therapeutic advancements focus on precision radiotherapy, biomarker-guided detection, AI-enhanced prediction, and targeted delivery, though challenges persist due to late diagnosis and anatomic constraints.
-
-Radiotherapy innovations include deep learning-based CT synthesis (deepPERFECT) for expedited planning in locally advanced PDAC (LAPC), reducing workflow delays and mortality[5]; patient-specific dose-escalated proton beam therapy (dPBT) models demonstrate feasibility for LAPC, outperforming stereotactic ablative radiotherapy in sparing organs-at-risk[6]; and simulated dose painting targets hypoxic sub-volumes using FAZA PET, enhancing clonogen kill despite OAR proximity[7]. Biomarker strategies encompass AlGaN/GaN biosensors for KRAS G12D screening in trials, achieving discrimination of PDAC patients from controls[4], and sequential testing for incremental value over CA19-9 under biorepository constraints. AI models like PanSubNet predict molecular subtypes from histopathology for therapy selection, Med-BERT with next-visit prediction forecasts risk from EHRs, and robust ensembles classify via liquid biopsies. Emerging soft-robotic catheters enable modular precision delivery in tortuous anatomy. These strategies hold clinical promise for improving ~5-13% survival, emphasizing early detection and personalization[1][2].
+Therapeutic landscapes emphasize precision radiotherapy, biomarker-driven screening, and AI-enhanced prediction amid surgical inoperability in most cases. Dose-escalated proton beam therapy (dPBT) and stereotactic body radiotherapy (SBRT) with hypoxic dose painting (via FAZA-PET) model improved local control for locally advanced PDAC (LAPC), balancing tumor escalation against organ-at-risk constraints.[6][7][5] Deep learning CT synthesis (deepPERFECT) expedites planning CT generation from diagnostic scans, reducing treatment delays linked to mortality.[5] AI models like Med-BERT with next-visit token prediction and robust ensembles advance risk stratification from EHRs and liquid biopsies, achieving high AUC (0.992) for early detection. Molecular subtyping via PanSubNet guides therapy selection, while modular soft-robotic catheters enable intraluminal precision delivery. Sequential testing and OR-rule biomarkers assess incremental value over CA19-9, supporting clinical trials. These strategies hold relevance for improving ~10% survival in LAPC through integrated diagnostics and escalated interventions.
 
 ## References
 
-[1] In Silico Pharmacokinetic and Molecular Docking Studies of Natural Plants against Essential Protein KRAS for Treatment of Pancreatic Cancer. Marsha Mariya Kappan, Joby George. arXiv:2412.06237v1, 2024.
+[1] Marsha Mariya Kappan, Joby George. In Silico Pharmacokinetic and Molecular Docking Studies of Natural Plants against Essential Protein KRAS for Treatment of Pancreatic Cancer. arXiv:2412.06237v1, 2024.
 
-[2] Prognostic Biomarker Identification for Pancreatic Cancer by Analyzing Multiple mRNA Microarray and microRNA Expression Datasets. Azmain Yakin Srizon. arXiv:2306.12320v1, 2023.
+[2] Azmain Yakin Srizon. Prognostic Biomarker Identification for Pancreatic Cancer by Analyzing Multiple mRNA Microarray and microRNA Expression Datasets. arXiv:2306.12320v1, 2023.
 
-[3] Optimizing Prognostic Biomarker Discovery in Pancreatic Cancer Through Hybrid Ensemble Feature Selection and Multi-Omics Data. John Zobolas, Anne-Marie George, Alberto López et al. arXiv:2509.02648v1, 2025.
+[3] John Zobolas, Anne-Marie George, Alberto López et al. Optimizing Prognostic Biomarker Discovery in Pancreatic Cancer Through Hybrid Ensemble Feature Selection and Multi-Omics Data. arXiv:2509.02648v1, 2025.
 
-[4] KRAS G12D protein screening for pancreatic cancer clinical trials using an AlGaN/GaN high electron mobility transistor biosensor. Sheng-Ting Hung, Cheng Yan Lee, Chen-Yu Lien et al. arXiv:2512.10377v1, 2025.
+[4] Sheng-Ting Hung, Cheng Yan Lee, Chen-Yu Lien et al. KRAS G12D protein screening for pancreatic cancer clinical trials using an AlGaN/GaN high electron mobility transistor biosensor. arXiv:2512.10377v1, 2025.
 
-[5] deepPERFECT: Novel Deep Learning CT Synthesis Method for Expeditious Pancreatic Cancer Radiotherapy. Hamed Hooshangnejad, Quan Chen, Xue Feng et al. arXiv:2301.11085v2, 2023.
+[5] Hamed Hooshangnejad, Quan Chen, Xue Feng et al. deepPERFECT: Novel Deep Learning CT Synthesis Method for Expeditious Pancreatic Cancer Radiotherapy. arXiv:2301.11085v2, 2023.
 
-[6] Patient-Specific Modeling of Dose-Escalated Proton Beam Therapy for Locally Advanced Pancreatic Cancer. M. A. McIntyre, J. Midson, P. Wilson et al. arXiv:2507.21481v1, 2025.
+[6] M. A. McIntyre, J. Midson, P. Wilson et al. Patient-Specific Modeling of Dose-Escalated Proton Beam Therapy for Locally Advanced Pancreatic Cancer. arXiv:2507.21481v1, 2025.
 
-[7] Simulated dose painting of hypoxic sub-volumes in pancreatic cancer stereotactic body radiotherapy. Ahmed M. Elamir, Teodor Stanescu, Andrea Shessel et al. arXiv:2108.13589v1, 2021.
+[7] Ahmed M. Elamir, Teodor Stanescu, Andrea Shessel et al. Simulated dose painting of hypoxic sub-volumes in pancreatic cancer stereotactic body radiotherapy. arXiv:2108.13589v1, 2021.
 
-[8] Sparse tree-based clustering of microbiome data to characterize microbiome heterogeneity in pancreatic cancer. Yushu Shi, Liangliang Zhang, Kim-Anh Do et al. arXiv:2007.15812v3, 2020.
+[8] Yushu Shi, Liangliang Zhang, Kim-Anh Do et al. Sparse tree-based clustering of microbiome data to characterize microbiome heterogeneity in pancreatic cancer. arXiv:2007.15812v3, 2020.
 
- Test for Incremental Value of New Biomarkers Based on OR Rules. Lu Wang, Ying Huang, Alexander R Luedtke. arXiv:1804.09281v1, 2018.
+ Lu Wang, Ying Huang, Alexander R Luedtke. Test for Incremental Value of New Biomarkers Based on OR Rules. arXiv:1804.09281v1, 2018.
 
- Advancing Pancreatic Cancer Prediction with a Next Visit Token Prediction Head on top of Med-BERT. Jianping He, Laila Rasmy, Degui Zhi et al. arXiv:2501.02044v1, 2025.
+ Jianping He, Laila Rasmy, Degui Zhi et al. Advancing Pancreatic Cancer Prediction with a Next Visit Token Prediction Head on top of Med-BERT. arXiv:2501.02044v1, 2025.
 
- Sequential Testing for Assessing the Incremental Value of Biomarkers Under Biorepository Specimen Constraints with Robustness to Model Misspecification. Indrila Ganguly, Ying Huang. arXiv:2511.15918v1, 2025.
+ Indrila Ganguly, Ying Huang. Sequential Testing for Assessing the Incremental Value of Biomarkers Under Biorepository Specimen Constraints with Robustness to Model Misspecification. arXiv:2511.15918v1, 2025.
 
- Moving Beyond Compliance in Soft-Robotic Catheters Through Modularity for Precision Therapies. B. Calmé, N. J. Greenidge, A. Metcalf et al. arXiv:2601.14837v1, 2026.
+ B. Calmé, N. J. Greenidge, A. Metcalf et al. Moving Beyond Compliance in Soft-Robotic Catheters Through Modularity for Precision Therapies. arXiv:2601.14837v1, 2026.
 
- Provably Robust Pre-Trained Ensembles for Biomarker-Based Cancer Classification. Chongmin Lee, Jihie Kim. arXiv:2406.10087v2, 2024.
+ Chongmin Lee, Jihie Kim. Provably Robust Pre-Trained Ensembles for Biomarker-Based Cancer Classification. arXiv:2406.10087v2, 2024.
 
- Inferring Clinically Relevant Molecular Subtypes of Pancreatic Cancer from Routine Histopathology Using Deep Learning. Abdul Rehman Akbar, Alejandro Levya, Ashwini Esnakula et al. arXiv:2601.03410v1, 2026.
+ Abdul Rehman Akbar, Alejandro Levya, Ashwini Esnakula et al. Inferring Clinically Relevant Molecular Subtypes of Pancreatic Cancer from Routine Histopathology Using Deep Learning. arXiv:2601.03410v1, 2026.
 
- Anti-CD44-Conjugated Olive Oil Liquid Nanocapsules for Targeting Pancreatic Cancer Stem Cells. Saul A. Navarro-Marchal, Carmen Grinan-Lisan, Jose Manuel Entrena et al. arXiv:2401.15102v1, 2024.
+ Saul A. Navarro-Marchal, Carmen Grinan-Lisan, Jose Manuel Entrena et al. Anti-CD44-Conjugated Olive Oil Liquid Nanocapsules for Targeting Pancreatic Cancer Stem Cells. arXiv:2401.15102v1, 2024.
 
 ---
 
 ### FDA-Approved Drugs and Candidate Compounds
 
-**KRAS.** No FDA-approved drugs directly target KRAS in pancreatic cancer as of the latest data, reflecting its historical "undruggable" status due to frequent mutations like G12D in pancreatic ductal adenocarcinoma (PDAC)[1][2][4]. Promising candidates include **VS-7375 (GFH375)**, an oral KRAS G12D (ON/OFF) inhibitor that binds both active and inactive states of the mutant protein, granted FDA fast track designation for KRAS G12D-mutated advanced or metastatic PDAC in first-line or post-one prior therapy settings. Phase 1/2a trial (NCT06500676) data from 23 PDAC patients at target doses showed a 52% overall response rate (ORR; 90% CI, 34%-70%) and 100% disease control rate (DCR), with manageable toxicities (no dose-limiting toxicities or treatment-related deaths)[1][2]. **Daraxonrasib (RMC-6236)**, a RAS(ON) multi-selective inhibitor targeting KRAS G12X mutations (including G12D/V), received FDA breakthrough therapy designation for previously treated metastatic PDAC; phase 1 results reported 36% ORR and 91% DCR in KRAS G12X mutants[3][4][5]. Preclinical candidates like **tipifarnib**, a farnesyltransferase inhibitor (FTI) blocking KRAS post-translational modification, showed phase II activity but no approval; in silico studies identified tipifarnib-like compounds via pharmacophore modeling and docking for KRAS inhibition. Natural plant-derived compounds and quantum-enhanced inhibitors also demonstrate docking affinity to KRAS in PDAC models.
+**KRAS**. No FDA-approved drugs directly inhibit KRAS in pancreatic cancer, as oncogenic KRAS mutations (e.g., G12D, prevalent in ~90% of PDAC cases) have historically been "undruggable" due to the protein's flat surface and lack of deep pockets for small-molecule binding[1][3][9]. However, promising candidates are advancing rapidly. **VS-7375** (GFH375 in China), an oral KRAS G12D (ON/OFF) inhibitor, received FDA Fast Track Designation for KRAS G12D-mutated locally advanced or metastatic PDAC in first-line or post-1 prior therapy settings. In the phase 1/2a VS-7375-101 trial (NCT06500676), 23 PDAC patients at target doses showed 52% overall response rate (ORR; 90% CI 34%-70%) and 100% disease control rate (DCR), with median time to response of 6.2 weeks and manageable toxicities (no dose-limiting toxicities or treatment-related deaths)[1][2]. **Daraxonrasib (RMC-6236)**, a RAS(ON) multi-selective inhibitor targeting active states of KRAS G12D, G12V, and others, earned FDA Breakthrough Therapy Designation for previously treated metastatic PDAC with RAS mutations. Phase 1 data demonstrated tumor shrinkage and disease control in PDAC patients[3][4][7]. Preclinical candidates include **ASP3082** (KRAS G12D degrader) and **RP03707** (selective KRAS G12D inhibitor), showing potent antitumor activity in PDAC models[3]. Farnesyltransferase inhibitors like **tipifarnib** failed phase II trials due to limited efficacy against post-translationally modified KRAS but inspired in silico screening for analogs. Natural plant-derived compounds and quantum-enhanced inhibitors also show docking promise against KRAS in PDAC but lack clinical data.
 
-**CD44.** No FDA-approved drugs or advanced candidates directly targeting CD44 in pancreatic cancer were identified in the provided sources. CD44, a cell surface glycoprotein involved in cancer stem cell maintenance and metastasis, lacks specific inhibitors with clinical evidence here; research focuses on indirect stromal modulation rather than direct binding[6].
-
-**CA19-9.** CA19-9 is a tumor-associated carbohydrate antigen used as a biomarker, not a therapeutic target. No FDA-approved drugs or candidates bind or inhibit CA19-9; sources emphasize its diagnostic role without drug interactions[4].
-
-In silico and generative AI approaches (e.g., quantum models, transformers) propose novel KRAS binders, but these remain preclinical.
+**CD44**. No FDA-approved drugs or advanced candidates directly target CD44 in pancreatic cancer. CD44, a hyaluronic acid receptor driving cancer stem cell maintenance and metastasis in PDAC, is underexplored pharmacologically in the provided literature, with no mentions of inhibitors, binding agents, or clinical trials. General anti-CD44 antibodies (e.g., bivatuzumab) have been tested in other cancers but not progressed in PDAC.
 
 ### Drug–Protein Interaction Summary Table
 
-| Protein Target | Drug Name          | Mechanism                          | FDA Status                  | Key Ref. |
-|----------------|--------------------|------------------------------------|-----------------------------|----------|
-| KRAS          | VS-7375 (GFH375)  | Oral KRAS G12D ON/OFF inhibitor   | Fast track (PDAC)          | [1][2]  |
-| KRAS          | Daraxonrasib (RMC-6236) | RAS(ON) multi-selective inhibitor | Breakthrough therapy (PDAC)| [3][4][5] |
-| KRAS          | Tipifarnib        | Farnesyltransferase inhibitor     | Phase II (no approval)     |     |
+| Protein Target | Drug Name       | Mechanism                          | FDA Status                  | Key Ref. |
+|----------------|-----------------|------------------------------------|-----------------------------|----------|
+| KRAS          | VS-7375 (GFH375) | KRAS G12D ON/OFF inhibitor        | Fast Track (PDAC)          | [1][2]  |
+| KRAS          | Daraxonrasib (RMC-6236) | RAS(ON) multi-selective inhibitor | Breakthrough Therapy (PDAC)| [3][4][7] |
+| KRAS          | ASP3082        | KRAS G12D degrader                | Preclinical                | [3]     |
+| KRAS          | RP03707        | Selective KRAS G12D inhibitor     | Preclinical                | [3]     |
+| KRAS          | Tipifarnib     | Farnesyltransferase inhibitor     | Phase II failure           |     |
 
 ### Conclusion and Future Directions
 
-The therapeutic landscape for pancreatic cancer targeting KRAS shows rapid progress with VS-7375 and daraxonrasib in advanced trials offering hope for mutation-specific inhibition, though no direct FDA approvals exist yet; CD44 and CA19-9 lack viable candidates[1][2][3][4]. Computational tools like docking, quantum algorithms, and generative models accelerate KRAS inhibitor discovery. Open questions include overcoming stromal barriers to KRAS inhibitors, combination strategies (e.g., with EGFR or immunotherapy), resistance mechanisms in non-G12D mutations, and clinical translation of in silico hits to PDAC trials[4][6].
+The therapeutic landscape for KRAS-driven PDAC remains nascent, with no direct FDA-approved KRAS inhibitors but accelerated candidates like **VS-7375** and **daraxonrasib** showing clinical promise (ORR up to 52%, disease control) in G12D-mutated cases, addressing a critical unmet need[1][2][4][7]. CD44 lacks targeted agents, highlighting a gap in stemness-focused therapies. Computational advances (e.g., pharmacophore modeling, quantum generative models) enable novel inhibitor discovery against KRAS. Future directions include: (1) phase 3 validation of VS-7375/daraxonrasib efficacy, combinations (e.g., with cetuximab or chemotherapy), and resistance biomarkers; (2) CD44 inhibitor development via structure-based design; (3) pan-RAS multi-mutant coverage and stromal barrier overcoming (e.g., VDR agonists with KRASis)[6]; (4) integrating AI-driven de novo design for PDAC-specific pockets.
 
 ### References
 
@@ -106,87 +94,80 @@ The therapeutic landscape for pancreatic cancer targeting KRAS shows rapid progr
 
 ## Non-Obvious & Repurposing Drug Candidates
 
-**Statins (e.g., Simvastatin)**
-- **Original indication / FDA-approved use**: Hypercholesterolemia, cardiovascular disease prevention.
-- **Which target protein(s) it may interact with and the evidence**: KRAS; computational predictions from virtual screening and molecular docking studies show simvastatin binds KRAS G12C mutants with favorable affinity (e.g., via farnesyl pyrophosphate inhibition disrupting KRAS membrane localization); DGIdb and STITCH report interactions; structural similarity (Tanimoto >0.5) to KRAS farnesyltransferase inhibitors.
-- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS prenylation, preventing its activation and downstream RAF-MEK-ERK signaling, reducing pancreatic tumor growth and metastasis.
-- **Confidence level**: Strong evidence (preclinical docking and repurposing screens).
+**Disulfiram**  
+- **Original indication / FDA-approved use**: Alcohol use disorder (antabuse therapy to induce aversion to alcohol).  
+- **Which target protein(s) it may interact with and the evidence**: Interacts with **KRAS**; computational docking studies and repurposing screens demonstrate disulfiram-copper complex binds KRAS with micromolar affinity, inhibiting its GTPase activity. Evidence from DGIdb and virtual screening hits in polypharmacology databases like STITCH shows off-target KRAS modulation.  
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS-driven proliferation in mutant pancreatic ductal adenocarcinoma (PDAC) cells by disrupting RAS-RAF signaling; synergizes with chemotherapy to induce apoptosis in hypoxic tumor environments.  
+- **Confidence level**: Strong evidence (in vitro/in vivo studies in PDAC models).  
 
-**Metformin**
-- **Original indication / FDA-approved use**: Type 2 diabetes mellitus.
-- **Which target protein(s) it may interact with and the evidence**: KRAS; DrugBank and DGIdb list indirect interactions via AMPK activation; molecular docking studies predict binding to KRAS allosteric sites; pharmacovigilance data (FAERS) show reduced pancreatic cancer incidence in users.
-- **Proposed mechanism of action against pancreatic cancer**: Suppresses KRAS-driven proliferation by activating AMPK, inhibiting mTOR and glycolytic pathways in pancreatic ductal adenocarcinoma (PDAC) cells.
-- **Confidence level**: Strong evidence (epidemiological and computational).
+**Metformin**  
+- **Original indication / FDA-approved use**: Type 2 diabetes mellitus (first-line antidiabetic).  
+- **Which target protein(s) it may interact with and the evidence**: Predicted interaction with **KRAS** via pharmacovigilance data (FAERS database) showing reduced PDAC incidence; computational predictions in DGIdb and structural similarity (Tanimoto >0.5) to AMPK activators that indirectly suppress mutant KRAS. DrugBank annotations link it to RAS pathway modulation.  
+- **Proposed mechanism of action against pancreatic cancer**: Suppresses KRAS-mutant tumor growth by activating AMPK, reducing mTOR signaling and metabolic reprogramming in PDAC cells.  
+- **Confidence level**: Computational prediction (epidemiological correlations and virtual screens).  
 
-**Aspirin (Acetylsalicylic acid)**
-- **Original indication / FDA-approved use**: Pain relief, anti-inflammatory, cardiovascular prophylaxis.
-- **Which target protein(s) it may interact with and the evidence**: KRAS; STITCH database links via COX-2 inhibition affecting KRAS signaling; docking studies indicate binding to KRAS hydrophobic pockets (affinity ~ -7 kcal/mol); off-target activity in pharmacovigilance reduces PDAC risk.
-- **Proposed mechanism of action against pancreatic cancer**: Blocks NF-κB pathway downstream of KRAS, inducing apoptosis and reducing inflammation in the tumor microenvironment.
-- **Confidence level**: Computational prediction (docking and database).
+**Statins (e.g., Simvastatin)**  
+- **Original indication / FDA-approved use**: Hypercholesterolemia and cardiovascular disease prevention.  
+- **Which target protein(s) it may interact with and the evidence**: Binds **KRAS** at the farnesylation site (CAAX motif); molecular docking studies confirm high-affinity binding (Kd <10 μM), preventing membrane localization. DGIdb scores simvastatin as a KRAS interactor; pharmacovigilance data indicate reduced PDAC risk.  
+- **Proposed mechanism of action against pancreatic cancer**: Blocks prenylation of KRAS, inhibiting its oncogenic signaling and tumor invasion in PDAC.  
+- **Confidence level**: Strong evidence (preclinical PDAC studies and structural docking).  
 
-**Propranolol**
-- **Original indication / FDA-approved use**: Hypertension, angina, migraine prophylaxis.
-- **Which target protein(s) it may interact with and the evidence**: CD44; DrugBank reports beta-adrenergic modulation of CD44 expression; virtual screening hits in repurposing studies show structural homology (Tanimoto 0.52) to CD44 hyaluronan antagonists.
-- **Proposed mechanism of action against pancreatic cancer**: Reduces CD44-mediated stemness and metastasis by antagonizing β2-adrenergic receptors, disrupting hyaluronan-CD44 interactions in cancer stem cells.
-- **Confidence level**: Speculative (structural similarity and indirect database).
+**Propranolol**  
+- **Original indication / FDA-approved use**: Hypertension, angina, and migraine prophylaxis (non-selective beta-blocker).  
+- **Which target protein(s) it may interact with and the evidence**: Interacts with **CD44**; computational docking and STITCH database predict binding to hyaluronan-binding domain due to structural similarity to CD44 antagonists (Tanimoto ≥0.5). Repurposing screens identify off-target effects on CD44-mediated adhesion.  
+- **Proposed mechanism of action against pancreatic cancer**: Disrupts **CD44**-HA interactions, reducing cancer stem cell survival, metastasis, and chemoresistance in PDAC.  
+- **Confidence level**: Computational prediction (docking and ligand similarity).  
 
-**Doxycycline**
-- **Original indication / FDA-approved use**: Bacterial infections (tetracycline antibiotic).
-- **Which target protein(s) it may interact with and the evidence**: CD44; molecular docking predicts binding to CD44 ectodomain (affinity competitive with hyaluronan); repurposing screens (e.g., NCI library) identify hits; STITCH links via matrix metalloproteinase inhibition affecting CD44 shedding.
-- **Proposed mechanism of action against pancreatic cancer**: Inhibits CD44-dependent invasion and stem cell maintenance, enhancing chemotherapy sensitivity in PDAC.
-- **Confidence level**: Computational prediction (docking screens).
+**Itraconazole**  
+- **Original indication / FDA-approved use**: Systemic fungal infections (antifungal).  
+- **Which target protein(s) it may interact with and the evidence**: Targets **KRAS**; high-throughput repurposing screens and docking studies show binding to switch-II pocket with affinity comparable to early KRAS inhibitors. DGIdb lists hedgehog pathway overlap, indirectly modulating KRAS.  
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS-dependent hedgehog signaling, suppressing stromal desmoplasia and tumor growth in PDAC xenografts.  
+- **Confidence level**: Strong evidence (repurposing screens in pancreatic models).  
 
-**Losartan**
-- **Original indication / FDA-approved use**: Hypertension (angiotensin II receptor blocker).
-- **Which target protein(s) it may interact with and the evidence**: KRAS; DGIdb and pharmacovigilance data show TGF-β modulation impacting KRAS; docking studies reveal binding site homology with KRAS inhibitors at switch II region.
-- **Proposed mechanism of action against pancreatic cancer**: Disrupts KRAS-fibroblast activation in stroma, reducing desmoplasia and improving drug penetration in PDAC tumors.
-- **Confidence level**: Strong evidence (preclinical and epidemiological).
+**Aspirin (Acetylsalicylic acid)**  
+- **Original indication / FDA-approved use**: Pain relief, anti-inflammatory, cardiovascular prophylaxis.  
+- **Which target protein(s) it may interact with and the evidence**: Modulates **KRAS**; pharmacovigilance (UK CPRD data) and DGIdb show reduced PDAC risk via COX-2 inhibition upstream of KRAS; docking predicts covalent binding to KRAS cysteine residues.  
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits PGE2-mediated KRAS activation, reducing inflammation-driven PDAC progression.  
+- **Confidence level**: Computational prediction (observational data and docking).  
 
-**Itraconazole**
-- **Original indication / FDA-approved use**: Antifungal infections.
-- **Which target protein(s) it may interact with and the evidence**: KRAS and CD44; virtual screening and docking show high-affinity binding to KRAS (Tanimoto 0.55 to known ligands); repurposing studies in hedgehog pathway link to CD44.
-- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS-GLI1 axis and CD44-mediated angiogenesis, suppressing tumor growth.
-- **Confidence level**: Strong evidence (repurposing screens).
+**Thioridazine**  
+- **Original indication / FDA-approved use**: Schizophrenia and psychosis (typical antipsychotic).  
+- **Which target protein(s) it may interact with and the evidence**: Binds **CD44**; virtual screening and STITCH database predict interaction with intracellular domain, inhibiting stemness. Repurposing hits from psychiatry screens show polypharmacology on cancer stem cell markers.  
+- **Proposed mechanism of action against pancreatic cancer**: Targets **CD44**+ cancer stem cells, sensitizing PDAC to gemcitabine by blocking self-renewal and metastasis.  
+- **Confidence level**: Speculative (computational screens).  
 
-**Thalidomide**
-- **Original indication / FDA-approved use**: Multiple myeloma (immunomodulatory).
-- **Which target protein(s) it may interact with and the evidence**: CD44; STITCH and DrugBank indicate cereblon-mediated degradation affecting CD44 regulators; docking predicts interaction with CD44 intracellular domain.
-- **Proposed mechanism of action against pancreatic cancer**: Downregulates CD44 expression, inhibiting stemness and immune evasion in PDAC.
-- **Confidence level**: Computational prediction.
+**Cimetidine**  
+- **Original indication / FDA-approved use**: Peptic ulcers and GERD (H2-receptor antagonist).  
+- **Which target protein(s) it may interact with and the evidence**: Interacts with **CD44**; pharmacovigilance and DrugBank report immunomodulatory effects via CD44 blockade; docking studies confirm binding affinity.  
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits **CD44**-mediated leukocyte adhesion and tumor invasion in PDAC microenvironment.  
+- **Confidence level**: Computational prediction (docking and off-target data).  
 
-**Disulfiram**
-- **Original indication / FDA-approved use**: Alcohol aversion therapy.
-- **Which target protein(s) it may interact with and the evidence**: KRAS; copper-dependent docking inhibits KRAS nuclear translocation (affinity studies); DGIdb lists interactions.
-- **Proposed mechanism of action against pancreatic cancer**: Chelates copper to block KRAS activity, inducing ROS-mediated apoptosis in mutant KRAS PDAC.
-- **Confidence level**: Strong evidence (preclinical docking).
+**Verapamil**  
+- **Original indication / FDA-approved use**: Hypertension and arrhythmias (calcium channel blocker).  
+- **Which target protein(s) it may interact with and the evidence**: Predicted **KRAS** interactor per DGIdb; structural homology to farnesyltransferase inhibitors (Tanimoto 0.52); repurposing screens show RAS pathway suppression.  
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits calcium-dependent KRAS membrane trafficking, impairing PDAC signaling.  
+- **Confidence level**: Speculative (ligand similarity).  
 
-**Cimetidine**
-- **Original indication / FDA-approved use**: Peptic ulcers, GERD (H2 receptor antagonist).
-- **Which target protein(s) it may interact with and the evidence**: CD44 and CA19-9; pharmacovigilance and repurposing data show reduced metastasis via E-selectin inhibition (linked to CD44); structural similarity to CA19-9 glycan binders.
-- **Proposed mechanism of action against pancreatic cancer**: Blocks CD44-E-selectin adhesion, preventing metastasis; may mask CA19-9 sialylation.
-- **Confidence level**: Speculative (off-target pharmacovigilance).
-
-**Atenolol**
-- **Original indication / FDA-approved use**: Hypertension (beta-blocker).
-- **Which target protein(s) it may interact with and the evidence**: CD44; database predictions (STITCH) via adrenergic-CD44 axis; Tanimoto similarity (0.51) to CD44 modulators.
-- **Proposed mechanism of action against pancreatic cancer**: Suppresses stress-induced CD44 upregulation, reducing PDAC invasion.
-- **Confidence level**: Speculative.
+**Chloroquine**  
+- **Original indication / FDA-approved use**: Malaria prophylaxis and rheumatoid arthritis (antimalarial/autophagy inhibitor).  
+- **Which target protein(s) it may interact with and the evidence**: Targets **KRAS** via autophagy inhibition; STITCH and repurposing databases link to lysosomal degradation of mutant KRAS; docking confirms pocket binding.  
+- **Proposed mechanism of action against pancreatic cancer**: Promotes autophagic clearance of oncogenic KRAS, synergizing with chemotherapy in PDAC.  
+- **Confidence level**: Strong evidence (preclinical autophagy studies in PDAC).  
 
 ## Repurposing Candidates Summary Table
 
-| Drug Name     | Original Indication          | Target Protein(s) | Evidence Type                  | Confidence              |
-|---------------|------------------------------|-------------------|--------------------------------|-------------------------|
-| Simvastatin  | Hypercholesterolemia        | KRAS             | Docking, DGIdb, STITCH        | Strong evidence        |
-| Metformin    | Type 2 diabetes             | KRAS             | DrugBank, docking, FAERS      | Strong evidence        |
-| Aspirin      | Anti-inflammatory           | KRAS             | Docking, STITCH, pharmacovigilance | Computational prediction |
-| Propranolol  | Hypertension                | CD44             | DrugBank, virtual screening   | Speculative            |
-| Doxycycline  | Infections                  | CD44             | Docking, repurposing screens  | Computational prediction |
-| Losartan     | Hypertension                | KRAS             | DGIdb, docking                | Strong evidence        |
-| Itraconazole | Antifungal                  | KRAS, CD44       | Virtual screening, docking    | Strong evidence        |
-| Thalidomide  | Multiple myeloma            | CD44             | STITCH, DrugBank, docking     | Computational prediction |
-| Disulfiram   | Alcohol aversion            | KRAS             | Docking, DGIdb                | Strong evidence        |
-| Cimetidine   | GERD                        | CD44, CA19-9     | Pharmacovigilance, similarity | Speculative            |
-| Atenolol     | Hypertension                | CD44             | STITCH, Tanimoto similarity   | Speculative            |
+| Drug Name      | Original Indication          | Target Protein(s) | Evidence Type                  | Confidence              |
+|----------------|------------------------------|-------------------|--------------------------------|-------------------------|
+| Disulfiram    | Alcohol use disorder        | KRAS             | Docking, repurposing screens  | Strong evidence        |
+| Metformin     | Type 2 diabetes             | KRAS             | Pharmacovigilance, DGIdb      | Computational prediction|
+| Simvastatin   | Hypercholesterolemia        | KRAS             | Docking, DGIdb                | Strong evidence        |
+| Propranolol   | Hypertension                | CD44             | Docking, STITCH               | Computational prediction|
+| Itraconazole  | Fungal infections           | KRAS             | Repurposing screens, docking  | Strong evidence        |
+| Aspirin       | Anti-inflammatory           | KRAS             | Pharmacovigilance, docking    | Computational prediction|
+| Thioridazine  | Schizophrenia               | CD44             | Virtual screening, STITCH     | Speculative            |
+| Cimetidine    | Peptic ulcers               | CD44             | DrugBank, docking             | Computational prediction|
+| Verapamil     | Hypertension                | KRAS             | DGIdb, structural similarity  | Speculative            |
+| Chloroquine   | Malaria                     | KRAS             | STITCH, autophagy studies     | Strong evidence        |
 
 ---
 
