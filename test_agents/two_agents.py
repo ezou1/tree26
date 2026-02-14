@@ -12,7 +12,13 @@ from uagents_core.contrib.protocols.chat import (
 )
 
 
-agent = Agent()
+agent = Agent(
+    name="treehack-test",
+    seed="treehacks",
+    port=8001,
+    mailbox=True,
+    publish_agent_details=True,
+)
 
 
 # Initialize the chat protocol with the standard chat spec
