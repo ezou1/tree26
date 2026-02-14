@@ -351,11 +351,12 @@ def main():
         combined_drug_text, cancer_type, proteins
     )
     with open("view.json", "w", encoding="utf-8") as f:
+
         json.dump(drug_protein_json, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*60}")
     print(f"  Review saved to: {output_file}")
-    print(f"  Drug map saved to: view.json")
+    print(f"  Drug map saved to: review.json")
     print(f"  Total papers cited: {len(all_papers)}")
     print(f"{'='*60}\n")
 
