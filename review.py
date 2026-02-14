@@ -312,15 +312,15 @@ def main():
     with open(output_file, "w", encoding="utf-8") as f:
         f.write(final_md)
 
-    # ----- Step 7: Generate view.json (drug → protein mapping) -----
-    print("\n>> Step 7: Generating view.json (drug–protein mapping) …")
+    # ----- Step 7: Generate review.json (drug → protein mapping) -----
+    print("\n>> Step 7: Generating review.json (drug–protein mapping) …")
     drug_protein_json = _extract_drug_protein_map(drug_review, cancer_type, proteins)
-    with open("view.json", "w", encoding="utf-8") as f:
+    with open("review.json", "w", encoding="utf-8") as f:
         json.dump(drug_protein_json, f, indent=2, ensure_ascii=False)
 
     print(f"\n{'='*60}")
     print(f"  Review saved to: {output_file}")
-    print(f"  Drug map saved to: view.json")
+    print(f"  Drug map saved to: review.json")
     print(f"  Total papers cited: {len(all_papers)}")
     print(f"{'='*60}\n")
 
