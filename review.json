@@ -1,0 +1,138 @@
+{
+  "drugs": [
+    {
+      "drug": "VS-7375 (GFH375)",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Oral KRAS G12D ON/OFF inhibitor",
+      "fda_status": "Fast track (PDAC)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Daraxonrasib (RMC-6236)",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "RAS(ON) multi-selective inhibitor",
+      "fda_status": "Breakthrough therapy (PDAC)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Tipifarnib",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Farnesyltransferase inhibitor",
+      "fda_status": "Phase II (no approval)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Simvastatin",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Inhibits KRAS prenylation",
+      "fda_status": "Approved for hypercholesterolemia",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Metformin",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Activates AMPK inhibiting KRAS-driven proliferation",
+      "fda_status": "Approved for type 2 diabetes",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Aspirin",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Blocks NF-κB pathway downstream of KRAS",
+      "fda_status": "Approved for anti-inflammatory use",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Propranolol",
+      "proteins": [
+        "CD44"
+      ],
+      "mechanism": "Reduces CD44-mediated stemness",
+      "fda_status": "Approved for hypertension",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Doxycycline",
+      "proteins": [
+        "CD44"
+      ],
+      "mechanism": "Inhibits CD44-dependent invasion",
+      "fda_status": "Approved for infections",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Losartan",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Disrupts KRAS-fibroblast activation",
+      "fda_status": "Approved for hypertension",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Itraconazole",
+      "proteins": [
+        "KRAS",
+        "CD44"
+      ],
+      "mechanism": "Inhibits KRAS-GLI1 axis and CD44-mediated angiogenesis",
+      "fda_status": "Approved for antifungal use",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Thalidomide",
+      "proteins": [
+        "CD44"
+      ],
+      "mechanism": "Downregulates CD44 expression",
+      "fda_status": "Approved for multiple myeloma",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Disulfiram",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Chelates copper to block KRAS activity",
+      "fda_status": "Approved for alcohol aversion",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Cimetidine",
+      "proteins": [
+        "CD44",
+        "CA19-9"
+      ],
+      "mechanism": "Blocks CD44-E-selectin adhesion",
+      "fda_status": "Approved for GERD",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Atenolol",
+      "proteins": [
+        "CD44"
+      ],
+      "mechanism": "Suppresses stress-induced CD44 upregulation",
+      "fda_status": "Approved for hypertension",
+      "category": "repurposing_candidate"
+    }
+  ],
+  "cancer_type": "pancreatic cancer",
+  "protein_targets": [
+    "KRAS",
+    "CD44",
+    "CA19-9"
+  ]
+}

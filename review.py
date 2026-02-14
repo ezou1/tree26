@@ -155,6 +155,19 @@ def build_drug_query(cancer_type: str, proteins: list[str]) -> str:
     )
 
 
+def build_repurposing_query(proteins: list[str]) -> str:
+    """Build a broader arXiv query for drug repurposing, molecular docking,
+    and off-target interaction studies for the given protein targets —
+    intentionally NOT restricted to the cancer type."""
+    protein_clause = " OR ".join(f'"{p}"' for p in proteins[:6])
+    return (
+        f'all:(({protein_clause}) AND ('
+        f'"drug repurposing" OR "drug repositioning" OR "molecular docking" '
+        f'OR "virtual screening" OR "off-target" OR "binding affinity" '
+        f'OR "structure-activity" OR "polypharmacology"))'
+    )
+
+
 def extract_proteins_from_text(text: str) -> list[str]:
     """Ask Perplexity to extract a concise list of protein targets from the
     first-pass review."""
@@ -245,17 +258,30 @@ def main():
         proteins = ["EGFR", "p53", "KRAS"]  # sensible fallback
         print(f"    (Using fallback protein list: {proteins})")
 
-    # ----- Step 4: Search arXiv for FDA-approved drugs -----
+    # ----- Step 4a: Search arXiv for mainstream drugs -----
     # Brief pause to respect arXiv rate limits (≤1 req / 3 sec)
     time.sleep(3)
-    print("\n>> Step 4: Searching arXiv for FDA-approved drugs targeting these proteins …")
+    print("\n>> Step 4a: Searching arXiv for mainstream drugs targeting these proteins …")
     drug_query = build_drug_query(cancer_type, proteins)
     drug_papers = search_arxiv(drug_query, max_results=ARXIV_MAX_RESULTS)
 
+    # ----- Step 4b: Broader repurposing / docking / off-target search -----
+    time.sleep(3)
+    print("\n>> Step 4b: Searching arXiv for drug-repurposing & off-target interaction studies …")
+    repurpose_query = build_repurposing_query(proteins)
+    repurpose_papers = search_arxiv(repurpose_query, max_results=ARXIV_MAX_RESULTS)
+
+    # Deduplicate by arxiv_id, keeping order
+    seen_ids = {p["arxiv_id"] for p in drug_papers}
+    for rp in repurpose_papers:
+        if rp["arxiv_id"] not in seen_ids:
+            drug_papers.append(rp)
+            seen_ids.add(rp["arxiv_id"])
+
     drug_papers_text = format_papers_for_prompt(drug_papers) if drug_papers else "(No papers found.)"
 
-    # ----- Step 5: Generate drug section -----
-    print("\n>> Step 5: Generating FDA-approved drug analysis via Perplexity …")
+    # ----- Step 5a: Generate drug section -----
+    print("\n>> Step 5a: Generating mainstream drug analysis via Perplexity …")
 
     # Reference numbering continues from the cancer papers
     offset = len(cancer_papers)
@@ -290,6 +316,10 @@ def main():
     )
     drug_review = query_perplexity(system_drugs, user_drugs)
 
+    # ----- Step 5b: Speculative / repurposing drug discovery via Perplexity -----
+    print("\n>> Step 5b: Searching for non-obvious repurposable FDA drugs via Perplexity …")
+    repurposing_review = _discover_repurposing_candidates(cancer_type, proteins)
+
     # ----- Step 6: Assemble final document -----
     print("\n>> Step 6: Assembling final Markdown document …")
 
@@ -306,6 +336,8 @@ def main():
         f"---\n\n"
         f"{drug_review}\n\n"
         f"---\n\n"
+        f"{repurposing_review}\n\n"
+        f"---\n\n"
         f"## Consolidated References\n\n{references_block}\n"
     )
 
@@ -314,7 +346,10 @@ def main():
 
     # ----- Step 7: Generate review.json (drug → protein mapping) -----
     print("\n>> Step 7: Generating review.json (drug–protein mapping) …")
-    drug_protein_json = _extract_drug_protein_map(drug_review, cancer_type, proteins)
+    combined_drug_text = drug_review + "\n\n" + repurposing_review
+    drug_protein_json = _extract_drug_protein_map(
+        combined_drug_text, cancer_type, proteins
+    )
     with open("review.json", "w", encoding="utf-8") as f:
         json.dump(drug_protein_json, f, indent=2, ensure_ascii=False)
 
@@ -323,6 +358,50 @@ def main():
     print(f"  Drug map saved to: review.json")
     print(f"  Total papers cited: {len(all_papers)}")
     print(f"{'='*60}\n")
+
+
+def _discover_repurposing_candidates(
+    cancer_type: str, proteins: list[str]
+) -> str:
+    """Use Perplexity (with web search) to find FDA-approved drugs from ANY
+    therapeutic area that have structural, mechanistic, or computational
+    evidence of interacting with the target proteins — even if they are not
+    currently studied for this cancer."""
+    system = (
+        "You are a computational pharmacology expert specialising in drug "
+        "repurposing and polypharmacology. You have access to web search. "
+        "Write a detailed Markdown section for a literature review. "
+        "Be exhaustive: include drugs from cardiology, psychiatry, "
+        "infectious disease, metabolic disorders, autoimmune conditions, "
+        "and any other field. Cite sources where possible."
+    )
+    user = (
+        f"The following proteins have been identified as therapeutic targets "
+        f"in **{cancer_type}**: {', '.join(proteins)}.\n\n"
+        f"Search broadly across ALL FDA-approved drugs — not just oncology "
+        f"drugs — and identify any that have known or computationally "
+        f"predicted interactions with these proteins. Consider:\n"
+        f"- Molecular docking studies showing binding affinity\n"
+        f"- Shared binding-site homology with known inhibitors\n"
+        f"- Off-target activity reported in pharmacovigilance data\n"
+        f"- Structural similarity (Tanimoto ≥ 0.5) to known ligands\n"
+        f"- Drug-gene interaction databases (DGIdb, DrugBank, STITCH)\n"
+        f"- Repurposing screens or virtual screening hits\n\n"
+        f"Write the following sections in Markdown:\n\n"
+        f"## Non-Obvious & Repurposing Drug Candidates\n\n"
+        f"For each drug, explain:\n"
+        f"- Original indication / FDA-approved use\n"
+        f"- Which target protein(s) it may interact with and the evidence\n"
+        f"- Proposed mechanism of action against {cancer_type}\n"
+        f"- Confidence level (strong evidence / computational prediction / "
+        f"speculative)\n\n"
+        f"## Repurposing Candidates Summary Table\n\n"
+        f"Markdown table: Drug Name | Original Indication | Target Protein(s) "
+        f"| Evidence Type | Confidence\n\n"
+        f"Include at least 10 drugs. Prioritise non-obvious candidates that "
+        f"are NOT already in mainstream {cancer_type} research."
+    )
+    return query_perplexity(system, user)
 
 
 def _extract_drug_protein_map(drug_review_text: str, cancer_type: str, proteins: list[str]) -> dict:
@@ -334,29 +413,32 @@ def _extract_drug_protein_map(drug_review_text: str, cancer_type: str, proteins:
         "The JSON must be an object with a top-level key \"drugs\" whose value "
         "is an array of objects. Each object has: "
         "\"drug\" (string), \"proteins\" (list of target protein symbols), "
-        "\"mechanism\" (string), \"fda_status\" (string)."
+        "\"mechanism\" (string), \"fda_status\" (string), "
+        "\"category\" (\"mainstream\" or \"repurposing_candidate\")."
     )
     user = (
-        f"From the following literature review section about {cancer_type}, "
-        f"extract every drug mentioned and which of these proteins it may "
+        f"From the following literature review sections about {cancer_type}, "
+        f"extract EVERY drug mentioned — both mainstream oncology drugs AND "
+        f"repurposing candidates — and which of these proteins each may "
         f"bind to or react with: {', '.join(proteins)}.\n\n"
+        f"Mark drugs that are commonly used for this cancer as "
+        f"\"mainstream\". Mark drugs from other therapeutic areas or "
+        f"speculative candidates as \"repurposing_candidate\".\n\n"
         f"Text:\n{drug_review_text}"
     )
     raw = query_perplexity(system, user)
+    data = _parse_json_response(raw)
 
-    # Strip markdown fences if present
-    cleaned = re.sub(r"^```(?:json)?\s*", "", raw.strip())
-    cleaned = re.sub(r"\s*```$", "", cleaned)
-
-    try:
-        data = json.loads(cleaned)
-    except json.JSONDecodeError:
-        # Fallback: try to find a JSON object in the response
-        match = re.search(r"\{.*\}", cleaned, re.DOTALL)
-        if match:
-            data = json.loads(match.group())
-        else:
-            data = {"drugs": [], "_parse_error": "Could not parse LLM response"}
+    # If first attempt fails, ask Perplexity to fix it
+    if "_parse_error" in data:
+        print("[Perplexity] JSON parse failed, requesting cleaned JSON …")
+        fix_system = (
+            "You are a JSON repair assistant. The user will give you malformed "
+            "JSON. Return ONLY the corrected, valid JSON. No explanation, no "
+            "markdown fences."
+        )
+        fixed_raw = query_perplexity(fix_system, raw)
+        data = _parse_json_response(fixed_raw)
 
     # Ensure consistent top-level structure
     if "drugs" not in data:
@@ -365,6 +447,48 @@ def _extract_drug_protein_map(drug_review_text: str, cancer_type: str, proteins:
     data["cancer_type"] = cancer_type
     data["protein_targets"] = proteins
     return data
+
+
+def _parse_json_response(raw: str) -> dict:
+    """Best-effort parse of an LLM JSON response, handling common issues
+    like markdown fences, trailing commas, and unescaped control chars."""
+    # Strip markdown fences
+    cleaned = re.sub(r"^```(?:json)?\s*", "", raw.strip())
+    cleaned = re.sub(r"\s*```$", "", cleaned)
+
+    # Remove control characters that break JSON (except normal whitespace)
+    cleaned = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f]", "", cleaned)
+
+    # Fix trailing commas before } or ]
+    cleaned = re.sub(r",\s*([}\]])", r"\1", cleaned)
+
+    # Attempt 1: parse the whole string
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError:
+        pass
+
+    # Attempt 2: extract the outermost JSON object
+    match = re.search(r"\{.*\}", cleaned, re.DOTALL)
+    if match:
+        fragment = match.group()
+        fragment = re.sub(r",\s*([}\]])", r"\1", fragment)
+        try:
+            return json.loads(fragment)
+        except json.JSONDecodeError:
+            pass
+
+    # Attempt 3: extract a JSON array
+    match = re.search(r"\[.*\]", cleaned, re.DOTALL)
+    if match:
+        fragment = match.group()
+        fragment = re.sub(r",\s*([}\]])", r"\1", fragment)
+        try:
+            return {"drugs": json.loads(fragment)}
+        except json.JSONDecodeError:
+            pass
+
+    return {"drugs": [], "_parse_error": "Could not parse LLM response"}
 
 
 def _build_references(papers: list[dict]) -> str:
