@@ -63,6 +63,16 @@ def query_perplexity(system_prompt: str, user_prompt: str) -> str:
     return reply
 
 
+def _strip_leading_header(text: str) -> str:
+    """Remove a leading Markdown header (e.g. '## Methodology\\n') that
+    Perplexity often echoes back, which would duplicate the header we
+    already add during document assembly."""
+    stripped = text.lstrip()
+    # Match one or more '#' followed by any text, then a newline
+    cleaned = re.sub(r"^#{1,4}\s+[^\n]*\n+", "", stripped, count=1)
+    return cleaned
+
+
 # ---------------------------------------------------------------------------
 # Data extraction helpers
 # ---------------------------------------------------------------------------
@@ -430,6 +440,11 @@ def main():
 
     # ----- Step 6: Assemble final document -----
     print("\n>> Step 6: Assembling final Markdown document …")
+
+    # Strip leading duplicate headers that Perplexity may echo back
+    methodology = _strip_leading_header(methodology)
+    results = _strip_leading_header(results)
+    conclusion = _strip_leading_header(conclusion)
 
     today = datetime.now().strftime("%B %d, %Y")
     final_md = (
