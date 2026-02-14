@@ -1,39 +1,12 @@
 {
   "drugs": [
     {
-      "drug": "VS-7375",
+      "drug": "Osimertinib",
       "proteins": [
-        "KRAS"
+        "EGFR"
       ],
-      "mechanism": "KRAS G12D ON/OFF inhibitor",
-      "fda_status": "Fast Track (PDAC)",
-      "category": "mainstream"
-    },
-    {
-      "drug": "Daraxonrasib",
-      "proteins": [
-        "KRAS"
-      ],
-      "mechanism": "RAS(ON) multi-selective inhibitor",
-      "fda_status": "Breakthrough Therapy (PDAC)",
-      "category": "mainstream"
-    },
-    {
-      "drug": "ASP3082",
-      "proteins": [
-        "KRAS"
-      ],
-      "mechanism": "KRAS G12D degrader",
-      "fda_status": "Preclinical",
-      "category": "mainstream"
-    },
-    {
-      "drug": "RP03707",
-      "proteins": [
-        "KRAS"
-      ],
-      "mechanism": "Selective KRAS G12D inhibitor",
-      "fda_status": "Preclinical",
+      "mechanism": "Irreversible tyrosine kinase inhibitor binding to EGFR mutants (e.g., T790M), inhibits kinase activity and downstream signaling (PI3K/AKT, MAPK)",
+      "fda_status": "FDA-approved (NSCLC; relevant to mesothelioma EGFR+)",
       "category": "mainstream"
     },
     {
@@ -41,26 +14,45 @@
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Farnesyltransferase inhibitor",
-      "fda_status": "Phase II failure",
-      "category": "mainstream"
-    },
-    {
-      "drug": "Disulfiram",
-      "proteins": [
-        "KRAS"
-      ],
-      "mechanism": "Inhibits KRAS-driven proliferation via disulfiram-copper complex",
-      "fda_status": "FDA-approved for alcohol use disorder",
+      "mechanism": "Farnesyltransferase inhibitor; blocks KRAS post-translational farnesylation required for membrane localization",
+      "fda_status": "Investigational (Phase II in KRAS+ cancers)",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Metformin",
+      "drug": "Pembrolizumab",
+      "proteins": [],
+      "mechanism": "PD-1 checkpoint inhibitor; blocks immune checkpoint to enhance immune recognition and killing of cancer cells",
+      "fda_status": "FDA-approved (first-line mesothelioma with chemotherapy)",
+      "category": "mainstream"
+    },
+    {
+      "drug": "Nivolumab",
+      "proteins": [],
+      "mechanism": "PD-1 checkpoint inhibitor; enhances immune-mediated tumor cell destruction",
+      "fda_status": "FDA-approved (first-line mesothelioma with ipilimumab)",
+      "category": "mainstream"
+    },
+    {
+      "drug": "Ipilimumab",
+      "proteins": [],
+      "mechanism": "CTLA-4 checkpoint inhibitor; enhances T-cell activation and anti-tumor immunity",
+      "fda_status": "FDA-approved (first-line mesothelioma with nivolumab)",
+      "category": "mainstream"
+    },
+    {
+      "drug": "Pemetrexed",
+      "proteins": [],
+      "mechanism": "Antifolate chemotherapy; inhibits thymidylate synthase and other folate-dependent enzymes",
+      "fda_status": "FDA-approved (first-line mesothelioma with platinum agents)",
+      "category": "mainstream"
+    },
+    {
+      "drug": "Atorvastatin",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Suppresses KRAS-mutant tumor growth by activating AMPK",
-      "fda_status": "FDA-approved for type 2 diabetes",
+      "mechanism": "HMG-CoA reductase inhibitor; blocks mevalonate pathway disrupting KRAS prenylation and membrane localization",
+      "fda_status": "FDA-approved (hyperlipidemia, cardiovascular disease)",
       "category": "repurposing_candidate"
     },
     {
@@ -68,77 +60,98 @@
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Blocks prenylation of KRAS",
-      "fda_status": "FDA-approved for hypercholesterolemia",
+      "mechanism": "HMG-CoA reductase inhibitor; blocks mevalonate pathway disrupting KRAS prenylation and membrane localization",
+      "fda_status": "FDA-approved (hyperlipidemia, cardiovascular disease)",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Propranolol",
+      "drug": "Efavirenz",
       "proteins": [
-        "CD44"
+        "p53"
       ],
-      "mechanism": "Disrupts CD44-HA interactions",
-      "fda_status": "FDA-approved for hypertension",
+      "mechanism": "Non-nucleoside reverse transcriptase inhibitor; suppresses LINE-1 retrotransposition that stabilizes mutant p53",
+      "fda_status": "FDA-approved (HIV infection)",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Itraconazole",
-      "proteins": [
-        "KRAS"
-      ],
-      "mechanism": "Inhibits KRAS-dependent hedgehog signaling",
-      "fda_status": "FDA-approved for fungal infections",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "Aspirin",
+      "drug": "Zoledronic acid",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Inhibits PGE2-mediated KRAS activation",
-      "fda_status": "FDA-approved for anti-inflammatory use",
+      "mechanism": "Bisphosphonate; inhibits HMG-CoA reductase downstream effects, blocking KRAS farnesylation and membrane localization",
+      "fda_status": "FDA-approved (osteoporosis, bone metastases)",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Thioridazine",
+      "drug": "Ibrutinib",
       "proteins": [
-        "CD44"
+        "EGFR"
       ],
-      "mechanism": "Targets CD44+ cancer stem cells",
-      "fda_status": "FDA-approved for schizophrenia",
+      "mechanism": "BTK inhibitor with off-target EGFR inhibition via reversible kinase domain binding",
+      "fda_status": "FDA-approved (mantle cell lymphoma, chronic lymphocytic leukemia)",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Cimetidine",
+      "drug": "Adavosertib",
       "proteins": [
-        "CD44"
-      ],
-      "mechanism": "Inhibits CD44-mediated leukocyte adhesion",
-      "fda_status": "FDA-approved for peptic ulcers",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "Verapamil",
-      "proteins": [
+        "p53",
         "KRAS"
       ],
-      "mechanism": "Inhibits calcium-dependent KRAS membrane trafficking",
-      "fda_status": "FDA-approved for hypertension",
+      "mechanism": "Wee1 kinase inhibitor; abrogates G2/M checkpoint, exploits p53 deficiency and sensitizes KRAS-mutant cells to DNA damage",
+      "fda_status": "Investigational (advanced trials, ovarian cancer combinations)",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Chloroquine",
+      "drug": "Ganetespib",
       "proteins": [
+        "p53"
+      ],
+      "mechanism": "HSP90 inhibitor; degrades mutant p53 via HSP90 client destabilization",
+      "fda_status": "Investigational (Phase II solid tumors)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "UCN-01",
+      "proteins": [
+        "p53"
+      ],
+      "mechanism": "Protein kinase C inhibitor; Chk1 modulation restores p53-independent apoptosis in mutant lines",
+      "fda_status": "Investigational (leukemia, lymphoma, SCLC trials)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "PEITC",
+      "proteins": [
+        "p53"
+      ],
+      "mechanism": "Phenethyl isothiocyanate; selectively inhibits p53 mutants (R175H/L), refolds/stabilizes mutant p53",
+      "fda_status": "Not FDA-approved (nutraceutical/dietary supplement)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "APR-246",
+      "proteins": [
+        "p53"
+      ],
+      "mechanism": "p53 reactivator; reactivates p53 mutants (R273H/L), restores tumor suppression via DNA-binding domain correction",
+      "fda_status": "Investigational (myelodysplastic syndrome, ovarian cancer trials)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Metformin",
+      "proteins": [
+        "EGFR",
         "KRAS"
       ],
-      "mechanism": "Promotes autophagic clearance of oncogenic KRAS",
-      "fda_status": "FDA-approved for malaria",
+      "mechanism": "AMPK activator; suppresses mTOR/EGFR-RAS signaling, inhibits metabolic reprogramming in KRAS-mutant cells",
+      "fda_status": "FDA-approved (type 2 diabetes)",
       "category": "repurposing_candidate"
     }
   ],
-  "cancer_type": "pancreatic cancer",
+  "cancer_type": "Pleural mesothelioma",
   "protein_targets": [
-    "KRAS",
-    "CD44"
+    "EGFR",
+    "p53",
+    "KRAS"
   ]
 }
