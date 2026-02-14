@@ -106,71 +106,71 @@ The therapeutic landscape for pancreatic cancer targeting KRAS shows rapid progr
 
 ## Non-Obvious & Repurposing Drug Candidates
 
-**Statins (e.g., Simvastatin)**  
-- **Original indication / FDA-approved use**: Hypercholesterolemia, cardiovascular disease prevention.  
-- **Which target protein(s) it may interact with and the evidence**: KRAS; computational predictions from virtual screening and molecular docking studies show simvastatin binds KRAS G12C mutants with favorable affinity (e.g., via farnesyl pyrophosphate inhibition disrupting KRAS membrane localization); DGIdb and STITCH report interactions; structural similarity (Tanimoto >0.5) to KRAS farnesyltransferase inhibitors.  
-- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS prenylation, preventing its activation and downstream RAF-MEK-ERK signaling, reducing pancreatic tumor growth and metastasis.  
-- **Confidence level**: Strong evidence (preclinical docking and repurposing screens).  
+**Statins (e.g., Simvastatin)**
+- **Original indication / FDA-approved use**: Hypercholesterolemia, cardiovascular disease prevention.
+- **Which target protein(s) it may interact with and the evidence**: KRAS; computational predictions from virtual screening and molecular docking studies show simvastatin binds KRAS G12C mutants with favorable affinity (e.g., via farnesyl pyrophosphate inhibition disrupting KRAS membrane localization); DGIdb and STITCH report interactions; structural similarity (Tanimoto >0.5) to KRAS farnesyltransferase inhibitors.
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS prenylation, preventing its activation and downstream RAF-MEK-ERK signaling, reducing pancreatic tumor growth and metastasis.
+- **Confidence level**: Strong evidence (preclinical docking and repurposing screens).
 
-**Metformin**  
-- **Original indication / FDA-approved use**: Type 2 diabetes mellitus.  
-- **Which target protein(s) it may interact with and the evidence**: KRAS; DrugBank and DGIdb list indirect interactions via AMPK activation; molecular docking studies predict binding to KRAS allosteric sites; pharmacovigilance data (FAERS) show reduced pancreatic cancer incidence in users.  
-- **Proposed mechanism of action against pancreatic cancer**: Suppresses KRAS-driven proliferation by activating AMPK, inhibiting mTOR and glycolytic pathways in pancreatic ductal adenocarcinoma (PDAC) cells.  
-- **Confidence level**: Strong evidence (epidemiological and computational).  
+**Metformin**
+- **Original indication / FDA-approved use**: Type 2 diabetes mellitus.
+- **Which target protein(s) it may interact with and the evidence**: KRAS; DrugBank and DGIdb list indirect interactions via AMPK activation; molecular docking studies predict binding to KRAS allosteric sites; pharmacovigilance data (FAERS) show reduced pancreatic cancer incidence in users.
+- **Proposed mechanism of action against pancreatic cancer**: Suppresses KRAS-driven proliferation by activating AMPK, inhibiting mTOR and glycolytic pathways in pancreatic ductal adenocarcinoma (PDAC) cells.
+- **Confidence level**: Strong evidence (epidemiological and computational).
 
-**Aspirin (Acetylsalicylic acid)**  
-- **Original indication / FDA-approved use**: Pain relief, anti-inflammatory, cardiovascular prophylaxis.  
-- **Which target protein(s) it may interact with and the evidence**: KRAS; STITCH database links via COX-2 inhibition affecting KRAS signaling; docking studies indicate binding to KRAS hydrophobic pockets (affinity ~ -7 kcal/mol); off-target activity in pharmacovigilance reduces PDAC risk.  
-- **Proposed mechanism of action against pancreatic cancer**: Blocks NF-κB pathway downstream of KRAS, inducing apoptosis and reducing inflammation in the tumor microenvironment.  
-- **Confidence level**: Computational prediction (docking and database).  
+**Aspirin (Acetylsalicylic acid)**
+- **Original indication / FDA-approved use**: Pain relief, anti-inflammatory, cardiovascular prophylaxis.
+- **Which target protein(s) it may interact with and the evidence**: KRAS; STITCH database links via COX-2 inhibition affecting KRAS signaling; docking studies indicate binding to KRAS hydrophobic pockets (affinity ~ -7 kcal/mol); off-target activity in pharmacovigilance reduces PDAC risk.
+- **Proposed mechanism of action against pancreatic cancer**: Blocks NF-κB pathway downstream of KRAS, inducing apoptosis and reducing inflammation in the tumor microenvironment.
+- **Confidence level**: Computational prediction (docking and database).
 
-**Propranolol**  
-- **Original indication / FDA-approved use**: Hypertension, angina, migraine prophylaxis.  
-- **Which target protein(s) it may interact with and the evidence**: CD44; DrugBank reports beta-adrenergic modulation of CD44 expression; virtual screening hits in repurposing studies show structural homology (Tanimoto 0.52) to CD44 hyaluronan antagonists.  
-- **Proposed mechanism of action against pancreatic cancer**: Reduces CD44-mediated stemness and metastasis by antagonizing β2-adrenergic receptors, disrupting hyaluronan-CD44 interactions in cancer stem cells.  
-- **Confidence level**: Speculative (structural similarity and indirect database).  
+**Propranolol**
+- **Original indication / FDA-approved use**: Hypertension, angina, migraine prophylaxis.
+- **Which target protein(s) it may interact with and the evidence**: CD44; DrugBank reports beta-adrenergic modulation of CD44 expression; virtual screening hits in repurposing studies show structural homology (Tanimoto 0.52) to CD44 hyaluronan antagonists.
+- **Proposed mechanism of action against pancreatic cancer**: Reduces CD44-mediated stemness and metastasis by antagonizing β2-adrenergic receptors, disrupting hyaluronan-CD44 interactions in cancer stem cells.
+- **Confidence level**: Speculative (structural similarity and indirect database).
 
-**Doxycycline**  
-- **Original indication / FDA-approved use**: Bacterial infections (tetracycline antibiotic).  
-- **Which target protein(s) it may interact with and the evidence**: CD44; molecular docking predicts binding to CD44 ectodomain (affinity competitive with hyaluronan); repurposing screens (e.g., NCI library) identify hits; STITCH links via matrix metalloproteinase inhibition affecting CD44 shedding.  
-- **Proposed mechanism of action against pancreatic cancer**: Inhibits CD44-dependent invasion and stem cell maintenance, enhancing chemotherapy sensitivity in PDAC.  
-- **Confidence level**: Computational prediction (docking screens).  
+**Doxycycline**
+- **Original indication / FDA-approved use**: Bacterial infections (tetracycline antibiotic).
+- **Which target protein(s) it may interact with and the evidence**: CD44; molecular docking predicts binding to CD44 ectodomain (affinity competitive with hyaluronan); repurposing screens (e.g., NCI library) identify hits; STITCH links via matrix metalloproteinase inhibition affecting CD44 shedding.
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits CD44-dependent invasion and stem cell maintenance, enhancing chemotherapy sensitivity in PDAC.
+- **Confidence level**: Computational prediction (docking screens).
 
-**Losartan**  
-- **Original indication / FDA-approved use**: Hypertension (angiotensin II receptor blocker).  
-- **Which target protein(s) it may interact with and the evidence**: KRAS; DGIdb and pharmacovigilance data show TGF-β modulation impacting KRAS; docking studies reveal binding site homology with KRAS inhibitors at switch II region.  
-- **Proposed mechanism of action against pancreatic cancer**: Disrupts KRAS-fibroblast activation in stroma, reducing desmoplasia and improving drug penetration in PDAC tumors.  
-- **Confidence level**: Strong evidence (preclinical and epidemiological).  
+**Losartan**
+- **Original indication / FDA-approved use**: Hypertension (angiotensin II receptor blocker).
+- **Which target protein(s) it may interact with and the evidence**: KRAS; DGIdb and pharmacovigilance data show TGF-β modulation impacting KRAS; docking studies reveal binding site homology with KRAS inhibitors at switch II region.
+- **Proposed mechanism of action against pancreatic cancer**: Disrupts KRAS-fibroblast activation in stroma, reducing desmoplasia and improving drug penetration in PDAC tumors.
+- **Confidence level**: Strong evidence (preclinical and epidemiological).
 
-**Itraconazole**  
-- **Original indication / FDA-approved use**: Antifungal infections.  
-- **Which target protein(s) it may interact with and the evidence**: KRAS and CD44; virtual screening and docking show high-affinity binding to KRAS (Tanimoto 0.55 to known ligands); repurposing studies in hedgehog pathway link to CD44.  
-- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS-GLI1 axis and CD44-mediated angiogenesis, suppressing tumor growth.  
-- **Confidence level**: Strong evidence (repurposing screens).  
+**Itraconazole**
+- **Original indication / FDA-approved use**: Antifungal infections.
+- **Which target protein(s) it may interact with and the evidence**: KRAS and CD44; virtual screening and docking show high-affinity binding to KRAS (Tanimoto 0.55 to known ligands); repurposing studies in hedgehog pathway link to CD44.
+- **Proposed mechanism of action against pancreatic cancer**: Inhibits KRAS-GLI1 axis and CD44-mediated angiogenesis, suppressing tumor growth.
+- **Confidence level**: Strong evidence (repurposing screens).
 
-**Thalidomide**  
-- **Original indication / FDA-approved use**: Multiple myeloma (immunomodulatory).  
-- **Which target protein(s) it may interact with and the evidence**: CD44; STITCH and DrugBank indicate cereblon-mediated degradation affecting CD44 regulators; docking predicts interaction with CD44 intracellular domain.  
-- **Proposed mechanism of action against pancreatic cancer**: Downregulates CD44 expression, inhibiting stemness and immune evasion in PDAC.  
-- **Confidence level**: Computational prediction.  
+**Thalidomide**
+- **Original indication / FDA-approved use**: Multiple myeloma (immunomodulatory).
+- **Which target protein(s) it may interact with and the evidence**: CD44; STITCH and DrugBank indicate cereblon-mediated degradation affecting CD44 regulators; docking predicts interaction with CD44 intracellular domain.
+- **Proposed mechanism of action against pancreatic cancer**: Downregulates CD44 expression, inhibiting stemness and immune evasion in PDAC.
+- **Confidence level**: Computational prediction.
 
-**Disulfiram**  
-- **Original indication / FDA-approved use**: Alcohol aversion therapy.  
-- **Which target protein(s) it may interact with and the evidence**: KRAS; copper-dependent docking inhibits KRAS nuclear translocation (affinity studies); DGIdb lists interactions.  
-- **Proposed mechanism of action against pancreatic cancer**: Chelates copper to block KRAS activity, inducing ROS-mediated apoptosis in mutant KRAS PDAC.  
-- **Confidence level**: Strong evidence (preclinical docking).  
+**Disulfiram**
+- **Original indication / FDA-approved use**: Alcohol aversion therapy.
+- **Which target protein(s) it may interact with and the evidence**: KRAS; copper-dependent docking inhibits KRAS nuclear translocation (affinity studies); DGIdb lists interactions.
+- **Proposed mechanism of action against pancreatic cancer**: Chelates copper to block KRAS activity, inducing ROS-mediated apoptosis in mutant KRAS PDAC.
+- **Confidence level**: Strong evidence (preclinical docking).
 
-**Cimetidine**  
-- **Original indication / FDA-approved use**: Peptic ulcers, GERD (H2 receptor antagonist).  
-- **Which target protein(s) it may interact with and the evidence**: CD44 and CA19-9; pharmacovigilance and repurposing data show reduced metastasis via E-selectin inhibition (linked to CD44); structural similarity to CA19-9 glycan binders.  
-- **Proposed mechanism of action against pancreatic cancer**: Blocks CD44-E-selectin adhesion, preventing metastasis; may mask CA19-9 sialylation.  
-- **Confidence level**: Speculative (off-target pharmacovigilance).  
+**Cimetidine**
+- **Original indication / FDA-approved use**: Peptic ulcers, GERD (H2 receptor antagonist).
+- **Which target protein(s) it may interact with and the evidence**: CD44 and CA19-9; pharmacovigilance and repurposing data show reduced metastasis via E-selectin inhibition (linked to CD44); structural similarity to CA19-9 glycan binders.
+- **Proposed mechanism of action against pancreatic cancer**: Blocks CD44-E-selectin adhesion, preventing metastasis; may mask CA19-9 sialylation.
+- **Confidence level**: Speculative (off-target pharmacovigilance).
 
-**Atenolol**  
-- **Original indication / FDA-approved use**: Hypertension (beta-blocker).  
-- **Which target protein(s) it may interact with and the evidence**: CD44; database predictions (STITCH) via adrenergic-CD44 axis; Tanimoto similarity (0.51) to CD44 modulators.  
-- **Proposed mechanism of action against pancreatic cancer**: Suppresses stress-induced CD44 upregulation, reducing PDAC invasion.  
-- **Confidence level**: Speculative.  
+**Atenolol**
+- **Original indication / FDA-approved use**: Hypertension (beta-blocker).
+- **Which target protein(s) it may interact with and the evidence**: CD44; database predictions (STITCH) via adrenergic-CD44 axis; Tanimoto similarity (0.51) to CD44 modulators.
+- **Proposed mechanism of action against pancreatic cancer**: Suppresses stress-induced CD44 upregulation, reducing PDAC invasion.
+- **Confidence level**: Speculative.
 
 ## Repurposing Candidates Summary Table
 
@@ -186,7 +186,7 @@ The therapeutic landscape for pancreatic cancer targeting KRAS shows rapid progr
 | Thalidomide  | Multiple myeloma            | CD44             | STITCH, DrugBank, docking     | Computational prediction |
 | Disulfiram   | Alcohol aversion            | KRAS             | Docking, DGIdb                | Strong evidence        |
 | Cimetidine   | GERD                        | CD44, CA19-9     | Pharmacovigilance, similarity | Speculative            |
-| Atenolol     | Hypertension                | CD44             | STITCH, Tanimoto similarity   | Speculative
+| Atenolol     | Hypertension                | CD44             | STITCH, Tanimoto similarity   | Speculative            |
 
 ---
 
