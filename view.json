@@ -1,32 +1,214 @@
 {
   "drugs": [
     {
-      "drug": "temozolomide",
+      "drug": "Temozolomide",
       "proteins": [
         "MGMT"
       ],
-      "mechanism": "Alkylates O6-guanine; efficacy depends on MGMT silencing",
-      "fda_status": "Approved (GBM, 2005)"
+      "mechanism": "DNA alkylation; MGMT-sensitive if methylated",
+      "fda_status": "Approved (GBM std-of-care)",
+      "category": "mainstream"
     },
     {
-      "drug": "O6-benzylguanine",
+      "drug": "Pembrolizumab",
       "proteins": [
-        "MGMT"
+        "PD-1",
+        "PD-L1"
       ],
-      "mechanism": "Inactivates MGMT enzyme, potentiates alkylators",
-      "fda_status": "Investigational"
+      "mechanism": "Checkpoint blockade (limited GBM efficacy)",
+      "fda_status": "Approved (other cancers)",
+      "category": "repurposing_candidate"
     },
     {
-      "drug": "MT-125",
+      "drug": "Nivolumab",
       "proteins": [
-        "MGMT"
+        "PD-1",
+        "PD-L1"
       ],
-      "mechanism": "Inhibits NMIIA/IIB to block invasion; RT synergy in MGMT-unmethylated GBM",
-      "fda_status": "Fast-track (phase 1/2)"
+      "mechanism": "Checkpoint blockade (limited GBM efficacy)",
+      "fda_status": "Approved (other cancers)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Sevabertinib",
+      "proteins": [
+        "EGFR"
+      ],
+      "mechanism": "EGFR/HER2 kinase inhibition",
+      "fda_status": "Accelerated (NSCLC; GBM candidate)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Erlotinib",
+      "proteins": [
+        "EGFR"
+      ],
+      "mechanism": "EGFR tyrosine kinase inhibition",
+      "fda_status": "Approved (other cancers; GBM failed)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Gefitinib",
+      "proteins": [
+        "EGFR"
+      ],
+      "mechanism": "EGFR tyrosine kinase inhibition",
+      "fda_status": "Approved (other cancers)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Everolimus",
+      "proteins": [
+        "PTEN"
+      ],
+      "mechanism": "mTOR inhibition (PI3K/PTEN pathway)",
+      "fda_status": "Approved (repurposed for GBM)",
+      "category": "mainstream"
+    },
+    {
+      "drug": "BI-2536",
+      "proteins": [
+        "TP53"
+      ],
+      "mechanism": "PLK1 inhibition (TP53-mutant selective)",
+      "fda_status": "Candidate (preclinical)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Bortezomib",
+      "proteins": [
+        "PTEN"
+      ],
+      "mechanism": "Proteasome inhibition, indirect interaction",
+      "fda_status": "Approved (multiple myeloma)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Fludarabine",
+      "proteins": [
+        "TP53"
+      ],
+      "mechanism": "Induces DNA damage in TP53-mutant cells",
+      "fda_status": "Approved (CLL)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Seliciclib",
+      "proteins": [
+        "TP53"
+      ],
+      "mechanism": "Inhibits cell cycle progression in TP53/PTEN-dysregulated GBM",
+      "fda_status": "Advanced trials (not fully approved)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "AT-9283",
+      "proteins": [
+        "EGFR"
+      ],
+      "mechanism": "Disrupts mitosis and DNA repair in EGFR/TP53-altered cells",
+      "fda_status": "In trials",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Litronesib",
+      "proteins": [
+        "TP53"
+      ],
+      "mechanism": "Mitotic arrest in rapidly dividing GBM cells with PTEN/TP53 loss",
+      "fda_status": "In trials",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Olaparib",
+      "proteins": [
+        "MGMT",
+        "TP53"
+      ],
+      "mechanism": "Synthetic lethality in homologous recombination-deficient GBM",
+      "fda_status": "Approved (ovarian cancer)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Afatinib",
+      "proteins": [
+        "EGFR"
+      ],
+      "mechanism": "Blocks EGFR-driven PI3K/AKT signaling",
+      "fda_status": "Approved (NSCLC)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Metformin",
+      "proteins": [
+        "PTEN",
+        "EGFR"
+      ],
+      "mechanism": "Suppresses metabolic reprogramming and invasion in PTEN-deficient cells",
+      "fda_status": "Approved (type 2 diabetes)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Atenolol",
+      "proteins": [
+        "EGFR",
+        "PD-L1"
+      ],
+      "mechanism": "Reduces adrenergic stress-induced PD-L1 expression and invasion",
+      "fda_status": "Approved (hypertension)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Disulfiram",
+      "proteins": [
+        "MGMT",
+        "TP53"
+      ],
+      "mechanism": "Proteotoxic stress and DNA repair inhibition in MGMT-high tumors",
+      "fda_status": "Approved (alcohol dependence)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Thalidomide",
+      "proteins": [
+        "PD-1",
+        "PD-L1"
+      ],
+      "mechanism": "Immune modulation and anti-angiogenesis targeting PD-L1 microenvironment",
+      "fda_status": "Approved (multiple myeloma)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Copanlisib",
+      "proteins": [
+        "PTEN"
+      ],
+      "mechanism": "Upstream PI3K inhibition",
+      "fda_status": "In trials",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Dabrafenib",
+      "proteins": [],
+      "mechanism": "BRAF-targeted",
+      "fda_status": "Approved",
+      "category": "mainstream"
+    },
+    {
+      "drug": "Trametinib",
+      "proteins": [],
+      "mechanism": "BRAF-targeted",
+      "fda_status": "Approved",
+      "category": "mainstream"
     }
   ],
   "cancer_type": "glioblastoma",
   "protein_targets": [
-    "MGMT"
+    "MGMT",
+    "PD-1",
+    "PD-L1",
+    "EGFR",
+    "PTEN",
+    "TP53"
   ]
 }
