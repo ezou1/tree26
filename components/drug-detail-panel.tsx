@@ -1,6 +1,5 @@
 "use client"
 
-import Image from "next/image"
 import {
   Shield,
   Clock,
@@ -14,6 +13,7 @@ import {
   Loader2,
   FlaskConical,
 } from "lucide-react"
+import { MoleculeViewer } from "@/components/molecule-viewer"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
@@ -128,20 +128,11 @@ function ConfidenceGauge({ value }: { value: number }) {
 function DrugResultContent({ drug }: { drug: Drug }) {
   return (
     <div className="flex flex-col gap-4 p-4">
-      {/* Molecular Image */}
-      <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border">
-        <Image
-          src={drug.imageUrl}
-          alt={`Molecular structure of ${drug.name}`}
-          fill
-          className="object-cover"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-3 pt-8">
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-            Molecular Structure
-          </span>
-        </div>
-      </div>
+      {/* 3D Molecular Viewer */}
+      <MoleculeViewer
+        pubchemCid={drug.pubchemCid}
+        drugName={drug.name}
+      />
 
       {/* Confidence + FDA row */}
       <div className="grid grid-cols-2 gap-3">

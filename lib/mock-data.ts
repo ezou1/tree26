@@ -23,6 +23,7 @@ export interface Drug {
   sideEffects: string[]
   citations: number
   imageUrl: string
+  pubchemCid: number
 }
 
 export const mockProteins: Protein[] = [
@@ -101,6 +102,7 @@ export const mockDrugs: Drug[] = [
     sideEffects: ["Upper respiratory infections", "Headache", "Diarrhea", "Nasopharyngitis"],
     citations: 847,
     imageUrl: "/images/tofacitinib.jpg",
+    pubchemCid: 9926791,
   },
   {
     id: "d2",
@@ -118,6 +120,7 @@ export const mockDrugs: Drug[] = [
     sideEffects: ["Nausea", "Herpes simplex", "Thrombocytosis", "Elevated liver enzymes"],
     citations: 623,
     imageUrl: "/images/baricitinib.jpg",
+    pubchemCid: 44205240,
   },
   {
     id: "d3",
@@ -135,6 +138,7 @@ export const mockDrugs: Drug[] = [
     sideEffects: ["Abdominal pain", "Dyspepsia", "Peripheral edema", "Dizziness"],
     citations: 1203,
     imageUrl: "/images/celecoxib.jpg",
+    pubchemCid: 2662,
   },
   {
     id: "d4",
@@ -152,6 +156,7 @@ export const mockDrugs: Drug[] = [
     sideEffects: ["Hypertension", "Proteinuria", "Bleeding events", "Wound healing complications"],
     citations: 2156,
     imageUrl: "/images/bevacizumab.jpg",
+    pubchemCid: 135314777,
   },
   {
     id: "d5",
@@ -169,6 +174,7 @@ export const mockDrugs: Drug[] = [
     sideEffects: ["Anemia", "Thrombocytopenia", "Bruising", "Weight gain"],
     citations: 534,
     imageUrl: "/images/ruxolitinib.jpg",
+    pubchemCid: 25126798,
   },
   {
     id: "d6",
@@ -186,6 +192,7 @@ export const mockDrugs: Drug[] = [
     sideEffects: ["Infusion reactions", "Infections", "Hepatotoxicity", "Lupus-like syndrome"],
     citations: 3892,
     imageUrl: "/images/infliximab.jpg",
+    pubchemCid: 135314753,
   },
 ]
 
