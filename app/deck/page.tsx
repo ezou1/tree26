@@ -121,33 +121,39 @@ function Slide({ children, className = "" }: { children: React.ReactNode; classN
   )
 }
 
-/* ─── 1. Title — "The Drug That Was Already There" ─── */
+/* ─── 1. Title — RepoRx Brand Slide ─── */
 function Slide01Title() {
   return (
-    <Slide className="items-start justify-start">
-      <div className="flex h-full w-full flex-col px-12 py-10 lg:px-16 lg:py-12">
-        {/* Top-left brand */}
-        <p className="text-base text-secondary-foreground lg:text-lg">
-          {"RepoRx \u2014 AI Driven Drug Repurposing"}
-        </p>
+    <Slide>
+      {/* Background image */}
+      <div className="absolute inset-0">
+        <Image
+          src="/images/deck-molecule-network.jpg"
+          alt="Molecular network visualization"
+          fill
+          className="object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/40" />
+      </div>
 
-        {/* Main headline — pushed down, subtitle follows closely */}
-        <div className="mt-auto mb-24">
-          <h1 className="mb-8 text-[clamp(3.5rem,8vw,8rem)] font-bold leading-[1.05] tracking-tight text-foreground">
-            The Drug That Was
-            <br />
-            <span className="text-primary">Already There</span>
-          </h1>
-
-          {/* Subtitle with teal left border */}
-          <div className="border-l-[3px] border-primary py-1 pl-5">
-            <p className="max-w-2xl text-base italic leading-relaxed text-secondary-foreground lg:text-lg">
-              A potential cancer treatment sat in medicine cabinets since the
-              1950s{" \u2014 "}and no one knew about it until 2005. We{"'"}re
-              making sure that never happens again.
-            </p>
-          </div>
+      <div className="relative z-10 flex flex-col items-center gap-6 text-center">
+        {/* Logo mark */}
+        <div className="flex h-20 w-20 items-center justify-center rounded-2xl border border-primary/20 bg-primary/10">
+          <FlaskConical className="h-10 w-10 text-primary" />
         </div>
+
+        {/* Brand name */}
+        <h1 className="text-8xl font-bold tracking-tight text-foreground lg:text-9xl">
+          Repo<span className="text-primary">Rx</span>
+        </h1>
+
+        {/* Accent divider */}
+        <div className="h-1 w-20 rounded-full bg-primary" />
+
+        {/* Tagline */}
+        <p className="text-xl text-secondary-foreground lg:text-2xl">
+          Research Platform for AI Drug Rediscovery
+        </p>
       </div>
     </Slide>
   )
