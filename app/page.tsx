@@ -268,6 +268,7 @@ export default function Home() {
   )
 
   const simulatingRef = useRef(false)
+  const pendingDecisionRef = useRef<ReasoningDecision | null>(null)
 
   // Refs for latest values in async SSE handlers (avoids stale closures)
   const drugsRef = useRef(drugs)
@@ -676,7 +677,7 @@ export default function Home() {
         )
       }
 
-      // ---------- Step 3: Reasoning Loop (skip if user-initiated re-dock) ----------
+      // ---------- Step 3: Reasoning Analysis (skip if user-initiated re-dock) ----------
       if (skipReasoningRef.current) {
         skipReasoningRef.current = false
         setPhase("done")
@@ -688,123 +689,68 @@ export default function Home() {
       setPhase("reasoning")
       setStatusMessage("AI is analyzing docking patterns...")
 
-      const analyzeRes = await fetch("/api/analyze", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          cancerType: query,
-          dockingResults: newAllResults,
-          round,
-          hypotheses,
-          expansionHistory,
-        }),
-      })
-
-      if (!analyzeRes.ok)
-        throw new Error(`Analyze API error: ${analyzeRes.status}`)
-      const decisionData = (await analyzeRes.json()) as ReasoningDecision
-      setHypotheses((prev) => [...prev, decisionData.hypothesis])
-      setExpansionHistory((prev) => [
-        ...prev,
-        {
-          round,
-          action: decisionData.action,
-          rationale: decisionData.rationale,
-        },
-      ])
-
-      if (decisionData.action !== "proceed" && round <= 2) {
-        addMessage(
-          "system",
-          `AI reasoning: ${decisionData.action} — ${decisionData.rationale}`
-        )
-
-        // Expansion round
-        setPhase("expanding")
-        setStatusMessage(
-          `Expanding search: ${decisionData.action} — ${decisionData.rationale}`
-        )
-
-        const expandRes = await fetch("/api/expand", {
+      try {
+        const analyzeRes = await fetch("/api/analyze", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            decision: decisionData,
-            proteins: proteinNames,
-            existingTargets: targets,
-            allDockingResults: newAllResults,
+            cancerType: query,
+            dockingResults: newAllResults,
+            round,
+            hypotheses,
+            expansionHistory,
           }),
         })
 
-        if (expandRes.ok) {
-          const expandData = await expandRes.json()
-          const newTargets = expandData.newTargets as DockingTarget[]
+        if (analyzeRes.ok) {
+          const decisionData = (await analyzeRes.json()) as ReasoningDecision
+          setHypotheses((prev) => [...prev, decisionData.hypothesis])
+          setExpansionHistory((prev) => [
+            ...prev,
+            {
+              round,
+              action: decisionData.action,
+              rationale: decisionData.rationale,
+            },
+          ])
 
-          if (newTargets.length > 0) {
-            setRound((prev) => prev + 1)
+          if (decisionData.action !== "proceed" && round <= 2) {
+            // Store pending decision for user confirmation
+            pendingDecisionRef.current = decisionData
 
-            // Count expansion ligands and initialize progress tracking
-            const expansionLigandCount = newTargets.reduce(
-              (sum, t) => sum + t.ligands.length, 0
+            const actionLabel = decisionData.action === "expand_3d_similar"
+              ? "Search for structurally similar compounds"
+              : decisionData.action === "expand_class"
+                ? "Expand to related drug classes"
+                : decisionData.action
+
+            addMessage(
+              "assistant",
+              `**AI Analysis:** ${decisionData.rationale}\n\n**Suggestion:** ${actionLabel}`,
+              [
+                {
+                  id: "approve-expansion",
+                  label: `Yes, ${actionLabel.toLowerCase()}`,
+                  value: "approve-expansion",
+                  variant: "primary",
+                },
+                {
+                  id: "skip-expansion",
+                  label: "No, I'm done",
+                  value: "skip-expansion",
+                  variant: "outline",
+                },
+              ]
             )
-            const expansionStatuses: Record<string, SimulationStatus> = {}
-            for (let i = 0; i < expansionLigandCount; i++) {
-              expansionStatuses[`exp-${i}`] = "waiting"
-            }
-            setDrugSimStatuses(expansionStatuses)
 
-            // Dock the new targets
-            setPhase("simulating")
-            setStatusMessage("Docking expanded compounds...")
-
-            const dockRes2 = await fetch("/api/dock", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                targets: newTargets,
-                round: round + 1,
-              }),
-            })
-
-            if (dockRes2.ok && dockRes2.body) {
-              let expansionResults: DockingResult[] = []
-              let expansionCompleted = 0
-
-              await readSSEStream(dockRes2, (event) => {
-                if (event.type === "progress")
-                  setStatusMessage(event.message as string)
-                if (event.type === "target_complete") {
-                  const tResults = event.results as DockingResult[]
-                  expansionCompleted += tResults.length
-                  // Update progress bar
-                  setDrugSimStatuses(() => {
-                    const next: Record<string, SimulationStatus> = {}
-                    for (let i = 0; i < expansionLigandCount; i++) {
-                      next[`exp-${i}`] = i < expansionCompleted ? "complete" : "waiting"
-                    }
-                    return next
-                  })
-                }
-                if (event.type === "complete")
-                  expansionResults = event.allResults as DockingResult[]
-              })
-
-              // Merge all results
-              const mergedResults = [...newAllResults, ...expansionResults]
-              setAllDockingResults(mergedResults)
-
-              const mergedSorted = [...mergedResults].sort(
-                (a, b) => b.confidenceScore - a.confidenceScore
-              )
-              const mergedDrugs = mergeDuplicateDrugs(mergedSorted.map(dockingResultToDisplay))
-              setDrugs(mergedDrugs)
-
-              const mergedStatuses: Record<string, SimulationStatus> = {}
-              for (const d of mergedDrugs) mergedStatuses[d.id] = "complete"
-              setDrugSimStatuses(mergedStatuses)
-            }
+            setPhase("done")
+            setStatusMessage("")
+            simulatingRef.current = false
+            return
           }
         }
+      } catch (err) {
+        console.error("Analysis error:", err)
       }
 
       setPhase("done")
@@ -812,7 +758,7 @@ export default function Home() {
 
       addMessage(
         "assistant",
-        "Pipeline complete! You can click any drug in the table for details, ask me questions about the results, or generate a full report using the button below the table.",
+        "Pipeline complete! You can click any drug in the table for details, ask me questions about the results, or generate a full report.",
       )
     } catch (error) {
       console.error("Simulation error:", error)
@@ -1035,6 +981,147 @@ export default function Home() {
     addMessage,
   ])
 
+  // Handle user-approved AI expansion (from reasoning loop)
+  const handleApproveExpansion = useCallback(async () => {
+    const decision = pendingDecisionRef.current
+    if (!decision) return
+    pendingDecisionRef.current = null
+
+    setPhase("expanding")
+    setStatusMessage(`Expanding search: ${decision.action}...`)
+    addMessage("system", `Expanding search: ${decision.action}`)
+
+    try {
+      const expandRes = await fetch("/api/expand", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          decision,
+          proteins: proteinNames,
+          existingTargets: targets,
+          allDockingResults,
+        }),
+      })
+
+      if (!expandRes.ok) {
+        addMessage("assistant", "Expansion failed. You can still generate a report or search similar compounds manually.")
+        setPhase("done")
+        setStatusMessage("")
+        return
+      }
+
+      const expandData = await expandRes.json()
+      const newTargets = expandData.newTargets as DockingTarget[]
+
+      if (newTargets.length === 0) {
+        addMessage("assistant", "No new compounds found from expansion. You can search similar compounds manually or generate a report.")
+        setPhase("done")
+        setStatusMessage("")
+        return
+      }
+
+      setRound((prev) => prev + 1)
+
+      // Build drug entries from expansion results
+      const ligandProteinMap = new Map<string, Set<string>>()
+      const ligandData = new Map<string, { lig: typeof newTargets[0]["ligands"][0] }>()
+
+      for (const target of newTargets) {
+        for (const lig of target.ligands) {
+          const key = lig.name.toLowerCase()
+          if (!ligandProteinMap.has(key)) {
+            ligandProteinMap.set(key, new Set())
+            ligandData.set(key, { lig })
+          }
+          ligandProteinMap.get(key)!.add(target.protein)
+        }
+      }
+
+      const newDrugEntries: Drug[] = []
+      const latestDrugs = drugsRef.current
+      let ligandIndex = latestDrugs?.length ?? 0
+
+      for (const [key, proteins] of ligandProteinMap) {
+        const { lig } = ligandData.get(key)!
+        newDrugEntries.push({
+          id: `expand-${ligandIndex++}`,
+          name: lig.name,
+          mechanism: lig.mechanism,
+          fdaStatus: lig.fdaStatus,
+          fdaCategory: parseFdaCategory(lig.fdaStatus),
+          targetProteins: [...proteins],
+          category: "repurposing_candidate",
+          smiles: lig.smiles,
+          source: lig.source,
+          confidenceScore: null,
+          proteinTarget: null,
+          round: round + 1,
+        })
+      }
+
+      // Merge targets
+      setTargets((prev) => {
+        const merged = [...prev]
+        for (const nt of newTargets) {
+          const existing = merged.find((t) => t.protein === nt.protein)
+          if (existing) {
+            const existingSmiles = new Set(existing.ligands.map((l) => l.smiles))
+            const uniqueNew = nt.ligands.filter((l) => !existingSmiles.has(l.smiles))
+            existing.ligands = [...existing.ligands, ...uniqueNew]
+          } else {
+            merged.push(nt)
+          }
+        }
+        return merged
+      })
+
+      // Add to drug table
+      const currentDrugsList = latestDrugs || []
+      const mergedDrugs = mergeDuplicateDrugs([...currentDrugsList, ...newDrugEntries])
+      setDrugs(mergedDrugs)
+
+      // Auto-select new drugs
+      setSelectedDrugIds((prev) => {
+        const next = new Set(prev)
+        for (const d of newDrugEntries) next.add(d.id)
+        return next
+      })
+
+      setDrugSimStatuses((prev) => {
+        const next = { ...prev }
+        for (const d of newDrugEntries) next[d.id] = "idle"
+        return next
+      })
+
+      addMessage(
+        "assistant",
+        `Found ${newDrugEntries.length} new compounds from AI expansion! They've been added to the table. Dock them or generate a report.`,
+        [
+          {
+            id: "dock-expanded",
+            label: `Dock ${newDrugEntries.length} new compounds`,
+            value: "dock-selected",
+            variant: "primary",
+          },
+          {
+            id: "skip-dock",
+            label: "Skip docking, generate report",
+            value: "generate-report",
+            variant: "outline",
+          },
+        ]
+      )
+
+      setPhase("review-ready")
+      setStatusMessage("")
+    } catch (error) {
+      console.error("Expansion error:", error)
+      addMessage("assistant", `Expansion failed: ${error instanceof Error ? error.message : "Unknown error"}`)
+      setPhase("done")
+      setStatusMessage("")
+    }
+  }, [allDockingResults, proteinNames, targets, round, addMessage])
+
   // ---------- Report Generation (on-demand) ----------
   const handleGenerateReport = useCallback(async () => {
     if (reportGenerating || allDockingResults.length === 0) return
@@ -1135,12 +1222,36 @@ export default function Home() {
         )
         // Trigger expand flow with 3D similarity
         handleExpandSimilar()
+      } else if (val === "approve-expansion") {
+        addMessage("user", "Yes, expand the search")
+        handleApproveExpansion()
+      } else if (val === "skip-expansion") {
+        addMessage("user", "No, I'm done")
+        pendingDecisionRef.current = null
+        addMessage(
+          "assistant",
+          "No problem! You can search similar compounds, generate a report, or ask questions about the results.",
+          [
+            {
+              id: "search-similar",
+              label: "Search similar compounds",
+              value: "search-similar",
+              variant: "primary",
+            },
+            {
+              id: "generate-report",
+              label: "Generate full report",
+              value: "generate-report",
+              variant: "outline",
+            },
+          ]
+        )
       } else if (val === "generate-report") {
         addMessage("user", "Generate report")
         handleGenerateReport()
       }
     },
-    [handleSubmitQuery, handleStartSimulation, handleExpandSimilar, handleGenerateReport, addMessage]
+    [handleSubmitQuery, handleStartSimulation, handleExpandSimilar, handleApproveExpansion, handleGenerateReport, addMessage]
   )
 
   // Handle free-text chat messages (post-docking Q&A)
