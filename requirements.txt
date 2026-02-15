@@ -1,0 +1,8 @@
+requests>=2.31.0
+python-dotenv>=1.0.0
+runpod>=1.7.0
+rdkit>=2024.3.1
+gemmi>=0.7.0
+pytest>=8.0.0
+uagents==0.23.6
+uagents-core==0.4.0
