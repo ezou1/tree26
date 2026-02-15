@@ -6,6 +6,8 @@ import {
   Send,
   Bot,
 } from "lucide-react"
+import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 import type { ChatMessage, ChatAction } from "@/lib/types"
 
 interface ResearchPanelProps {
@@ -90,9 +92,17 @@ export function ResearchPanel({
                     </span>
                   </div>
                 )}
-                <p className="whitespace-pre-wrap text-xs leading-relaxed">
-                  {msg.content}
-                </p>
+                {msg.role === "user" ? (
+                  <p className="whitespace-pre-wrap text-xs leading-relaxed">
+                    {msg.content}
+                  </p>
+                ) : (
+                  <div className="prose prose-xs max-w-none text-xs leading-relaxed text-inherit prose-headings:text-inherit prose-headings:text-xs prose-headings:font-semibold prose-headings:mt-2 prose-headings:mb-1 prose-p:my-1 prose-p:leading-relaxed prose-strong:text-inherit prose-ul:my-1 prose-ol:my-1 prose-li:my-0 prose-code:text-inherit prose-code:bg-black/10 prose-code:rounded prose-code:px-1 prose-code:py-0.5 prose-code:text-[11px] prose-code:before:content-none prose-code:after:content-none prose-a:text-primary">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      {msg.content}
+                    </ReactMarkdown>
+                  </div>
+                )}
 
                 {/* Action buttons */}
                 {msg.actions && msg.actions.length > 0 && (
