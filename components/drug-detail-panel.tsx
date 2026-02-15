@@ -1,67 +1,61 @@
 "use client"
 
-import Image from "next/image"
 import {
   Shield,
-  Clock,
-  Weight,
-  Syringe,
-  AlertTriangle,
-  BookMarked,
   Target,
   X,
   Atom,
   Loader2,
   FlaskConical,
+  Beaker,
+  Hash,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
+import { MoleculeViewer } from "@/components/molecule-viewer"
 import type { Drug } from "@/lib/mock-data"
 
-function FdaStatusDisplay({ status }: { status: Drug["fdaStatus"] }) {
-  const config: Record<
-    Drug["fdaStatus"],
-    { label: string; description: string; color: string; bgColor: string }
+/** Extract PubChem CID from source field like "pubchem_cid_2244" */
+function extractCid(source: string | null): number | null {
+  if (!source) return null
+  const match = source.match(/pubchem_cid_(\d+)/)
+  return match ? parseInt(match[1], 10) : null
+}
+
+function FdaStatusDisplay({ drug }: { drug: Drug }) {
+  const categoryConfig: Record<
+    Drug["fdaCategory"],
+    { label: string; color: string; bgColor: string }
   > = {
     approved: {
       label: "FDA Approved",
-      description:
-        "This drug has received full FDA approval for its original indication and can be prescribed off-label.",
       color: "text-emerald-400",
       bgColor: "bg-emerald-500/10 border-emerald-500/20",
     },
     "phase-3": {
       label: "Phase 3 Trials",
-      description:
-        "Currently undergoing Phase 3 clinical trials for repurposed indication. Large-scale efficacy testing.",
       color: "text-sky-400",
       bgColor: "bg-sky-500/10 border-sky-500/20",
     },
     "phase-2": {
       label: "Phase 2 Trials",
-      description:
-        "In Phase 2 clinical trials. Preliminary efficacy data being collected for the repurposed indication.",
       color: "text-amber-400",
       bgColor: "bg-amber-500/10 border-amber-500/20",
     },
     "phase-1": {
       label: "Phase 1 Trials",
-      description:
-        "Early-stage Phase 1 trials. Safety and dosing studies underway for the new indication.",
       color: "text-orange-400",
       bgColor: "bg-orange-500/10 border-orange-500/20",
     },
     preclinical: {
       label: "Preclinical",
-      description:
-        "Currently in preclinical research. In-vitro and animal model studies ongoing.",
       color: "text-muted-foreground",
       bgColor: "bg-muted/50 border-muted-foreground/20",
     },
   }
 
-  const c = config[status]
+  const c = categoryConfig[drug.fdaCategory]
 
   return (
     <div className={`rounded-lg border p-3 ${c.bgColor}`}>
@@ -70,19 +64,21 @@ function FdaStatusDisplay({ status }: { status: Drug["fdaStatus"] }) {
         <span className={`text-sm font-semibold ${c.color}`}>{c.label}</span>
       </div>
       <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
-        {c.description}
+        {drug.fdaStatus}
       </p>
     </div>
   )
 }
 
 function ConfidenceGauge({ value }: { value: number }) {
+  // Value is 0-1 from docking score
+  const pct = Math.round(value * 100)
   const circumference = 2 * Math.PI * 36
-  const offset = circumference - (value / 100) * circumference
+  const offset = circumference - (pct / 100) * circumference
   const color =
-    value >= 85
+    pct >= 85
       ? "stroke-emerald-400"
-      : value >= 70
+      : pct >= 70
         ? "stroke-sky-400"
         : "stroke-amber-400"
 
@@ -113,67 +109,61 @@ function ConfidenceGauge({ value }: { value: number }) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="font-mono text-xl font-bold text-foreground">
-            {value}%
+            {value.toFixed(2)}
           </span>
         </div>
       </div>
       <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-        Confidence Score
+        Docking Score
       </span>
     </div>
   )
 }
 
-/** Reusable drug result content -- used in both "previous result during sim" and normal view */
 function DrugResultContent({ drug }: { drug: Drug }) {
+  const cid = extractCid(drug.source)
+
   return (
     <div className="flex flex-col gap-4 p-4">
-      {/* Molecular Image */}
-      <div className="relative aspect-[16/9] overflow-hidden rounded-lg border border-border">
-        <Image
-          src={drug.imageUrl}
-          alt={`Molecular structure of ${drug.name}`}
-          fill
-          className="object-cover"
-        />
-        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/90 to-transparent p-3 pt-8">
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
-            Molecular Structure
-          </span>
-        </div>
-      </div>
+      {/* 3D Molecular Structure */}
+      {(cid || drug.smiles) && (
+        <>
+          <MoleculeViewer cid={cid} smiles={drug.smiles} height={200} />
+          <Separator className="bg-border" />
+        </>
+      )}
 
       {/* Confidence + FDA row */}
       <div className="grid grid-cols-2 gap-3">
         <div className="flex items-center justify-center rounded-lg border border-border bg-card p-4">
-          <ConfidenceGauge value={drug.confidence} />
+          {drug.confidenceScore !== null ? (
+            <ConfidenceGauge value={drug.confidenceScore} />
+          ) : (
+            <div className="flex flex-col items-center gap-2 text-muted-foreground/40">
+              <Atom className="h-8 w-8" />
+              <span className="text-[10px] uppercase tracking-wider">
+                Not docked
+              </span>
+            </div>
+          )}
         </div>
         <div className="flex flex-col gap-3">
-          <FdaStatusDisplay status={drug.fdaStatus} />
+          <FdaStatusDisplay drug={drug} />
         </div>
-      </div>
-
-      <Separator className="bg-border" />
-
-      {/* Description */}
-      <div>
-        <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-          Analysis Summary
-        </h3>
-        <p className="text-xs leading-relaxed text-secondary-foreground">
-          {drug.description}
-        </p>
       </div>
 
       <Separator className="bg-border" />
 
       {/* Mechanism of Action */}
       <div>
-        <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-          Mechanism of Action
-        </h3>
+        <div className="mb-2 flex items-center gap-2">
+          <Beaker className="h-3 w-3 text-primary" />
+          <h3 className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+            Mechanism of Action
+          </h3>
+        </div>
         <p className="text-xs leading-relaxed text-secondary-foreground">
-          {drug.mechanismOfAction}
+          {drug.mechanism}
         </p>
       </div>
 
@@ -199,81 +189,69 @@ function DrugResultContent({ drug }: { drug: Drug }) {
         </div>
       </div>
 
-      <Separator className="bg-border" />
-
-      {/* Pharmacokinetics */}
-      <div>
-        <h3 className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-          Pharmacokinetics
-        </h3>
-        <div className="grid grid-cols-3 gap-2">
-          <div className="rounded-lg border border-border bg-secondary/30 p-2.5 text-center">
-            <Weight className="mx-auto mb-1 h-3.5 w-3.5 text-muted-foreground" />
-            <p className="font-mono text-xs font-medium text-foreground">
-              {drug.molecularWeight}
-            </p>
-            <p className="text-[9px] text-muted-foreground">Mol. Weight</p>
+      {drug.proteinTarget && (
+        <>
+          <Separator className="bg-border" />
+          <div>
+            <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Docked Against
+            </h3>
+            <code className="rounded-md border border-border bg-secondary px-2 py-1 font-mono text-xs text-foreground">
+              {drug.proteinTarget}
+            </code>
           </div>
-          <div className="rounded-lg border border-border bg-secondary/30 p-2.5 text-center">
-            <Clock className="mx-auto mb-1 h-3.5 w-3.5 text-muted-foreground" />
-            <p className="font-mono text-xs font-medium text-foreground">
-              {drug.halfLife}
-            </p>
-            <p className="text-[9px] text-muted-foreground">Half-Life</p>
-          </div>
-          <div className="rounded-lg border border-border bg-secondary/30 p-2.5 text-center">
-            <Syringe className="mx-auto mb-1 h-3.5 w-3.5 text-muted-foreground" />
-            <p className="font-mono text-xs font-medium text-foreground">
-              {drug.routeOfAdmin}
-            </p>
-            <p className="text-[9px] text-muted-foreground">Route</p>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
 
-      <Separator className="bg-border" />
+      {/* Source + Round info */}
+      {(drug.source || drug.round > 0) && (
+        <>
+          <Separator className="bg-border" />
+          <div className="flex flex-wrap items-center gap-2">
+            {drug.source && (
+              <div className="rounded-lg border border-border bg-secondary/30 px-3 py-2">
+                <div className="flex items-center gap-2">
+                  <Hash className="h-3 w-3 text-muted-foreground" />
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    Source
+                  </span>
+                </div>
+                <p className="mt-1 text-xs text-foreground">{drug.source}</p>
+              </div>
+            )}
+            {drug.round > 0 && (
+              <div className="rounded-lg border border-border bg-secondary/30 px-3 py-2">
+                <div className="flex items-center gap-2">
+                  <FlaskConical className="h-3 w-3 text-muted-foreground" />
+                  <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
+                    Docking Round
+                  </span>
+                </div>
+                <p className="mt-1 text-xs font-medium text-foreground">
+                  Round {drug.round}
+                </p>
+              </div>
+            )}
+          </div>
+        </>
+      )}
 
-      {/* Side Effects */}
-      <div>
-        <div className="mb-2 flex items-center gap-2">
-          <AlertTriangle className="h-3 w-3 text-amber-400" />
-          <h3 className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-            Known Side Effects
-          </h3>
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {drug.sideEffects.map((effect) => (
+      {drug.category && (
+        <>
+          <Separator className="bg-border" />
+          <div>
+            <h3 className="mb-2 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
+              Category
+            </h3>
             <Badge
-              key={effect}
               variant="outline"
-              className="border-amber-500/20 bg-amber-500/5 text-[10px] text-amber-400/80"
+              className="border-primary/30 bg-primary/10 text-xs text-primary"
             >
-              {effect}
+              {drug.category}
             </Badge>
-          ))}
-        </div>
-      </div>
-
-      <Separator className="bg-border" />
-
-      {/* Citations */}
-      <div className="rounded-lg border border-border bg-secondary/30 p-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <BookMarked className="h-3.5 w-3.5 text-primary" />
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-              Literature Citations
-            </span>
           </div>
-          <span className="font-mono text-lg font-bold text-foreground">
-            {drug.citations.toLocaleString()}
-          </span>
-        </div>
-        <p className="mt-1 text-[10px] text-muted-foreground">
-          References found across PubMed, ClinicalTrials.gov, and Cochrane
-          Library
-        </p>
-      </div>
+        </>
+      )}
     </div>
   )
 }
@@ -289,7 +267,7 @@ export function DrugDetailPanel({
   onClose,
   simulationRunningDrug,
 }: DrugDetailPanelProps) {
-  // State 1: Simulation running, no previous completed result yet (first drug)
+  // State 1: Simulation running, no previous completed result yet
   if (simulationRunningDrug && !drug) {
     return (
       <div className="flex h-full flex-col">
@@ -298,9 +276,6 @@ export function DrugDetailPanel({
             <h2 className="text-lg font-semibold text-foreground">
               {simulationRunningDrug.name}
             </h2>
-            <p className="text-xs text-muted-foreground">
-              {simulationRunningDrug.genericName}
-            </p>
           </div>
         </div>
         <div className="flex flex-1 flex-col items-center justify-center gap-6 p-8">
@@ -314,19 +289,19 @@ export function DrugDetailPanel({
           </div>
           <div className="text-center">
             <p className="text-sm font-medium text-foreground">
-              Running simulation...
+              Running DiffDock...
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              Analyzing binding affinity and pathway interactions for{" "}
+              Molecular docking simulation for{" "}
               {simulationRunningDrug.name}
             </p>
           </div>
           <div className="flex w-full max-w-[200px] flex-col gap-2">
             {[
-              "Molecular docking",
-              "Binding energy calc",
-              "Pathway analysis",
-              "Safety profiling",
+              "Preparing ligand",
+              "Submitting to RunPod",
+              "Docking in progress",
+              "Scoring poses",
             ].map((step, i) => (
               <div key={step} className="flex items-center gap-2">
                 {i < 2 ? (
@@ -349,18 +324,16 @@ export function DrugDetailPanel({
     )
   }
 
-  // State 2: Simulation running for another drug, but showing the previously completed drug's results
+  // State 2: Simulation running for another drug, showing previous result
   if (simulationRunningDrug && drug) {
     return (
       <div className="flex h-full flex-col">
-        {/* Running indicator banner */}
         <div className="flex items-center gap-2 border-b border-primary/20 bg-primary/5 px-4 py-2">
           <Loader2 className="h-3.5 w-3.5 animate-spin text-primary" />
           <span className="text-xs text-primary">
-            Now simulating {simulationRunningDrug.name}...
+            Now docking {simulationRunningDrug.name}...
           </span>
         </div>
-        {/* Header for the displayed (previously completed) drug */}
         <div className="flex items-start justify-between border-b border-border p-4">
           <div>
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
@@ -369,7 +342,6 @@ export function DrugDetailPanel({
             <h2 className="text-lg font-semibold text-foreground">
               {drug.name}
             </h2>
-            <p className="text-xs text-muted-foreground">{drug.genericName}</p>
           </div>
         </div>
         <ScrollArea className="flex-1">
@@ -379,7 +351,7 @@ export function DrugDetailPanel({
     )
   }
 
-  // State 3: No drug selected at all
+  // State 3: No drug selected
   if (!drug) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-4 p-8">
@@ -398,14 +370,17 @@ export function DrugDetailPanel({
     )
   }
 
-  // State 4: Normal view -- drug selected, no simulation running
+  // State 4: Normal view
   return (
     <div className="flex h-full flex-col">
-      {/* Header */}
       <div className="flex items-start justify-between border-b border-border p-4">
         <div>
           <h2 className="text-lg font-semibold text-foreground">{drug.name}</h2>
-          <p className="text-xs text-muted-foreground">{drug.genericName}</p>
+          {drug.proteinTarget && (
+            <p className="text-xs text-muted-foreground">
+              Docked against {drug.proteinTarget}
+            </p>
+          )}
         </div>
         <button
           type="button"

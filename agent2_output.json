@@ -1,829 +1,507 @@
 {
-  "cancer_type": "Pleural mesothelioma",
+  "cancer_type": "pancreatic ductal adenocarcinoma",
   "targets": [
     {
-      "protein": "EGFR",
-      "pdb_id": "8A27",
-      "pdb_file": "structures\\8A27.pdb",
+      "protein": "KRAS",
+      "pdb_id": "9IAY",
+      "pdb_file": "structures/9IAY.pdb",
       "ligands": [
         {
-          "name": "Osimertinib",
-          "smiles": "C=CC(=O)Nc1cc(Nc2nccc(-c3cn(C)c4ccccc34)n2)c(OC)cc1N(C)CCN(C)C",
-          "mechanism": "Irreversible tyrosine kinase inhibitor binding to EGFR mutants (e.g., T790M), inhibits kinase activity and downstream signaling (PI3K/AKT, MAPK)",
-          "fda_status": "FDA-approved (NSCLC; relevant to mesothelioma EGFR+)",
-          "source": "pubchem_cid_71496458"
+          "name": "sotorasib (AMG-510)",
+          "smiles": "C=CC(=O)N1CCN(c2nc(=O)n(-c3c(C)ccnc3C(C)C)c3nc(-c4c(O)cccc4F)c(F)cc23)C(C)C1",
+          "mechanism": "Covalently binds the GDP-bound inactive state of KRAS G12C (switch II pocket), locking it inactive and blocking downstream RAF/MEK/ERK signaling.",
+          "fda_status": "Approved for NSCLC and colorectal cancer",
+          "source": "pubchem_cid_137278711"
         },
         {
-          "name": "Ibrutinib",
-          "smiles": "C=CC(=O)N1CCCC(n2nc(-c3ccc(Oc4ccccc4)cc3)c3c(N)ncnc32)C1",
-          "mechanism": "BTK inhibitor with off-target EGFR inhibition via reversible kinase domain binding",
-          "fda_status": "FDA-approved (mantle cell lymphoma, chronic lymphocytic leukemia)",
-          "source": "pubchem_cid_24821094"
+          "name": "adagrasib",
+          "smiles": "C=C(F)C(=O)N1CCN(c2nc(OCC3CCCN3C)nc3c2CCN(c2cccc4cccc(Cl)c24)C3)CC1CC#N",
+          "mechanism": "Covalently binds the GDP-bound inactive state of KRAS G12C (switch II pocket), locking it inactive and blocking downstream RAF/MEK/ERK signaling.",
+          "fda_status": "Approved for NSCLC and colorectal cancer",
+          "source": "pubchem_cid_138611145"
+        },
+        {
+          "name": "Daraxonrasib (RMC-6236)",
+          "smiles": "CCn1c(-c2cc(N3CCN(C)CC3)cnc2C(C)OC)c2c3cc(ccc31)-c1csc(n1)CC(NC(=O)C1CC1C)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
+          "mechanism": "Pan-RAS(ON) inhibitor targeting active GTP-bound states of KRAS G12C, G12D, and G12V.",
+          "fda_status": "Phase 1/3 trials",
+          "source": "pubchem_cid_164726578"
+        },
+        {
+          "name": "RMC-7977",
+          "smiles": "CCn1c(-c2cc(N3CCN(C4CC4)CC3)cnc2C(C)OC)c2c3cc(ccc31)-c1csc(n1)CC(NC(=O)C1C3COCC31)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
+          "mechanism": "Pan-KRAS inhibitor with significant antitumor activity.",
+          "fda_status": "Preclinical/early-stage",
+          "source": "pubchem_cid_164726623"
+        },
+        {
+          "name": "Trametinib",
+          "smiles": "CC(=O)Nc1cccc(-n2c(=O)n(C3CC3)c(=O)c3c(Nc4ccc(I)cc4F)n(C)c(=O)c(C)c32)c1",
+          "mechanism": "MEK1/2 inhibitor blocking MAPK pathway downstream of KRAS; upstream MEK1/2 inhibitor affecting ERK2 activation.",
+          "fda_status": "FDA-approved for other cancers (e.g., colorectal)",
+          "source": "pubchem_cid_11707110"
+        },
+        {
+          "name": "RMC-4630",
+          "smiles": "Cc1nc(N2CCC3(CC2)COC(C)C3N)c(CO)nc1Sc1ccnc(N)c1Cl",
+          "mechanism": "SHP2 inhibitor to block RAS-MAPK signaling.",
+          "fda_status": "Phase 1/1b trials",
+          "source": "pubchem_cid_134182831"
+        },
+        {
+          "name": "IMM-6-415",
+          "smiles": "CNS(=O)(=O)Nc1cccc(Cc2c(CN(C)C)c3ccc(OC(=O)N(C)C)cc3oc2=O)c1Cl",
+          "mechanism": "Immunotherapy targeting KRAS.",
+          "fda_status": "Phase 1/2",
+          "source": "pubchem_cid_168982960"
+        },
+        {
+          "name": "Disulfiram",
+          "smiles": "CCN(CC)C(=S)SSC(=S)N(CC)CC",
+          "mechanism": "Covalently binds KRAS via copper-mediated mechanisms, inhibiting KRAS activity.",
+          "fda_status": "Approved for alcohol use disorder",
+          "source": "pubchem_cid_3117"
         },
         {
           "name": "Metformin",
           "smiles": "CN(C)C(=N)N=C(N)N",
-          "mechanism": "AMPK activator; suppresses mTOR/EGFR-RAS signaling, inhibits metabolic reprogramming in KRAS-mutant cells",
-          "fda_status": "FDA-approved (type 2 diabetes)",
+          "mechanism": "Indirectly suppresses KRAS signaling via AMPK activation.",
+          "fda_status": "Approved for type 2 diabetes",
           "source": "pubchem_cid_4091"
         },
         {
-          "name": "4-[4-(3-bromoanilino)-6H-azeto[3,2-g]quinazolin-7-yl]-1-morpholin-4-ylbutan-1-one",
-          "smiles": "O=C(CCCN1Cc2cc3c(Nc4cccc(Br)c4)ncnc3cc21)N1CCOCC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44564480"
-        },
-        {
-          "name": "2-[4-(3-bromoanilino)-6H-azeto[3,2-g]quinazolin-7-yl]acetic acid",
-          "smiles": "O=C(O)CN1Cc2cc3c(Nc4cccc(Br)c4)ncnc3cc21",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44564481"
-        },
-        {
-          "name": "2-[4-(3-bromoanilino)-8H-pyrrolo[3,2-g]quinazolin-6-yl]-1-morpholin-4-ylethanone",
-          "smiles": "O=C(Cc1c[nH]c2cc3ncnc(Nc4cccc(Br)c4)c3cc12)N1CCOCC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44564482"
-        },
-        {
-          "name": "1-[4-[(4-fluorophenyl)-(4-methoxyphenoxy)methyl]piperidin-1-yl]ethanone",
-          "smiles": "COc1ccc(OC(c2ccc(F)cc2)C2CCN(C(C)=O)CC2)cc1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44367872"
-        },
-        {
-          "name": "2-[2-[4-(3,4-dichloroanilino)-6-methoxyquinazolin-7-yl]oxyethyl]isoindole-1,3-dione",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCCN1C(=O)c2ccccc2C1=O",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802754"
-        },
-        {
-          "name": "N-(1H-indol-5-yl)-6-thiophen-2-ylthieno[3,2-d]pyrimidin-4-amine",
-          "smiles": "c1csc(-c2cc3ncnc(Nc4ccc5[nH]ccc5c4)c3s2)c1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_18382853"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[[4-(2-phenylethyl)morpholin-2-yl]methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(CCc2ccccc2)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802752"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[[4-(3-phenylpropyl)morpholin-2-yl]methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(CCCc2ccccc2)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802758"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[[2-(1-methylpiperidin-2-yl)-1,3-thiazol-4-yl]methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCc1csc(C2CCCCN2C)n1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802760"
-        },
-        {
-          "name": "N-(1H-indazol-5-yl)-6-phenylthieno[3,2-d]pyrimidin-4-amine",
-          "smiles": "c1ccc(-c2cc3ncnc(Nc4ccc5[nH]ncc5c4)c3s2)cc1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_18382857"
-        },
-        {
-          "name": "tert-butyl 2-[2-[4-(3,4-dichloroanilino)-6-methoxyquinazolin-7-yl]oxyethyl]-5,5-dimethylmorpholine-4-carboxylate",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCCC1CN(C(=O)OC(C)(C)C)C(C)(C)CO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802762"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[[3-(pyridin-2-ylsulfonylmethyl)-1,2,4-oxadiazol-5-yl]methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCc1nc(CS(=O)(=O)c2ccccn2)no1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802763"
-        },
-        {
-          "name": "N-(4-bromo-2-chlorophenyl)-6-methoxy-7-[(4-methylmorpholin-2-yl)methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Br)cc3Cl)ncnc2cc1OCC1CN(C)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802756"
-        },
-        {
-          "name": "N-(1H-indol-5-yl)-2-[4-(morpholin-4-ylmethyl)phenyl]thieno[3,2-b]pyridin-7-amine",
-          "smiles": "c1cc(Nc2ccc3[nH]ccc3c2)c2sc(-c3ccc(CN4CCOCC4)cc3)cc2n1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_18382861"
-        },
-        {
-          "name": "(1S)-4-[6-(cyclopentylamino)purin-9-yl]-2,3-dihydroxy-N-methylbicyclo[3.1.0]hexane-1-carboxamide",
-          "smiles": "CNC(=O)C12CC1C(n1cnc3c(NC4CCCC4)ncnc31)C(O)C2O",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_49823645"
-        },
-        {
-          "name": "[2-[[4-(3,4-dichloroanilino)-6-methoxyquinazolin-7-yl]oxymethyl]morpholin-4-yl]-(2,3,6-trifluorophenyl)methanone",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(C(=O)c2c(F)ccc(F)c2F)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802765"
-        },
-        {
-          "name": "N-(4-bromo-3-chlorophenyl)-6-methoxy-7-[(4-methylmorpholin-2-yl)methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Br)c(Cl)c3)ncnc2cc1OCC1CN(C)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802766"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[(4-pyridin-4-yl-1,3-thiazol-2-yl)methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCc1nc(-c2ccncc2)cs1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802769"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[[5-(4-methylphenyl)-1,3,4-oxadiazol-2-yl]methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCc1nnc(-c2ccc(C)cc2)o1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802770"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[(2-piperazin-1-yl-1,3-thiazol-4-yl)methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCc1csc(N2CCNCC2)n1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802771"
-        },
-        {
-          "name": "2-[methyl-[[4-[7-[(2-methyl-1H-indol-5-yl)amino]thieno[3,2-b]pyridin-2-yl]phenyl]methyl]amino]ethanol",
-          "smiles": "Cc1cc2cc(Nc3ccnc4cc(-c5ccc(CN(C)CCO)cc5)sc34)ccc2[nH]1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_18382868"
-        },
-        {
-          "name": "2-(1,4-dioxaspiro[4.5]decan-7-yl)-2-[[4-(4-methoxyphenyl)phenyl]sulfonylamino]acetic acid",
-          "smiles": "COc1ccc(-c2ccc(S(=O)(=O)NC(C(=O)O)C3CCCC4(C3)OCCO4)cc2)cc1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44302357"
-        },
-        {
-          "name": "4-[2-(diethylamino)ethylamino]naphthalen-1-ol",
-          "smiles": "CCN(CC)CCNc1ccc(O)c2ccccc12",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44466196"
-        },
-        {
-          "name": "[4-[[4-(3,4-dichloroanilino)-6-methoxyquinazolin-7-yl]oxymethyl]-1,3-thiazol-2-yl]methyl benzoate",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCc1csc(COC(=O)c2ccccc2)n1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802774"
-        },
-        {
-          "name": "7-[[4-[(E)-3-bromoprop-2-enyl]morpholin-2-yl]methoxy]-N-(3,4-dichlorophenyl)-6-methoxyquinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(CC=CBr)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802772"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-7-[[3-(4-ethylpiperazin-1-yl)-1,2,4-oxadiazol-5-yl]methoxy]-6-methoxyquinazolin-4-amine",
-          "smiles": "CCN1CCN(c2noc(COc3cc4ncnc(Nc5ccc(Cl)c(Cl)c5)c4cc3OC)n2)CC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802773"
-        },
-        {
-          "name": "N-(4-bromo-5-chloro-2-fluorophenyl)-6-methoxy-7-[(4,5,5-trimethylmorpholin-2-yl)methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3cc(Cl)c(Br)cc3F)ncnc2cc1OCC1CN(C)C(C)(C)CO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802776"
-        },
-        {
-          "name": "N-(1H-indol-5-yl)-2-[4-[(2-piperazin-1-ylethylamino)methyl]phenyl]thieno[3,2-b]pyridin-7-amine",
-          "smiles": "c1cc(Nc2ccc3[nH]ccc3c2)c2sc(-c3ccc(CNCCN4CCNCC4)cc3)cc2n1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_18382875"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-7-[[4-(4-fluorobutyl)morpholin-2-yl]methoxy]-6-methoxyquinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(CCCCF)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802780"
-        },
-        {
-          "name": "6-amino-1H-quinoxalin-2-one",
-          "smiles": "Nc1ccc2[nH]c(=O)cnc2c1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_45121565"
-        },
-        {
-          "name": "2-[6-amino-2-[[1-hydroxy-3-(4-hydroxyphenyl)propan-2-yl]amino]purin-9-yl]-5-(2-ethyltetrazol-5-yl)oxolane-3,4-diol",
-          "smiles": "CCn1nnc(C2OC(n3cnc4c(N)nc(NC(CO)Cc5ccc(O)cc5)nc43)C(O)C2O)n1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_49823648"
-        },
-        {
-          "name": "4-(3-benzylsulfanyl-1H-1,2,4-triazol-5-yl)pyridine",
-          "smiles": "c1ccc(CSc2n[nH]c(-c3ccncc3)n2)cc1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_884767"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-7-[(1,4-dimethylpiperazin-2-yl)methoxy]-6-methoxyquinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(C)CCN1C",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802781"
-        },
-        {
-          "name": "7-cyclopentyloxy-N-(3,4-dichlorophenyl)-6-methoxyquinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OC1CCCC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802785"
-        },
-        {
-          "name": "N-(4-bromo-3-chlorophenyl)-6-methoxy-7-(1-methylpyrrolidin-3-yl)oxyquinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Br)c(Cl)c3)ncnc2cc1OC1CCN(C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802786"
-        },
-        {
-          "name": "N-(2,3-dichloro-4-methylphenyl)-6-methoxy-7-[(4-methylmorpholin-2-yl)methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(C)c(Cl)c3Cl)ncnc2cc1OCC1CN(C)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802779"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-[[4-[(2R)-2-methylbutyl]morpholin-2-yl]methoxy]quinazolin-4-amine",
-          "smiles": "CCC(C)CN1CCOC(COc2cc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3cc2OC)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802788"
-        },
-        {
-          "name": "5-(1-benzyltriazol-4-yl)-1H-indazole",
-          "smiles": "c1ccc(Cn2cc(-c3ccc4[nH]ncc4c3)nn2)cc1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_25165861"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-7-[(1,4-diethylpiperazin-2-yl)methoxy]-6-methoxyquinazolin-4-amine",
-          "smiles": "CCN1CCN(CC)C(COc2cc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3cc2OC)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802789"
-        },
-        {
-          "name": "1-[2-[[4-(3,4-dichloroanilino)-6-methoxyquinazolin-7-yl]oxymethyl]morpholin-4-yl]-3-phenylpropan-1-one",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(C(=O)CCc2ccccc2)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802791"
-        },
-        {
-          "name": "4-[[4-(4-chlorophenyl)-1,3-thiazol-2-yl]amino]phenol",
-          "smiles": "Oc1ccc(Nc2nc(-c3ccc(Cl)cc3)cs2)cc1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_753704"
-        },
-        {
-          "name": "7-[[(3S,8aS)-3,4,6,7,8,8a-hexahydro-1H-pyrrolo[2,1-c][1,4]oxazin-3-yl]methoxy]-N-(3,4-dichloro-2-fluorophenyl)-6-methoxyquinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3F)ncnc2cc1OCC1CN2CCCC2CO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802793"
-        },
-        {
-          "name": "N-(4-bromo-2-fluorophenyl)-6-methoxy-7-[(4-methylmorpholin-2-yl)methoxy]quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Br)cc3F)ncnc2cc1OCC1CN(C)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802794"
-        },
-        {
-          "name": "methyl 3-[2-[[4-(3,4-dichloroanilino)-6-methoxyquinazolin-7-yl]oxymethyl]morpholin-4-yl]propanoate",
-          "smiles": "COC(=O)CCN1CCOC(COc2cc3ncnc(Nc4ccc(Cl)c(Cl)c4)c3cc2OC)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802790"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-6-methoxy-7-(2-piperidin-1-ylethoxy)quinazolin-4-amine",
-          "smiles": "COc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCCN1CCCCC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802796"
-        },
-        {
-          "name": "N-(3,4-dichlorophenyl)-7-[(4-methylmorpholin-2-yl)methoxy]-6-propan-2-yloxyquinazolin-4-amine",
-          "smiles": "CC(C)Oc1cc2c(Nc3ccc(Cl)c(Cl)c3)ncnc2cc1OCC1CN(C)CCO1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_57802797"
-        },
-        {
-          "name": "N-[4-[(3-chloro-4-fluorophenyl)methyl]pyrido[3,2-d]pyrimidin-6-yl]prop-2-enamide",
-          "smiles": "C=CC(=O)Nc1ccc2ncnc(Cc3ccc(F)c(Cl)c3)c2n1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44564526"
-        },
-        {
-          "name": "N-[4-[(3-chloro-4-fluorophenyl)methyl]-7-[(E)-4-morpholin-4-ylbut-1-enyl]pyrido[3,2-d]pyrimidin-6-yl]prop-2-enamide",
-          "smiles": "C=CC(=O)Nc1nc2c(Cc3ccc(F)c(Cl)c3)ncnc2cc1C=CCCN1CCOCC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44564527"
-        },
-        {
-          "name": "N-[4-[(3-chloro-4-fluorophenyl)methyl]-7-(4-morpholin-4-ylbutyl)pyrido[3,2-d]pyrimidin-6-yl]prop-2-enamide",
-          "smiles": "C=CC(=O)Nc1nc2c(Cc3ccc(F)c(Cl)c3)ncnc2cc1CCCCN1CCOCC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44564528"
-        },
-        {
-          "name": "N-[4-[(3-chloro-4-fluorophenyl)methyl]-7-methoxypyrido[3,2-d]pyrimidin-6-yl]prop-2-enamide",
-          "smiles": "C=CC(=O)Nc1nc2c(Cc3ccc(F)c(Cl)c3)ncnc2cc1OC",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
-          "source": "pubchem_cid_44564529"
-        }
-      ]
-    },
-    {
-      "protein": "p53",
-      "pdb_id": "3QL9",
-      "pdb_file": "structures\\3QL9.pdb",
-      "ligands": [
-        {
-          "name": "Efavirenz",
-          "smiles": "O=C1Nc2ccc(Cl)cc2C(C#CC2CC2)(C(F)(F)F)O1",
-          "mechanism": "Non-nucleoside reverse transcriptase inhibitor; suppresses LINE-1 retrotransposition that stabilizes mutant p53",
-          "fda_status": "FDA-approved (HIV infection)",
-          "source": "pubchem_cid_64139"
-        },
-        {
-          "name": "Adavosertib",
-          "smiles": "C=CCn1c(=O)c2cnc(Nc3ccc(N4CCN(C)CC4)cc3)nc2n1-c1cccc(C(C)(C)O)n1",
-          "mechanism": "Wee1 kinase inhibitor; abrogates G2/M checkpoint, exploits p53 deficiency and sensitizes KRAS-mutant cells to DNA damage",
-          "fda_status": "Investigational (advanced trials, ovarian cancer combinations)",
-          "source": "pubchem_cid_24856436"
-        },
-        {
-          "name": "Ganetespib",
-          "smiles": "CC(C)c1cc(-c2n[nH]c(=O)n2-c2ccc3c(ccn3C)c2)c(O)cc1O",
-          "mechanism": "HSP90 inhibitor; degrades mutant p53 via HSP90 client destabilization",
-          "fda_status": "Investigational (Phase II solid tumors)",
-          "source": "pubchem_cid_135564985"
-        },
-        {
-          "name": "UCN-01",
-          "smiles": "CNC1CC2OC(C)(C1OC)n1c3ccccc3c3c4c(c5c6ccccc6n2c5c31)C(=O)NC4O",
-          "mechanism": "Protein kinase C inhibitor; Chk1 modulation restores p53-independent apoptosis in mutant lines",
-          "fda_status": "Investigational (leukemia, lymphoma, SCLC trials)",
-          "source": "pubchem_cid_3078519"
-        },
-        {
-          "name": "PEITC",
-          "smiles": "S=C=NCCc1ccccc1",
-          "mechanism": "Phenethyl isothiocyanate; selectively inhibits p53 mutants (R175H/L), refolds/stabilizes mutant p53",
-          "fda_status": "Not FDA-approved (nutraceutical/dietary supplement)",
-          "source": "pubchem_cid_16741"
-        },
-        {
-          "name": "APR-246",
-          "smiles": "COCC1(CO)C(=O)C2CCN1CC2",
-          "mechanism": "p53 reactivator; reactivates p53 mutants (R273H/L), restores tumor suppression via DNA-binding domain correction",
-          "fda_status": "Investigational (myelodysplastic syndrome, ovarian cancer trials)",
-          "source": "pubchem_cid_52918385"
-        }
-      ]
-    },
-    {
-      "protein": "KRAS",
-      "pdb_id": "9IAY",
-      "pdb_file": "structures\\9IAY.pdb",
-      "ligands": [
-        {
-          "name": "Tipifarnib",
-          "smiles": "Cn1cncc1C(N)(c1ccc(Cl)cc1)c1ccc2c(c1)c(-c1cccc(Cl)c1)cc(=O)n2C",
-          "mechanism": "Farnesyltransferase inhibitor; blocks KRAS post-translational farnesylation required for membrane localization",
-          "fda_status": "Investigational (Phase II in KRAS+ cancers)",
-          "source": "pubchem_cid_159324"
-        },
-        {
-          "name": "Atorvastatin",
-          "smiles": "CC(C)c1c(C(=O)Nc2ccccc2)c(-c2ccccc2)c(-c2ccc(F)cc2)n1CCC(O)CC(O)CC(=O)O",
-          "mechanism": "HMG-CoA reductase inhibitor; blocks mevalonate pathway disrupting KRAS prenylation and membrane localization",
-          "fda_status": "FDA-approved (hyperlipidemia, cardiovascular disease)",
-          "source": "pubchem_cid_60823"
+          "name": "Aspirin",
+          "smiles": "CC(=O)Oc1ccccc1C(=O)O",
+          "mechanism": "Binds to switch-II pocket of KRAS, inhibiting G12D/C mutants.",
+          "fda_status": "Approved for analgesic, anti-inflammatory use",
+          "source": "pubchem_cid_2244"
         },
         {
           "name": "Simvastatin",
           "smiles": "CCC(C)(C)C(=O)OC1CC(C)C=C2C=CC(C)C(CCC3CC(O)CC(=O)O3)C21",
-          "mechanism": "HMG-CoA reductase inhibitor; blocks mevalonate pathway disrupting KRAS prenylation and membrane localization",
-          "fda_status": "FDA-approved (hyperlipidemia, cardiovascular disease)",
+          "mechanism": "Inhibits KRAS prenylation via farnesyl pyrophosphate depletion.",
+          "fda_status": "Approved for hypercholesterolemia",
           "source": "pubchem_cid_54454"
         },
         {
-          "name": "Zoledronic acid",
-          "smiles": "O=P(O)(O)C(O)(Cn1ccnc1)P(=O)(O)O",
-          "mechanism": "Bisphosphonate; inhibits HMG-CoA reductase downstream effects, blocking KRAS farnesylation and membrane localization",
-          "fda_status": "FDA-approved (osteoporosis, bone metastases)",
-          "source": "pubchem_cid_68740"
+          "name": "Itraconazole",
+          "smiles": "CCC(C)n1ncn(-c2ccc(N3CCN(c4ccc(OCC5COC(Cn6cncn6)(c6ccc(Cl)cc6Cl)O5)cc4)CC3)cc2)c1=O",
+          "mechanism": "Disrupts KRAS-GLI1 axis.",
+          "fda_status": "Approved for fungal infections",
+          "source": "pubchem_cid_55283"
         },
         {
-          "name": "Adavosertib",
-          "smiles": "C=CCn1c(=O)c2cnc(Nc3ccc(N4CCN(C)CC4)cc3)nc2n1-c1cccc(C(C)(C)O)n1",
-          "mechanism": "Wee1 kinase inhibitor; abrogates G2/M checkpoint, exploits p53 deficiency and sensitizes KRAS-mutant cells to DNA damage",
-          "fda_status": "Investigational (advanced trials, ovarian cancer combinations)",
-          "source": "pubchem_cid_24856436"
+          "name": "Cimetidine",
+          "smiles": "CN=C(NC#N)NCCSCc1nc[nH]c1C",
+          "mechanism": "Inhibits histamine-RAS-ERK axis.",
+          "fda_status": "Approved for peptic ulcers",
+          "source": "pubchem_cid_2756"
         },
         {
-          "name": "Metformin",
-          "smiles": "CN(C)C(=N)N=C(N)N",
-          "mechanism": "AMPK activator; suppresses mTOR/EGFR-RAS signaling, inhibits metabolic reprogramming in KRAS-mutant cells",
-          "fda_status": "FDA-approved (type 2 diabetes)",
-          "source": "pubchem_cid_4091"
+          "name": "Doxycycline",
+          "smiles": "CC1c2cccc(O)c2C(O)=C2C(=O)C3(O)C(O)=C(C(N)=O)C(=O)C(N(C)C)C3C(O)C21",
+          "mechanism": "Direct docking hits and indirect block of RAS-ERK via MMP inhibition.",
+          "fda_status": "Approved for bacterial infections",
+          "source": "pubchem_cid_54671203"
         },
         {
           "name": "(2R,3S)-N-[(2S)-1-[[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N,2-dimethyl-1-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CCC(C(=O)N(C)C(C(=O)NC2Cc3cccc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1C",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336128"
         },
         {
           "name": "1-[4-[7-chloro-6-(2-fluoro-6-hydroxyphenyl)-4-(2-methoxyphenyl)phthalazin-1-yl]piperazin-1-yl]prop-2-en-1-one",
           "smiles": "C=CC(=O)N1CCN(c2nnc(-c3ccccc3OC)c3cc(-c4c(O)cccc4F)c(Cl)cc23)CC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_137297923"
         },
         {
           "name": "(3S)-1-[4-[(3S,5R)-3,5-dimethylmorpholin-4-yl]but-2-ynoyl]-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyrrolidine-3-carboxamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1cc(O)cc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)C1CCN(C(=O)C#CCN3C(C)COCC3C)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336140"
         },
         {
           "name": "(3R)-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-(2-methoxyethyl)phenyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,26,28-tetrazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-5-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)C1CC(C(=O)N(C)C(C(=O)NC2Cc3cc(O)cc(c3)-c3ccc4c(n3)c(c(-c3ccccc3CCOC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)CN1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336141"
         },
         {
           "name": "6-[[(E)-4-(dimethylamino)but-2-enoyl]amino]-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-(2-methoxyethyl)phenyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyridine-3-carboxamide",
           "smiles": "CCn1c(-c2ccccc2CCOC)c2c3cc(ccc31)-c1cc(O)cc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)c1ccc(NC(=O)C=CCN(C)C)nc1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336144"
         },
         {
           "name": "(3S)-1-[3-[1-(dimethylamino)cyclopropyl]prop-2-ynoyl]-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-(methoxymethyl)-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyrrolidine-3-carboxamide",
           "smiles": "CCn1c(-c2cccnc2COC)c2c3cc(ccc31)-c1cc(O)cc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)C1CCN(C(=O)C#CC3(N(C)C)CC3)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336150"
         },
         {
           "name": "4-[(1S,5R)-3,8-diazabicyclo[3.2.1]octan-3-yl]-7-(7,8-difluoronaphthalen-1-yl)-8-fluoro-2-(1,2,3,5,6,7-hexahydropyrrolizin-8-ylmethoxy)pyrido[4,3-d]pyrimidine",
           "smiles": "Fc1ccc2cccc(-c3ncc4c(N5CC6CCC(C5)N6)nc(OCC56CCCN5CCC6)nc4c3F)c2c1F",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_166625303"
         },
         {
           "name": "(2R,3R)-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-(2-methoxyethyl)phenyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-2-methoxy-N-methyl-5-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)C1CC(C(=O)N(C)C(C(=O)NC2Cc3cc(O)cc(c3)-c3ccc4c(c3)c(c(-c3ccccc3CCOC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C(OC)N1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336167"
         },
         {
           "name": "(3S)-N-[(2S)-1-[[(8S,14S)-4-amino-22-ethyl-21-[2-(methoxymethyl)phenyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CCC(C(=O)N(C)C(C(=O)NC2Cc3cc(N)cc(c3)-c3ccc4c(c3)c(c(-c3ccccc3COC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336173"
         },
         {
           "name": "5-[[(E)-4-(dimethylamino)but-2-enoyl]amino]-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyridine-2-carboxamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1cc(O)cc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)c1ccc(NC(=O)C=CCN(C)C)cn1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336177"
         },
         {
           "name": "N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-prop-2-enoylazetidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CC(C(=O)N(C)C(C(=O)NC2Cc3cc(O)cc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336182"
         },
         {
           "name": "(2S)-2-[2-[4-(dimethylamino)-4-methylpent-2-ynoyl]-5-oxo-2,6-diazaspiro[3.4]octan-6-yl]-N-[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]-3-methylbutanamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1cccc(c1)CC(NC(=O)C(C(C)C)N1CCC3(CN(C(=O)C#CC(C)(C)N(C)C)C3)C1=O)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336191"
         },
         {
           "name": "N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-5-(prop-2-enoylamino)pyridine-2-carboxamide",
           "smiles": "C=CC(=O)Nc1ccc(C(=O)N(C)C(C(=O)NC2Cc3cc(O)cc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)nc1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336193"
         },
         {
           "name": "(8S,11S,17S,26S,29S,33S,36S)-26-[(2S)-butan-2-yl]-17-[(4-chlorophenyl)methyl]-9,15,18,21,24,30,37-heptamethyl-8,36-bis(2-methylpropyl)-29-propan-2-yl-33-(pyrrolidine-1-carbonyl)-11-[2-[4-(trifluoromethyl)phenyl]ethyl]-6,9,12,15,18,21,24,27,30,34,37-undecazaspiro[4.33]octatriacontane-7,10,13,16,19,22,25,28,31,35,38-undecone",
           "smiles": "CCC(C)C1NC(=O)C(C(C)C)N(C)C(=O)CC(C(=O)N2CCCC2)NC(=O)C(CC(C)C)N(C)C(=O)C2(CCCC2)NC(=O)C(CC(C)C)N(C)C(=O)C(CCc2ccc(C(F)(F)F)cc2)NC(=O)CN(C)C(=O)C(Cc2ccc(Cl)cc2)N(C)C(=O)CN(C)C(=O)CN(C)C1=O",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_169706505"
         },
         {
           "name": "2-[(5R)-2-[4-(azetidin-1-yl)-4-methylpent-2-ynoyl]-2,7-diazaspiro[4.4]nonan-7-yl]-N-[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]acetamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1csc(n1)CC(NC(=O)CN1CCC3(CCN(C(=O)C#CC(C)(C)N4CCC4)C3)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336209"
         },
         {
           "name": "(3S)-1-but-2-ynoyl-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyrrolidine-3-carboxamide",
           "smiles": "CC#CC(=O)N1CCC(C(=O)N(C)C(C(=O)NC2Cc3cc(O)cc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336211"
         },
         {
           "name": "(3S)-N-[(2S)-1-[[(8S,14S)-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-22-(2,2,2-trifluoroethyl)-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CCC(C(=O)N(C)C(C(=O)NC2Cc3cccc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC(F)(F)F)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336213"
         },
         {
           "name": "1-[(E)-4-(dimethylamino)but-2-enoyl]-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-(methoxymethyl)-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylazetidine-3-carboxamide",
           "smiles": "CCn1c(-c2cccnc2COC)c2c3cc(ccc31)-c1cc(O)cc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)C1CN(C(=O)C=CCN(C)C)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336215"
         },
         {
           "name": "(3S)-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CCC(C(=O)N(C)C(C(=O)NC2Cc3cc(O)cc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336217"
         },
         {
           "name": "(2R)-2-[[1-[4-(dimethylamino)-4-methylpent-2-ynoyl]azetidin-3-yl]oxymethyl]-N-[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-6,10,22,28-tetrazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,20,23(27),24-pentaen-8-yl]-3-methylbutanamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)C1=CCCN(C1)CC(NC(=O)C(COC1CN(C(=O)C#CC(C)(C)N(C)C)C1)C(C)C)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336219"
         },
         {
           "name": "(3S)-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-(2-methylprop-1-enylsulfonyl)pyrrolidine-3-carboxamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1cc(O)cc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)C1CCN(S(=O)(=O)C=C(C)C)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336221"
         },
         {
           "name": "(3S)-N-[(2S)-1-[[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-5-(4-methylpiperazin-1-yl)-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CCC(C(=O)N(C)C(C(=O)NC2Cc3cccc(c3)-c3ccc4c(c3)c(c(-c3cc(N5CCN(C)CC5)cnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336229"
         },
         {
           "name": "(7S,10S,13R,16S,19R,22S,25S,28R,31S,34S,37R)-N-[(3S)-5-amino-1-[[(2R)-1-amino-5-carbamimidamido-1-oxopentan-2-yl]amino]-1-oxopentan-3-yl]-31-(2-amino-2-oxoethyl)-19-benzyl-10,13-bis(3-carbamimidamidopropyl)-34-(hydroxymethyl)-16-methyl-28,37-bis(naphthalen-2-ylmethyl)-4,9,12,15,18,21,24,27,30,33,36,39,42-tridecaoxo-25-phenyl-5,8,11,14,17,20,23,26,29,32,35,38,43-tridecazatricyclo[20.19.6.13,40]octatetraconta-1,3(48),40-triene-7-carboxamide",
           "smiles": "CC1NC(=O)C(Cc2ccccc2)NC(=O)C2CCCCNC(=O)c3cc(cc(c3)C(=O)NC(Cc3ccc4ccccc4c3)C(=O)NC(CO)C(=O)NC(CC(N)=O)C(=O)NC(Cc3ccc4ccccc4c3)C(=O)NC(c3ccccc3)C(=O)N2)C(=O)NCC(C(=O)NC(CCN)CC(=O)NC(CCCNC(=N)N)C(N)=O)NC(=O)C(CCCNC(=N)N)NC(=O)C(CCCNC(=N)N)NC1=O",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_164626535"
         },
         {
           "name": "(3S)-1-[4-(dimethylamino)-4-methylpent-2-ynoyl]-N-[(2S)-1-[[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyrrolidine-3-carboxamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1cccc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)C1CCN(C(=O)C#CC(C)(C)N(C)C)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336232"
         },
         {
           "name": "(3S)-1-[(E)-4-(dimethylamino)but-2-enoyl]-N-[(2S)-1-[[(8S,14S)-22-ethyl-4-hydroxy-21-[2-(methoxymethyl)phenyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyrrolidine-3-carboxamide",
           "smiles": "CCn1c(-c2ccccc2COC)c2c3cc(ccc31)-c1cc(O)cc(c1)CC(NC(=O)C(C(C)C)N(C)C(=O)C1CCN(C(=O)C=CCN(C)C)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_161022070"
         },
         {
           "name": "(3R,4R)-N-[(2S)-1-[[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-3,4-difluoro-N-methyl-1-prop-2-enoylpyrrolidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CC(F)C(F)(C(=O)N(C)C(C(=O)NC2Cc3cccc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336255"
         },
         {
           "name": "(2S)-2-[(5S)-7-but-2-ynoyl-1-oxo-2,7-diazaspiro[4.4]nonan-2-yl]-N-[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]-3-methylbutanamide",
           "smiles": "CC#CC(=O)N1CCC2(CCN(C(C(=O)NC3Cc4cccc(c4)-c4ccc5c(c4)c(c(-c4cccnc4C(C)OC)n5CC)CC(C)(C)COC(=O)C4CCCN(N4)C3=O)C(C)C)C2=O)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336260"
         },
         {
           "name": "N-[(2S)-1-[[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-prop-2-enoyl-1,7-diazaspiro[3.5]nonane-7-carboxamide",
           "smiles": "C=CC(=O)N1CCC12CCN(C(=O)N(C)C(C(=O)NC1Cc3nc(cs3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C1=O)C(C)C)CC2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336270"
         },
         {
           "name": "(2S,3S)-N-[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]-3-methyl-1-[(3S)-1-prop-2-enoylpyrrolidine-3-carbonyl]pyrrolidine-2-carboxamide",
           "smiles": "C=CC(=O)N1CCC(C(=O)N2CCC(C)C2C(=O)NC2Cc3cccc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336271"
         },
         {
           "name": "(3S,6R,9S,12S,20S,23S,27R,30S,36S)-20-[(2S)-butan-2-yl]-3-[2-[3-chloro-4-(trifluoromethyl)phenyl]ethyl]-30-cyclopentyl-6,7,10,18,23,24,27,31-octamethyl-9-[(4-methylphenyl)methyl]spiro[1,4,7,10,15,18,21,24,28,31,34-undecazatricyclo[34.3.0.012,15]nonatriacontane-33,1'-cyclopentane]-2,5,8,11,16,19,22,25,29,32,35-undecone",
           "smiles": "CCC(C)C1NC(=O)C(C)N(C)C(=O)CC(C)NC(=O)C(C2CCCC2)N(C)C(=O)C2(CCCC2)NC(=O)C2CCCN2C(=O)C(CCc2ccc(C(F)(F)F)c(Cl)c2)NC(=O)C(C)N(C)C(=O)C(Cc2ccc(C)cc2)N(C)C(=O)C2CCN2C(=O)CN(C)C1=O",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_165085337"
         },
         {
           "name": "1-[4-[6-chloro-8-fluoro-7-(2-fluoro-6-hydroxyphenyl)quinazolin-4-yl]piperazin-1-yl]prop-2-en-1-one",
           "smiles": "C=CC(=O)N1CCN(c2ncnc3c(F)c(-c4c(O)cccc4F)c(Cl)cc23)CC1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_137003167"
         },
         {
           "name": "(3S)-1-[4-(azetidin-1-yl)-4-methylpent-2-ynoyl]-N-[(2S)-1-[[(7S,13S)-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-21-(2,2,2-trifluoroethyl)-15-oxa-3-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2(28),4,19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methylpyrrolidine-3-carboxamide",
           "smiles": "COC(C)c1ncccc1-c1c2c3cc(ccc3n1CC(F)(F)F)-c1nc(cs1)CC(NC(=O)C(C(C)C)N(C)C(=O)C1CCN(C(=O)C#CC(C)(C)N3CCC3)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336288"
         },
         {
           "name": "2-[(2S)-4-[7-(2,3-dihydro-1H-inden-1-yl)-2-[[(2S)-1-methylpyrrolidin-2-yl]methoxy]imidazo[2,1-f][1,2,4]triazin-4-yl]-1-prop-2-enoylpiperazin-2-yl]acetonitrile",
           "smiles": "C=CC(=O)N1CCN(c2nc(OCC3CCCN3C)nn3c(C4CCc5ccccc54)cnc23)CC1CC#N",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_163643580"
         },
         {
           "name": "(2S)-N-[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]-1-[(3S)-1-prop-2-enoylpyrrolidine-3-carbonyl]azepane-2-carboxamide",
           "smiles": "C=CC(=O)N1CCC(C(=O)N2CCCCCC2C(=O)NC2Cc3cccc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336347"
         },
         {
           "name": "(2S)-N-[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]-3-methyl-2-[(5R)-1-oxo-7-prop-2-enoyl-2,7-diazaspiro[4.4]nonan-2-yl]butanamide",
           "smiles": "C=CC(=O)N1CCC2(CCN(C(C(=O)NC3Cc4cccc(c4)-c4ccc5c(c4)c(c(-c4cccnc4C(C)OC)n5CC)CC(C)(C)COC(=O)C4CCCN(N4)C3=O)C(C)C)C2=O)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336348"
         },
         {
           "name": "(3S,9S,12S,17S,20S,23S,29R,32S,38S)-20-[(2S)-butan-2-yl]-3-[2-[3-chloro-4-(trifluoromethyl)phenyl]ethyl]-32-cyclopentyl-N,N,7,10,17,18,24,30,33-nonamethyl-9-[(4-methylphenyl)methyl]-23-(2-methylpropyl)-2,5,8,11,16,19,22,25,31,34,37-undecaoxospiro[27-thia-1,4,7,10,15,18,21,24,30,33,36-undecazatricyclo[36.3.0.012,15]hentetracontane-35,1'-cyclopentane]-29-carboxamide",
           "smiles": "CCC(C)C1NC(=O)C(CC(C)C)N(C)C(=O)CSCC(C(=O)N(C)C)N(C)C(=O)C(C2CCCC2)N(C)C(=O)C2(CCCC2)NC(=O)C2CCCN2C(=O)C(CCc2ccc(C(F)(F)F)c(Cl)c2)NC(=O)CN(C)C(=O)C(Cc2ccc(C)cc2)N(C)C(=O)C2CCN2C(=O)C(C)N(C)C1=O",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_169705696"
         },
         {
           "name": "2-[[(5-tert-butyl-6-chloro-1H-indazol-3-yl)amino]methyl]-5-chloro-3-[(3S)-oxolan-3-yl]-N-(1-prop-2-enoylazetidin-3-yl)imidazole-4-carboxamide",
           "smiles": "C=CC(=O)N1CC(NC(=O)c2c(Cl)nc(CNc3n[nH]c4cc(Cl)c(C(C)(C)C)cc34)n2C2CCOC2)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_151912677"
         },
         {
           "name": "(2S)-2-[(5S)-7-[3-[(3S)-3-(dimethylamino)oxolan-3-yl]prop-2-ynoyl]-1-oxo-2,7-diazaspiro[4.4]nonan-2-yl]-N-[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]-3-methylbutanamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1cccc(c1)CC(NC(=O)C(C(C)C)N1CCC3(CCN(C(=O)C#CC4(N(C)C)CCOC4)C3)C1=O)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_160923886"
         },
         {
           "name": "N-[(2S)-1-[[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-3-fluoro-N-methyl-1-prop-2-enoylazetidine-3-carboxamide",
           "smiles": "C=CC(=O)N1CC(F)(C(=O)N(C)C(C(=O)NC2Cc3cccc(c3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336370"
         },
         {
           "name": "N-[(2S)-1-[[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-2-[(E)-4-morpholin-4-ylbut-2-enoyl]-2,7-diazaspiro[3.5]nonane-7-carboxamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1csc(n1)CC(NC(=O)C(C(C)C)N(C)C(=O)N1CCC3(CC1)CN(C(=O)C=CCN1CCOCC1)C3)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336383"
         },
         {
           "name": "(5R)-N-[(2S)-1-[[(7S,13S)-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-21-(2,2,2-trifluoroethyl)-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-9-prop-2-enoyl-6-oxa-2,9-diazaspiro[4.5]decane-2-carboxamide",
           "smiles": "C=CC(=O)N1CCOC2(CCN(C(=O)N(C)C(C(=O)NC3Cc4nc(cs4)-c4ccc5c(c4)c(c(-c4cccnc4C(C)OC)n5CC(F)(F)F)CC(C)(C)COC(=O)C4CCCN(N4)C3=O)C(C)C)C2)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336398"
         },
         {
           "name": "(3R)-3-[1-[4-(dimethylamino)-4-methylpent-2-ynoyl]azetidin-3-yl]oxy-N-[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]butanamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1csc(n1)CC(NC(=O)CC(C)OC1CN(C(=O)C#CC(C)(C)N(C)C)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336399"
         },
         {
           "name": "(4aR,7aR)-N-[(2S)-1-[[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-1-prop-2-enoyl-3,4,4a,5,7,7a-hexahydro-2H-pyrrolo[3,4-b]pyridine-6-carboxamide",
           "smiles": "C=CC(=O)N1CCCC2CN(C(=O)N(C)C(C(=O)NC3Cc4nc(cs4)-c4ccc5c(c4)c(c(-c4cccnc4C(C)OC)n5CC)CC(C)(C)COC(=O)C4CCCN(N4)C3=O)C(C)C)CC21",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336410"
         },
         {
           "name": "(1S,5R)-N-[(2S)-1-[[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-3-prop-2-enoyl-3,6-diazabicyclo[3.2.0]heptane-6-carboxamide",
           "smiles": "C=CC(=O)N1CC2CN(C(=O)N(C)C(C(=O)NC3Cc4nc(cs4)-c4ccc5c(c4)c(c(-c4cccnc4C(C)OC)n5CC)CC(C)(C)COC(=O)C4CCCN(N4)C3=O)C(C)C)C2C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336413"
         },
         {
           "name": "(2S)-3-[1-[4-(dimethylamino)-4-methylpent-2-ynoyl]azetidin-3-yl]oxy-N-[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]-2-fluoropropanamide",
           "smiles": "CCn1c(-c2cccnc2C(C)OC)c2c3cc(ccc31)-c1csc(n1)CC(NC(=O)C(F)COC1CN(C(=O)C#CC(C)(C)N(C)C)C1)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336418"
         },
         {
           "name": "N-[(2S)-1-[[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-6-prop-2-enoyl-1,6-diazaspiro[3.3]heptane-1-carboxamide",
           "smiles": "C=CC(=O)N1CC2(CCN2C(=O)N(C)C(C(=O)NC2Cc3nc(cs3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_157155620"
         },
         {
           "name": "N-[(2S)-1-[[(8S,14S)-22-ethyl-21-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-18,18-dimethyl-9,15-dioxo-16-oxa-10,22,28-triazapentacyclo[18.5.2.12,6.110,14.023,27]nonacosa-1(26),2,4,6(29),20,23(27),24-heptaen-8-yl]amino]-3-methyl-1-oxobutan-2-yl]-N-methyl-2-prop-2-enoyl-2,7-diazaspiro[3.5]nonane-7-carboxamide",
           "smiles": "C=CC(=O)N1CC2(CCN(C(=O)N(C)C(C(=O)NC3Cc4cccc(c4)-c4ccc5c(c4)c(c(-c4cccnc4C(C)OC)n5CC)CC(C)(C)COC(=O)C4CCCN(N4)C3=O)C(C)C)CC2)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336421"
         },
         {
           "name": "(2R,4R)-N-[(2S)-1-[[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]amino]-3-methyl-1-oxobutan-2-yl]-N,2-dimethyl-4-[methyl(prop-2-enoyl)amino]pyrrolidine-1-carboxamide",
           "smiles": "C=CC(=O)N(C)C1CC(C)N(C(=O)N(C)C(C(=O)NC2Cc3nc(cs3)-c3ccc4c(c3)c(c(-c3cccnc3C(C)OC)n4CC)CC(C)(C)COC(=O)C3CCCN(N3)C2=O)C(C)C)C1",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336422"
         },
         {
           "name": "(2R)-2-[[1-[4-(dimethylamino)-4-methylpent-2-ynoyl]azetidin-3-yl]oxymethyl]-N-[(7S,13S)-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-21-(2,2,2-trifluoroethyl)-3,15-dioxa-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2(28),4,19,22(26),23-hexaen-7-yl]-3-methylbutanamide",
           "smiles": "COC(C)c1ncccc1-c1c2c3cc(ccc3n1CC(F)(F)F)-c1nc(co1)CC(NC(=O)C(COC1CN(C(=O)C#CC(C)(C)N(C)C)C1)C(C)C)C(=O)N1CCCC(N1)C(=O)OCC(C)(C)C2",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336429"
         },
         {
           "name": "(2S)-2-[[1-[4-(dimethylamino)-4-methylpent-2-ynoyl]azetidin-3-yl]oxymethyl]-N-[(7S,13S)-21-ethyl-20-[2-[(1S)-1-methoxyethyl]-3-pyridinyl]-17,17-dimethyl-8,14-dioxo-15-oxa-4-thia-9,21,27,28-tetrazapentacyclo[17.5.2.12,5.19,13.022,26]octacosa-1(25),2,5(28),19,22(26),23-hexaen-7-yl]butanamide",
           "smiles": "CCC(COC1CN(C(=O)C#CC(C)(C)N(C)C)C1)C(=O)NC1Cc2nc(cs2)-c2ccc3c(c2)c(c(-c2cccnc2C(C)OC)n3CC)CC(C)(C)COC(=O)C2CCCN(N2)C1=O",
-          "mechanism": "Bioactive compound — discovered via PubChem target search",
-          "fda_status": "Unknown — requires verification",
+          "mechanism": "Bioactive \u2014 PubChem target search",
+          "fda_status": "Unknown \u2014 requires verification",
           "source": "pubchem_cid_156336431"
+        }
+      ]
+    },
+    {
+      "protein": "ERK2",
+      "pdb_id": "2FMA",
+      "pdb_file": "structures/2FMA.pdb",
+      "ligands": [
+        {
+          "name": "Trametinib",
+          "smiles": "CC(=O)Nc1cccc(-n2c(=O)n(C3CC3)c(=O)c3c(Nc4ccc(I)cc4F)n(C)c(=O)c(C)c32)c1",
+          "mechanism": "MEK1/2 inhibitor blocking MAPK pathway downstream of KRAS; upstream MEK1/2 inhibitor affecting ERK2 activation.",
+          "fda_status": "FDA-approved for other cancers (e.g., colorectal)",
+          "source": "pubchem_cid_11707110"
+        },
+        {
+          "name": "LY3214996",
+          "smiles": "Cn1nccc1Nc1nccc(-c2cc3c(s2)C(C)(C)N(CCN2CCOCC2)C3=O)n1",
+          "mechanism": "ERK inhibitor.",
+          "fda_status": "Phase 1/1b trials",
+          "source": "pubchem_cid_121408882"
+        },
+        {
+          "name": "Propranolol",
+          "smiles": "CC(C)NCC(O)COc1cccc2ccccc12",
+          "mechanism": "Off-target ERK inhibition.",
+          "fda_status": "Approved for hypertension",
+          "source": "pubchem_cid_4946"
+        },
+        {
+          "name": "Thalidomide",
+          "smiles": "O=C1CCC(N2C(=O)c3ccccc3C2=O)C(=O)N1",
+          "mechanism": "Binds to ERK kinase domain, inhibiting phosphorylation.",
+          "fda_status": "Approved for multiple myeloma",
+          "source": "pubchem_cid_5426"
+        },
+        {
+          "name": "Verapamil",
+          "smiles": "COc1ccc(CCN(C)CCCC(C#N)(c2ccc(OC)c(OC)c2)C(C)C)cc1OC",
+          "mechanism": "Off-target MAPK/ERK2 inhibition.",
+          "fda_status": "Approved for hypertension",
+          "source": "pubchem_cid_2520"
+        },
+        {
+          "name": "Doxycycline",
+          "smiles": "CC1c2cccc(O)c2C(O)=C2C(=O)C3(O)C(O)=C(C(N)=O)C(=O)C(N(C)C)C3C(O)C21",
+          "mechanism": "Direct docking hits and indirect block of RAS-ERK via MMP inhibition.",
+          "fda_status": "Approved for bacterial infections",
+          "source": "pubchem_cid_54671203"
         }
       ]
     }

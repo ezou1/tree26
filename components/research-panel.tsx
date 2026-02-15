@@ -9,19 +9,22 @@ import {
   ChevronRight,
   Loader2,
   Send,
+  Brain,
+  Download,
 } from "lucide-react"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Badge } from "@/components/ui/badge"
-import type { literatureReviewSummary as LitReviewType } from "@/lib/mock-data"
-
-type LiteratureReview = typeof LitReviewType
+import type { LiteratureReview } from "@/lib/mock-data"
+import type { ReasoningDecision } from "@/lib/types"
 
 interface ResearchPanelProps {
-  phase: "idle" | "analyzing" | "review-ready" | "simulating" | "done"
+  phase: string
   query: string
   isLoading: boolean
   literatureReview: LiteratureReview | null
   onSubmitQuery: (query: string) => void
+  decision?: ReasoningDecision | null
+  reportMd?: string
+  paperMd?: string
 }
 
 function SkeletonPulse({ className }: { className?: string }) {
@@ -44,6 +47,9 @@ export function ResearchPanel({
   isLoading,
   literatureReview,
   onSubmitQuery,
+  decision,
+  reportMd,
+  paperMd,
 }: ResearchPanelProps) {
   const [inputValue, setInputValue] = useState("")
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -67,6 +73,32 @@ export function ResearchPanel({
     }
   }
 
+  const handleDownload = (content: string, filename: string) => {
+    const blob = new Blob([content], { type: "text/markdown" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = filename
+    a.click()
+    URL.revokeObjectURL(url)
+  }
+
+  // Extract key findings from the review markdown (first few paragraphs)
+  const keyFindings: string[] = []
+  if (literatureReview?.reviewMd) {
+    const lines = literatureReview.reviewMd.split("\n")
+    let inContent = false
+    for (const line of lines) {
+      if (line.startsWith("#")) {
+        inContent = true
+        continue
+      }
+      if (inContent && line.trim().length > 50 && keyFindings.length < 4) {
+        keyFindings.push(line.trim().slice(0, 200))
+      }
+    }
+  }
+
   return (
     <div className="flex h-full flex-col">
       {/* Prompt Section */}
@@ -79,7 +111,6 @@ export function ResearchPanel({
         </div>
 
         {phase === "idle" ? (
-          /* Editable input state */
           <div className="flex flex-col gap-3">
             <div className="group relative rounded-lg border border-border bg-secondary/50 transition-colors focus-within:border-primary/50 focus-within:bg-secondary/70">
               <textarea
@@ -126,30 +157,15 @@ export function ResearchPanel({
             </div>
           </div>
         ) : (
-          /* Locked query display */
           <div className="rounded-lg border border-border bg-secondary/50 p-3">
             <p className="text-sm font-medium leading-relaxed text-foreground">
               {query}
             </p>
-            <div className="mt-2 flex items-center gap-2">
-              <Badge
-                variant="outline"
-                className="border-primary/30 bg-primary/10 text-xs text-primary"
-              >
-                Autoimmune
-              </Badge>
-              <Badge
-                variant="outline"
-                className="border-primary/30 bg-primary/10 text-xs text-primary"
-              >
-                Inflammatory
-              </Badge>
-            </div>
           </div>
         )}
       </div>
 
-      {/* Idle empty state for literature section */}
+      {/* Idle empty state */}
       {phase === "idle" && (
         <div className="flex flex-1 flex-col items-center justify-center gap-3 p-6">
           <div className="flex h-12 w-12 items-center justify-center rounded-full border border-dashed border-border">
@@ -169,7 +185,6 @@ export function ResearchPanel({
       {/* Loading State */}
       {isLoading && !literatureReview && (
         <div className="flex flex-1 flex-col">
-          {/* Stats bar skeleton */}
           <div className="grid grid-cols-2 gap-px border-b border-border bg-border">
             <div className="flex flex-col items-center bg-card py-3">
               <div className="flex items-center gap-2">
@@ -189,7 +204,6 @@ export function ResearchPanel({
             </div>
           </div>
 
-          {/* Skeleton findings */}
           <div className="flex items-center gap-2 border-b border-border p-4 pb-3">
             <BookOpen className="h-4 w-4 text-primary" />
             <h2 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -240,7 +254,7 @@ export function ResearchPanel({
             </div>
             <div className="flex flex-col items-center bg-card py-3">
               <span className="font-mono text-lg font-bold text-primary">
-                {literatureReview.keyFindings.length}
+                {keyFindings.length}
               </span>
               <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
                 Key Findings
@@ -258,53 +272,89 @@ export function ResearchPanel({
             </div>
             <ScrollArea className="h-[calc(100%-3rem)]">
               <div className="flex flex-col gap-3 p-4">
-                {literatureReview.keyFindings.map(
-                  (finding: string, index: number) => (
-                    <div
-                      key={index}
-                      className="group rounded-lg border border-border bg-secondary/30 p-3 transition-colors hover:border-primary/30 hover:bg-secondary/50"
-                    >
-                      <div className="mb-1.5 flex items-start gap-2">
-                        <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
-                        <span className="text-[10px] font-medium uppercase tracking-wider text-primary">
-                          Finding {index + 1}
-                        </span>
-                      </div>
-                      <p className="pl-5 text-xs leading-relaxed text-secondary-foreground">
-                        {finding}
-                      </p>
+                {keyFindings.map((finding, index) => (
+                  <div
+                    key={index}
+                    className="group rounded-lg border border-border bg-secondary/30 p-3 transition-colors hover:border-primary/30 hover:bg-secondary/50"
+                  >
+                    <div className="mb-1.5 flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                      <span className="text-[10px] font-medium uppercase tracking-wider text-primary">
+                        Finding {index + 1}
+                      </span>
                     </div>
-                  )
-                )}
-
-                {/* Methodology */}
-                <div className="mt-1 rounded-lg border border-dashed border-border p-3">
-                  <div className="mb-1.5 flex items-center gap-2">
-                    <FileText className="h-3.5 w-3.5 text-muted-foreground" />
-                    <span className="text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
-                      Methodology
-                    </span>
+                    <p className="pl-5 text-xs leading-relaxed text-secondary-foreground">
+                      {finding}
+                    </p>
                   </div>
-                  <p className="pl-5 text-xs leading-relaxed text-muted-foreground">
-                    {literatureReview.methodology}
-                  </p>
-                </div>
+                ))}
+
+                {/* Reasoning Decision */}
+                {decision && (
+                  <div className="rounded-lg border border-primary/30 bg-primary/5 p-3">
+                    <div className="mb-1.5 flex items-center gap-2">
+                      <Brain className="h-3.5 w-3.5 text-primary" />
+                      <span className="text-[10px] font-medium uppercase tracking-wider text-primary">
+                        AI Reasoning
+                      </span>
+                    </div>
+                    <p className="pl-5 text-xs leading-relaxed text-secondary-foreground">
+                      <strong>Decision:</strong> {decision.action}
+                    </p>
+                    <p className="mt-1 pl-5 text-xs leading-relaxed text-muted-foreground">
+                      {decision.rationale}
+                    </p>
+                    {decision.hypothesis && (
+                      <p className="mt-1 pl-5 text-xs italic leading-relaxed text-muted-foreground">
+                        Hypothesis: {decision.hypothesis}
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
             </ScrollArea>
           </div>
 
-          {/* Bottom action */}
-          <div className="border-t border-border p-3">
-            <button
-              type="button"
-              className="flex w-full items-center justify-between rounded-md border border-border bg-secondary/50 px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
-            >
-              <span className="flex items-center gap-2">
-                <FileText className="h-3 w-3" />
-                Export full review
-              </span>
-              <ChevronRight className="h-3 w-3" />
-            </button>
+          {/* Bottom actions */}
+          <div className="flex flex-col gap-2 border-t border-border p-3">
+            {reportMd && (
+              <button
+                type="button"
+                onClick={() => handleDownload(reportMd, "results.md")}
+                className="flex w-full items-center justify-between rounded-md border border-border bg-secondary/50 px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+              >
+                <span className="flex items-center gap-2">
+                  <Download className="h-3 w-3" />
+                  Download results report
+                </span>
+                <ChevronRight className="h-3 w-3" />
+              </button>
+            )}
+            {paperMd && (
+              <button
+                type="button"
+                onClick={() => handleDownload(paperMd, "final_paper.md")}
+                className="flex w-full items-center justify-between rounded-md border border-primary/30 bg-primary/10 px-3 py-2 text-xs text-primary transition-colors hover:bg-primary/20"
+              >
+                <span className="flex items-center gap-2">
+                  <FileText className="h-3 w-3" />
+                  Download final paper
+                </span>
+                <ChevronRight className="h-3 w-3" />
+              </button>
+            )}
+            {!reportMd && !paperMd && (
+              <button
+                type="button"
+                className="flex w-full items-center justify-between rounded-md border border-border bg-secondary/50 px-3 py-2 text-xs text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+              >
+                <span className="flex items-center gap-2">
+                  <FileText className="h-3 w-3" />
+                  Export full review
+                </span>
+                <ChevronRight className="h-3 w-3" />
+              </button>
+            )}
           </div>
         </>
       )}

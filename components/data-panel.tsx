@@ -25,26 +25,32 @@ import type { Protein, Drug } from "@/lib/mock-data"
 
 export type SimulationStatus = "idle" | "running" | "complete" | "waiting"
 
-function ConfidenceBar({ value }: { value: number }) {
+function ConfidenceBar({ value }: { value: number | null }) {
+  if (value === null) return <span className="text-[10px] text-muted-foreground/40">—</span>
+
+  // Value is 0-1 from docking, display as percentage
+  const pct = Math.round(value * 100)
   const color =
-    value >= 85 ? "bg-primary" : value >= 70 ? "bg-chart-2" : "bg-chart-3"
+    pct >= 85 ? "bg-primary" : pct >= 70 ? "bg-chart-2" : "bg-chart-3"
 
   return (
     <div className="flex items-center gap-2">
       <div className="h-1.5 w-16 overflow-hidden rounded-full bg-secondary">
         <div
           className={`h-full rounded-full ${color} transition-all`}
-          style={{ width: `${value}%` }}
+          style={{ width: `${pct}%` }}
         />
       </div>
-      <span className="font-mono text-xs text-muted-foreground">{value}%</span>
+      <span className="font-mono text-xs text-muted-foreground">
+        {value.toFixed(2)}
+      </span>
     </div>
   )
 }
 
-function FdaStatusBadge({ status }: { status: Drug["fdaStatus"] }) {
+function FdaStatusBadge({ status }: { status: Drug["fdaCategory"] }) {
   const config: Record<
-    Drug["fdaStatus"],
+    Drug["fdaCategory"],
     { label: string; className: string }
   > = {
     approved: {
@@ -177,7 +183,7 @@ export function DataPanel({
                     Gene
                   </TableHead>
                   <TableHead className="h-8 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Pathway
+                    PDB ID
                   </TableHead>
                   <TableHead className="h-8 text-right text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                     Confidence
@@ -205,11 +211,33 @@ export function DataPanel({
                         {protein.gene}
                       </code>
                     </TableCell>
-                    <TableCell className="py-2 text-xs text-secondary-foreground">
-                      {protein.pathwayInvolvement}
+                    <TableCell className="py-2">
+                      {protein.pdbId ? (
+                        <code className="rounded bg-secondary px-1.5 py-0.5 font-mono text-[11px] text-muted-foreground">
+                          {protein.pdbId}
+                        </code>
+                      ) : (
+                        <span className="text-[10px] text-muted-foreground/40">—</span>
+                      )}
                     </TableCell>
                     <TableCell className="py-2 text-right">
-                      <ConfidenceBar value={protein.confidence} />
+                      <div className="flex items-center justify-end gap-2">
+                        <div className="h-1.5 w-16 overflow-hidden rounded-full bg-secondary">
+                          <div
+                            className={`h-full rounded-full transition-all ${
+                              protein.confidence >= 85
+                                ? "bg-primary"
+                                : protein.confidence >= 70
+                                  ? "bg-chart-2"
+                                  : "bg-chart-3"
+                            }`}
+                            style={{ width: `${protein.confidence}%` }}
+                          />
+                        </div>
+                        <span className="font-mono text-xs text-muted-foreground">
+                          {protein.confidence}%
+                        </span>
+                      </div>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -236,7 +264,9 @@ export function DataPanel({
             <div className="flex items-center gap-2">
               <TrendingUp className="h-3 w-3 text-primary" />
               <span className="text-[10px] text-muted-foreground">
-                Ranked by confidence
+                {drugs.some((d) => d.confidenceScore !== null)
+                  ? "Ranked by docking score"
+                  : "From literature review"}
               </span>
             </div>
           )}
@@ -275,7 +305,7 @@ export function DataPanel({
                     Drug
                   </TableHead>
                   <TableHead className="h-8 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Original Indication
+                    Mechanism
                   </TableHead>
                   <TableHead className="h-8 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                     Targets
@@ -284,7 +314,7 @@ export function DataPanel({
                     Status
                   </TableHead>
                   <TableHead className="h-8 text-right text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
-                    Confidence
+                    Score
                   </TableHead>
                 </TableRow>
               </TableHeader>
@@ -334,13 +364,21 @@ export function DataPanel({
                           >
                             {drug.name}
                           </span>
+                          {drug.round > 1 && (
+                            <Badge
+                              variant="outline"
+                              className="border-primary/30 bg-primary/10 text-[9px] text-primary"
+                            >
+                              R{drug.round}
+                            </Badge>
+                          )}
                           {isClickable && (
                             <ArrowUpRight className="h-3 w-3 text-muted-foreground" />
                           )}
                         </div>
                       </TableCell>
-                      <TableCell className="py-2.5 text-xs text-secondary-foreground">
-                        {drug.originalIndication}
+                      <TableCell className="max-w-[200px] py-2.5 text-xs text-secondary-foreground">
+                        <span className="line-clamp-1">{drug.mechanism}</span>
                       </TableCell>
                       <TableCell className="py-2.5">
                         <div className="flex flex-wrap gap-1">
@@ -355,10 +393,10 @@ export function DataPanel({
                         </div>
                       </TableCell>
                       <TableCell className="py-2.5">
-                        <FdaStatusBadge status={drug.fdaStatus} />
+                        <FdaStatusBadge status={drug.fdaCategory} />
                       </TableCell>
                       <TableCell className="py-2.5 text-right">
-                        <ConfidenceBar value={drug.confidence} />
+                        <ConfidenceBar value={drug.confidenceScore} />
                       </TableCell>
                     </TableRow>
                   )
@@ -381,11 +419,10 @@ export function DataPanel({
               className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
             >
               <Play className="h-4 w-4" />
-              Run Drug Simulation
+              Run DiffDock Simulation
             </button>
             <p className="mt-2 text-center text-[10px] text-muted-foreground">
-              Simulates binding affinity and repurposing viability for each
-              candidate
+              Runs molecular docking on RunPod GPU for each candidate
             </p>
           </div>
         )}
@@ -398,7 +435,7 @@ export function DataPanel({
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-medium text-foreground">
-                    Simulation in progress
+                    Pipeline running
                   </span>
                   <span className="font-mono text-xs text-muted-foreground">
                     {
@@ -434,7 +471,7 @@ export function DataPanel({
             <div className="flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/5 px-3 py-2">
               <CheckCircle2 className="h-4 w-4 text-emerald-400" />
               <span className="text-xs font-medium text-emerald-400">
-                All simulations complete
+                Pipeline complete
               </span>
               <span className="ml-auto text-[10px] text-muted-foreground">
                 Click any drug for details
