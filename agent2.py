@@ -8,6 +8,10 @@ Reads Agent 1's output (review.json) and for each protein target:
   3. Queries PubChem for drug SMILES strings
   4. Discovers additional bioactive compounds via PubChem assay data
 
+Also exposes search_3d_similar() for post-docking 3D similarity expansion
+(shape-Tanimoto >= 0.80, color-Tanimoto >= 0.50) — call after Agent 3
+identifies top hits to find structurally analogous candidates.
+
 Outputs a structured JSON (agent2_output.json) for Agent 3 (DiffDock).
 
 No AI / LLM calls — just two REST APIs (RCSB PDB + PubChem).
@@ -424,6 +428,72 @@ def search_compounds_for_target(
             print(f"[PubChem] Batch property fetch failed: {e}")
 
     print(f"[PubChem] Retrieved properties for {len(compounds)} compounds")
+    return compounds
+
+
+def search_3d_similar(cid: int, max_results: int = 20) -> list[dict]:
+    """Find compounds with similar 3D conformations to a given CID.
+
+    Uses PubChem's fastsimilarity_3d endpoint which applies fixed thresholds
+    of shape-Tanimoto >= 0.80 and color-Tanimoto >= 0.50.  This finds
+    compounds whose 3D shape and functional-group orientation resemble the
+    query — useful for discovering structurally analogous drug candidates.
+
+    Returns a list of dicts with cid, smiles, iupac_name, molecular_formula.
+    """
+    # Step 1: get similar CIDs
+    url = (
+        f"{PUBCHEM_BASE}/compound/fastsimilarity_3d/cid/{cid}/cids/JSON"
+    )
+    print(f"[PubChem 3D] Searching 3D-similar compounds for CID {cid} …")
+
+    try:
+        resp = requests.get(url, timeout=60)
+        if resp.status_code == 404:
+            print(f"[PubChem 3D] No 3D conformer for CID {cid}")
+            return []
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        print(f"[PubChem 3D] Search failed for CID {cid}: {e}")
+        return []
+
+    similar_cids = data.get("IdentifierList", {}).get("CID", [])
+    # Remove self-hit and limit
+    similar_cids = [c for c in similar_cids if c != cid][:max_results]
+
+    if not similar_cids:
+        print(f"[PubChem 3D] No similar compounds found for CID {cid}")
+        return []
+
+    print(f"[PubChem 3D] Found {len(similar_cids)} similar CIDs, fetching properties …")
+
+    # Step 2: batch-fetch properties
+    cid_str = ",".join(str(c) for c in similar_cids)
+    prop_url = (
+        f"{PUBCHEM_BASE}/compound/cid/{cid_str}"
+        f"/property/CanonicalSMILES,IUPACName,MolecularFormula/JSON"
+    )
+
+    compounds = []
+    try:
+        time.sleep(PUBCHEM_DELAY)
+        resp = requests.get(prop_url, timeout=30)
+        if resp.status_code == 200:
+            data = resp.json()
+            for props in data.get("PropertyTable", {}).get("Properties", []):
+                compounds.append(
+                    {
+                        "cid": props.get("CID"),
+                        "smiles": canonicalize_smiles(_extract_smiles(props)),
+                        "iupac_name": props.get("IUPACName", ""),
+                        "molecular_formula": props.get("MolecularFormula", ""),
+                    }
+                )
+    except Exception as e:
+        print(f"[PubChem 3D] Property fetch failed: {e}")
+
+    print(f"[PubChem 3D] Retrieved {len(compounds)} similar compounds for CID {cid}")
     return compounds
 
 

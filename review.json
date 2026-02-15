@@ -1,58 +1,121 @@
 {
   "drugs": [
     {
-      "drug": "Osimertinib",
-      "proteins": [
-        "EGFR"
-      ],
-      "mechanism": "Irreversible tyrosine kinase inhibitor binding to EGFR mutants (e.g., T790M), inhibits kinase activity and downstream signaling (PI3K/AKT, MAPK)",
-      "fda_status": "FDA-approved (NSCLC; relevant to mesothelioma EGFR+)",
-      "category": "mainstream"
-    },
-    {
-      "drug": "Tipifarnib",
+      "drug": "sotorasib (AMG-510)",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Farnesyltransferase inhibitor; blocks KRAS post-translational farnesylation required for membrane localization",
-      "fda_status": "Investigational (Phase II in KRAS+ cancers)",
+      "mechanism": "Covalently binds the GDP-bound inactive state of KRAS G12C (switch II pocket), locking it inactive and blocking downstream RAF/MEK/ERK signaling.",
+      "fda_status": "Approved for NSCLC and colorectal cancer",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Pembrolizumab",
-      "proteins": [],
-      "mechanism": "PD-1 checkpoint inhibitor; blocks immune checkpoint to enhance immune recognition and killing of cancer cells",
-      "fda_status": "FDA-approved (first-line mesothelioma with chemotherapy)",
-      "category": "mainstream"
-    },
-    {
-      "drug": "Nivolumab",
-      "proteins": [],
-      "mechanism": "PD-1 checkpoint inhibitor; enhances immune-mediated tumor cell destruction",
-      "fda_status": "FDA-approved (first-line mesothelioma with ipilimumab)",
-      "category": "mainstream"
-    },
-    {
-      "drug": "Ipilimumab",
-      "proteins": [],
-      "mechanism": "CTLA-4 checkpoint inhibitor; enhances T-cell activation and anti-tumor immunity",
-      "fda_status": "FDA-approved (first-line mesothelioma with nivolumab)",
-      "category": "mainstream"
-    },
-    {
-      "drug": "Pemetrexed",
-      "proteins": [],
-      "mechanism": "Antifolate chemotherapy; inhibits thymidylate synthase and other folate-dependent enzymes",
-      "fda_status": "FDA-approved (first-line mesothelioma with platinum agents)",
-      "category": "mainstream"
-    },
-    {
-      "drug": "Atorvastatin",
+      "drug": "adagrasib",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "HMG-CoA reductase inhibitor; blocks mevalonate pathway disrupting KRAS prenylation and membrane localization",
-      "fda_status": "FDA-approved (hyperlipidemia, cardiovascular disease)",
+      "mechanism": "Covalently binds the GDP-bound inactive state of KRAS G12C (switch II pocket), locking it inactive and blocking downstream RAF/MEK/ERK signaling.",
+      "fda_status": "Approved for NSCLC and colorectal cancer",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Daraxonrasib (RMC-6236)",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Pan-RAS(ON) inhibitor targeting active GTP-bound states of KRAS G12C, G12D, and G12V.",
+      "fda_status": "Phase 1/3 trials",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "RMC-7977",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Pan-KRAS inhibitor with significant antitumor activity.",
+      "fda_status": "Preclinical/early-stage",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Trametinib",
+      "proteins": [
+        "KRAS",
+        "ERK2"
+      ],
+      "mechanism": "MEK1/2 inhibitor blocking MAPK pathway downstream of KRAS; upstream MEK1/2 inhibitor affecting ERK2 activation.",
+      "fda_status": "FDA-approved for other cancers (e.g., colorectal)",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "RMC-4630",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "SHP2 inhibitor to block RAS-MAPK signaling.",
+      "fda_status": "Phase 1/1b trials",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "LY3214996",
+      "proteins": [
+        "ERK2"
+      ],
+      "mechanism": "ERK inhibitor.",
+      "fda_status": "Phase 1/1b trials",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "IMM-6-415",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Immunotherapy targeting KRAS.",
+      "fda_status": "Phase 1/2",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "ARV-806",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Targets KRAS G12D.",
+      "fda_status": "Early-stage",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "ELI-002 7P",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Vaccine targeting KRAS.",
+      "fda_status": "Phase 1/2",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Disulfiram",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Covalently binds KRAS via copper-mediated mechanisms, inhibiting KRAS activity.",
+      "fda_status": "Approved for alcohol use disorder",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Metformin",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Indirectly suppresses KRAS signaling via AMPK activation.",
+      "fda_status": "Approved for type 2 diabetes",
+      "category": "repurposing_candidate"
+    },
+    {
+      "drug": "Aspirin",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Binds to switch-II pocket of KRAS, inhibiting G12D/C mutants.",
+      "fda_status": "Approved for analgesic, anti-inflammatory use",
       "category": "repurposing_candidate"
     },
     {
@@ -60,98 +123,69 @@
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "HMG-CoA reductase inhibitor; blocks mevalonate pathway disrupting KRAS prenylation and membrane localization",
-      "fda_status": "FDA-approved (hyperlipidemia, cardiovascular disease)",
+      "mechanism": "Inhibits KRAS prenylation via farnesyl pyrophosphate depletion.",
+      "fda_status": "Approved for hypercholesterolemia",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Efavirenz",
+      "drug": "Propranolol",
       "proteins": [
-        "p53"
+        "ERK2"
       ],
-      "mechanism": "Non-nucleoside reverse transcriptase inhibitor; suppresses LINE-1 retrotransposition that stabilizes mutant p53",
-      "fda_status": "FDA-approved (HIV infection)",
+      "mechanism": "Off-target ERK inhibition.",
+      "fda_status": "Approved for hypertension",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Zoledronic acid",
+      "drug": "Itraconazole",
       "proteins": [
         "KRAS"
       ],
-      "mechanism": "Bisphosphonate; inhibits HMG-CoA reductase downstream effects, blocking KRAS farnesylation and membrane localization",
-      "fda_status": "FDA-approved (osteoporosis, bone metastases)",
+      "mechanism": "Disrupts KRAS-GLI1 axis.",
+      "fda_status": "Approved for fungal infections",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Ibrutinib",
+      "drug": "Thalidomide",
       "proteins": [
-        "EGFR"
+        "ERK2"
       ],
-      "mechanism": "BTK inhibitor with off-target EGFR inhibition via reversible kinase domain binding",
-      "fda_status": "FDA-approved (mantle cell lymphoma, chronic lymphocytic leukemia)",
+      "mechanism": "Binds to ERK kinase domain, inhibiting phosphorylation.",
+      "fda_status": "Approved for multiple myeloma",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Adavosertib",
+      "drug": "Cimetidine",
       "proteins": [
-        "p53",
         "KRAS"
       ],
-      "mechanism": "Wee1 kinase inhibitor; abrogates G2/M checkpoint, exploits p53 deficiency and sensitizes KRAS-mutant cells to DNA damage",
-      "fda_status": "Investigational (advanced trials, ovarian cancer combinations)",
+      "mechanism": "Inhibits histamine-RAS-ERK axis.",
+      "fda_status": "Approved for peptic ulcers",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "Ganetespib",
+      "drug": "Verapamil",
       "proteins": [
-        "p53"
+        "ERK2"
       ],
-      "mechanism": "HSP90 inhibitor; degrades mutant p53 via HSP90 client destabilization",
-      "fda_status": "Investigational (Phase II solid tumors)",
+      "mechanism": "Off-target MAPK/ERK2 inhibition.",
+      "fda_status": "Approved for hypertension",
       "category": "repurposing_candidate"
     },
     {
-      "drug": "UCN-01",
+      "drug": "Doxycycline",
       "proteins": [
-        "p53"
+        "KRAS",
+        "ERK2"
       ],
-      "mechanism": "Protein kinase C inhibitor; Chk1 modulation restores p53-independent apoptosis in mutant lines",
-      "fda_status": "Investigational (leukemia, lymphoma, SCLC trials)",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "PEITC",
-      "proteins": [
-        "p53"
-      ],
-      "mechanism": "Phenethyl isothiocyanate; selectively inhibits p53 mutants (R175H/L), refolds/stabilizes mutant p53",
-      "fda_status": "Not FDA-approved (nutraceutical/dietary supplement)",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "APR-246",
-      "proteins": [
-        "p53"
-      ],
-      "mechanism": "p53 reactivator; reactivates p53 mutants (R273H/L), restores tumor suppression via DNA-binding domain correction",
-      "fda_status": "Investigational (myelodysplastic syndrome, ovarian cancer trials)",
-      "category": "repurposing_candidate"
-    },
-    {
-      "drug": "Metformin",
-      "proteins": [
-        "EGFR",
-        "KRAS"
-      ],
-      "mechanism": "AMPK activator; suppresses mTOR/EGFR-RAS signaling, inhibits metabolic reprogramming in KRAS-mutant cells",
-      "fda_status": "FDA-approved (type 2 diabetes)",
+      "mechanism": "Direct docking hits and indirect block of RAS-ERK via MMP inhibition.",
+      "fda_status": "Approved for bacterial infections",
       "category": "repurposing_candidate"
     }
   ],
-  "cancer_type": "Pleural mesothelioma",
+  "cancer_type": "pancreatic ductal adenocarcinoma",
   "protein_targets": [
-    "EGFR",
-    "p53",
-    "KRAS"
+    "KRAS",
+    "ERK2"
   ]
 }
