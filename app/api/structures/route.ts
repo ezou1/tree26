@@ -1,12 +1,8 @@
 import { searchPdb, pickBestStructure, downloadPdb } from "@/lib/pdb"
-import { lookupSmiles, searchCompoundsForTarget } from "@/lib/pubchem"
+import { lookupSmiles } from "@/lib/pubchem"
 import type { ReviewDrug, DockingTarget, Ligand } from "@/lib/types"
 
 export const maxDuration = 120
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
 
 export async function POST(req: Request) {
   try {
@@ -34,124 +30,124 @@ export async function POST(req: Request) {
         const targets: DockingTarget[] = []
 
         try {
-          for (let pi = 0; pi < proteins.length; pi++) {
-            const protein = proteins[pi]
+          send({
+            type: "progress",
+            message: `Processing ${proteins.length} protein targets in parallel...`,
+          })
 
-            // Search PDB
-            send({
-              type: "progress",
-              message: `Searching PDB for ${protein} structure... (${pi + 1}/${proteins.length})`,
-            })
-
-            let candidates = await searchPdb(protein)
-            if (candidates.length === 0) {
-              const gene = protein.split(/\s+/)[0]
-              if (gene !== protein) {
-                candidates = await searchPdb(gene)
-              }
-            }
-
-            let pdbId: string | null = null
-            let pdbContentB64: string | null = null
-
-            if (candidates.length > 0) {
-              const best = await pickBestStructure(candidates)
-              if (best) {
-                pdbId = best.pdbId
-                send({
-                  type: "progress",
-                  message: `Downloading PDB structure ${best.pdbId} for ${protein}...`,
-                })
-                pdbContentB64 = await downloadPdb(best.pdbId)
-              }
-            }
-
-            // Look up SMILES for known drugs
-            const ligands: Ligand[] = []
-            const existingSmiles = new Set<string>()
-            const proteinLower = protein.toLowerCase()
-
-            const matchedDrugs = drugs.filter((d) =>
-              (d.proteins || []).some((p) => {
-                const pl = p.toLowerCase()
-                return pl.includes(proteinLower) || proteinLower.includes(pl)
+          // Process all proteins in parallel
+          const proteinPromises = proteins.map(async (protein, pi) => {
+            // --- PDB search + SMILES lookups run concurrently ---
+            const pdbPromise = (async () => {
+              send({
+                type: "progress",
+                message: `Searching PDB for ${protein}... (${pi + 1}/${proteins.length})`,
               })
-            )
-            const drugsForProtein = matchedDrugs.length > 0 ? matchedDrugs : drugs
 
-            send({
-              type: "progress",
-              message: `Looking up SMILES for ${drugsForProtein.length} drugs targeting ${protein}...`,
-            })
+              let candidates = await searchPdb(protein)
+              if (candidates.length === 0) {
+                const gene = protein.split(/\s+/)[0]
+                if (gene !== protein) {
+                  candidates = await searchPdb(gene)
+                }
+              }
 
-            for (let di = 0; di < drugsForProtein.length; di++) {
-              const drugInfo = drugsForProtein[di]
-              await delay(250)
+              let pdbId: string | null = null
+              let pdbContentB64: string | null = null
+
+              if (candidates.length > 0) {
+                const best = await pickBestStructure(candidates)
+                if (best) {
+                  pdbId = best.pdbId
+                  send({
+                    type: "progress",
+                    message: `Downloading PDB structure ${best.pdbId} for ${protein}...`,
+                  })
+                  pdbContentB64 = await downloadPdb(best.pdbId)
+                }
+              }
+
+              return { pdbId, pdbContentB64 }
+            })()
+
+            const smilesPromise = (async () => {
+              const ligands: Ligand[] = []
+              const proteinLower = protein.toLowerCase()
+
+              const matchedDrugs = drugs.filter((d) =>
+                (d.proteins || []).some((p) => {
+                  const pl = p.toLowerCase()
+                  return pl.includes(proteinLower) || proteinLower.includes(pl)
+                })
+              )
+              const drugsForProtein = matchedDrugs.length > 0 ? matchedDrugs : drugs
 
               send({
                 type: "progress",
-                message: `Looking up ${drugInfo.drug}... (${di + 1}/${drugsForProtein.length} for ${protein})`,
+                message: `Looking up SMILES for ${drugsForProtein.length} drugs targeting ${protein}...`,
               })
 
-              const result = await lookupSmiles(drugInfo.drug)
-
-              const smiles = result?.smiles || ""
-              if (smiles) {
-                existingSmiles.add(smiles)
-                console.log(`[structures] ✓ ${drugInfo.drug} → CID ${result?.cid}`)
-              } else {
-                console.log(`[structures] ✗ ${drugInfo.drug} — no SMILES found`)
-              }
-
-              ligands.push({
-                name: drugInfo.drug,
-                smiles,
-                mechanism: drugInfo.mechanism || "",
-                fdaStatus: drugInfo.fdaStatus || "Unknown",
-                source: result ? `pubchem_cid_${result.cid}` : "no_smiles",
-              })
-            }
-
-            // Discover bioactive compounds from PubChem
-            send({
-              type: "progress",
-              message: `Searching PubChem bioassays for ${protein}...`,
-            })
-            const extra = await searchCompoundsForTarget(protein, 50)
-            console.log(`[structures] ${protein}: ${extra.length} bioactive compounds from PubChem`)
-            for (const c of extra) {
-              if (c.smiles && !existingSmiles.has(c.smiles)) {
-                ligands.push({
-                  name: c.iupacName || `CID_${c.cid}`,
-                  smiles: c.smiles,
-                  mechanism: "Bioactive — PubChem target search",
-                  fdaStatus: "Unknown — requires verification",
-                  source: `pubchem_cid_${c.cid}`,
+              // Look up all drugs concurrently (PubChem has internal delays)
+              const lookupResults = await Promise.allSettled(
+                drugsForProtein.map(async (drugInfo) => {
+                  const result = await lookupSmiles(drugInfo.drug)
+                  return { drugInfo, result }
                 })
-                existingSmiles.add(c.smiles)
+              )
+
+              for (const r of lookupResults) {
+                if (r.status !== "fulfilled") continue
+                const { drugInfo, result } = r.value
+                const smiles = result?.smiles || ""
+                if (smiles) {
+                  console.log(`[structures] ✓ ${drugInfo.drug} → CID ${result?.cid}`)
+                } else {
+                  console.log(`[structures] ✗ ${drugInfo.drug} — no SMILES found`)
+                }
+
+                ligands.push({
+                  name: drugInfo.drug,
+                  smiles,
+                  mechanism: drugInfo.mechanism || "",
+                  fdaStatus: drugInfo.fdaStatus || "Unknown",
+                  source: result ? `pubchem_cid_${result.cid}` : "no_smiles",
+                })
               }
-            }
 
-            // Drop empty SMILES and limit to 5 ligands total for speed
-            const validLigands = ligands.filter((l) => l.smiles).slice(0, 5)
+              return ligands
+            })()
 
-            console.log(`[structures] ${protein}: ${validLigands.length} valid ligands (PDB: ${pdbId || "none"})`)
+            // Run PDB and SMILES lookups concurrently
+            const [pdbResult, drugLigands] = await Promise.all([pdbPromise, smilesPromise])
+
+            // Keep only drugs with valid SMILES
+            const validLigands = drugLigands.filter((l) => l.smiles)
+
+            console.log(`[structures] ${protein}: ${validLigands.length} valid ligands (PDB: ${pdbResult.pdbId || "none"})`)
 
             const target: DockingTarget = {
               protein,
-              pdbId,
-              pdbContentB64,
+              pdbId: pdbResult.pdbId,
+              pdbContentB64: pdbResult.pdbContentB64,
               ligands: validLigands,
             }
-            targets.push(target)
 
-            // Emit this target immediately so frontend can update
+            // Emit this target immediately
             send({
               type: "target",
               target,
               index: pi,
               total: proteins.length,
             })
+
+            return target
+          })
+
+          const results = await Promise.allSettled(proteinPromises)
+          for (const r of results) {
+            if (r.status === "fulfilled") {
+              targets.push(r.value)
+            }
           }
 
           send({

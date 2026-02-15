@@ -71,7 +71,7 @@ function FdaStatusDisplay({ drug }: { drug: Drug }) {
 }
 
 function ConfidenceGauge({ value }: { value: number }) {
-  // Value is 0-1 from docking score
+  // Value is 0-1 confidence
   const pct = Math.round(value * 100)
   const circumference = 2 * Math.PI * 36
   const offset = circumference - (pct / 100) * circumference
@@ -109,12 +109,12 @@ function ConfidenceGauge({ value }: { value: number }) {
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="font-mono text-xl font-bold text-foreground">
-            {value.toFixed(2)}
+            {pct}%
           </span>
         </div>
       </div>
       <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
-        Docking Score
+        Confidence
       </span>
     </div>
   )
@@ -371,16 +371,22 @@ export function DrugDetailPanel({
   }
 
   // State 4: Normal view
+  const isAnalyzed = drug.confidenceScore !== null
+
   return (
     <div className="flex h-full flex-col">
       <div className="flex items-start justify-between border-b border-border p-4">
         <div>
           <h2 className="text-lg font-semibold text-foreground">{drug.name}</h2>
-          {drug.proteinTarget && (
+          {isAnalyzed && drug.proteinTarget ? (
             <p className="text-xs text-muted-foreground">
               Docked against {drug.proteinTarget}
             </p>
-          )}
+          ) : !isAnalyzed ? (
+            <p className="text-xs text-amber-400">
+              Not Analyzed
+            </p>
+          ) : null}
         </div>
         <button
           type="button"

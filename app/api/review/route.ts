@@ -1,5 +1,7 @@
 import { queryPerplexity, parseJsonResponse } from "@/lib/perplexity"
+import { searchCompoundsForTarget } from "@/lib/pubchem"
 import type { ReviewDrug } from "@/lib/types"
+import { shortenDrugName } from "@/lib/types"
 
 export const maxDuration = 300 // 5 min — lit review makes several Perplexity calls
 
@@ -172,7 +174,10 @@ async function extractDrugProteinMap(
     "is an array of objects. Each object has: " +
     '"drug" (string), "proteins" (list of target protein symbols), ' +
     '"mechanism" (string), "fda_status" (string), ' +
-    '"category" ("mainstream" or "repurposing_candidate").'
+    '"category" ("mainstream" or "repurposing_candidate"), ' +
+    '"trial_status_for_targets" (string: describe if this drug has been tested ' +
+    'in clinical trials specifically for the listed protein targets, e.g. ' +
+    '"Phase 2 trial for KRAS G12C inhibition in NSCLC" or "No known trials for these targets").'
   const user =
     `From the following literature review sections about ${cancerType}, ` +
     `extract EVERY drug mentioned — both mainstream oncology drugs AND ` +
@@ -199,11 +204,12 @@ async function extractDrugProteinMap(
 
   const rawDrugs = (data.drugs as Record<string, unknown>[]) || []
   const drugs: ReviewDrug[] = rawDrugs.map((d) => ({
-    drug: (d.drug as string) || "",
+    drug: shortenDrugName((d.drug as string) || "", null, 40) || "Unknown",
     proteins: (d.proteins as string[]) || [],
     mechanism: (d.mechanism as string) || "",
     fdaStatus: (d.fdaStatus as string) || (d.fda_status as string) || "",
     category: (d.category as string) || "",
+    trialStatusForTargets: (d.trialStatusForTargets as string) || (d.trial_status_for_targets as string) || "",
   }))
 
   return {
@@ -333,14 +339,52 @@ export async function POST(req: Request) {
           const combined = drugReview + "\n\n" + repurposingReview
           const drugMap = await extractDrugProteinMap(combined, cancerType, proteins)
 
+          // Step 9: Search PubChem for bioactive compounds targeting each protein
+          send({ type: "progress", message: "Searching PubChem for bioactive compounds..." })
+          const existingDrugNames = new Set(
+            drugMap.drugs.map((d) => d.drug.toLowerCase())
+          )
+          const bioactiveDrugs: ReviewDrug[] = []
+
+          const bioactiveResults = await Promise.allSettled(
+            proteins.map((protein) => searchCompoundsForTarget(protein, 15))
+          )
+
+          for (let i = 0; i < proteins.length; i++) {
+            const r = bioactiveResults[i]
+            if (r.status !== "fulfilled") continue
+            const protein = proteins[i]
+            for (const c of r.value) {
+              const name = shortenDrugName(c.iupacName, c.cid)
+              if (existingDrugNames.has(name.toLowerCase())) continue
+              existingDrugNames.add(name.toLowerCase())
+              bioactiveDrugs.push({
+                drug: name,
+                proteins: [protein],
+                mechanism: "Bioactive compound — PubChem target search",
+                fdaStatus: "Unknown — requires verification",
+                category: "repurposing_candidate",
+              })
+            }
+          }
+
+          if (bioactiveDrugs.length > 0) {
+            send({
+              type: "progress",
+              message: `Found ${bioactiveDrugs.length} additional bioactive compounds from PubChem`,
+            })
+          }
+
+          const allDrugs = [...drugMap.drugs, ...bioactiveDrugs]
+
           // Emit drugs
-          send({ type: "drugs", drugs: drugMap.drugs })
+          send({ type: "drugs", drugs: allDrugs })
 
           // Final complete event
           send({
             type: "complete",
             proteins,
-            drugs: drugMap.drugs,
+            drugs: allDrugs,
             reviewMd,
             papersAnalyzed: cancerPapers.length + drugPapers.length,
           })
