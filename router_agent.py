@@ -153,34 +153,15 @@ def split_text_for_chat(text: str, max_chars: int) -> List[str]:
 
 
 async def send_long_text(ctx: Context, recipient: str, text: str) -> None:
-    """Send text across one or more chat messages with logging."""
-    chunks = split_text_for_chat(text, MAX_CHAT_CHARS)
+    """Send full paper in a single chat message."""
     ctx.logger.info(
         "Sending final paper to user "
-        f"(chars={len(text)}, chunks={len(chunks)}, max_chunk={MAX_CHAT_CHARS})"
+        f"(chars={len(text)}, mode=single_message)"
     )
 
-    if len(chunks) == 1:
-        await send_text_with_retry(ctx, recipient, chunks[0])
-        await send_text_with_retry(ctx, recipient, "Done: paper delivery complete.")
-        ctx.logger.info("Sent final paper in a single message")
-        return
-
-    await send_text_with_retry(
-        ctx,
-        recipient,
-        f"Paper is long, sending in {len(chunks)} parts.",
-    )
-
-    for idx, chunk in enumerate(chunks, start=1):
-        header = f"[Paper part {idx}/{len(chunks)}]\n\n"
-        await send_text_with_retry(ctx, recipient, header + chunk)
-        ctx.logger.info(
-            f"Sent paper chunk {idx}/{len(chunks)} (chars={len(chunk)})"
-        )
-
+    await send_text_with_retry(ctx, recipient, text)
     await send_text_with_retry(ctx, recipient, "Done: paper delivery complete.")
-    ctx.logger.info("Sent final paper delivery completion marker")
+    ctx.logger.info("Sent full paper and delivery completion marker")
 
 
 async def run_pipeline(ctx: Context, cancer_type: str) -> Dict[str, Any]:
