@@ -1,0 +1,58 @@
+{
+  "drugs": [
+    {
+      "drug": "sotorasib",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Covalent binding to GDP-bound KRAS G12C",
+      "fda_status": "Approved (NSCLC, CRC combo)"
+    },
+    {
+      "drug": "adagrasib",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "Covalent binding to GDP-bound KRAS G12C",
+      "fda_status": "Approved (NSCLC, CRC)"
+    },
+    {
+      "drug": "daraxonrasib (RMC-6236)",
+      "proteins": [
+        "KRAS"
+      ],
+      "mechanism": "RAS(ON) multi-selective; binds active GTP-RAS",
+      "fda_status": "Breakthrough Therapy (PDAC)"
+    },
+    {
+      "drug": "MRTX1133",
+      "proteins": [
+        "KRAS G12D"
+      ],
+      "mechanism": "Direct switch-II pocket binding to KRAS G12D",
+      "fda_status": "Phase 1/2 (PDAC)"
+    },
+    {
+      "drug": "VS-7375 (GFH375)",
+      "proteins": [
+        "KRAS G12D"
+      ],
+      "mechanism": "Oral direct KRAS G12D inhibition",
+      "fda_status": "Fast Track (PDAC)"
+    },
+    {
+      "drug": "zoldonrasib",
+      "proteins": [
+        "KRAS G12D"
+      ],
+      "mechanism": "Direct KRAS G12D inhibition",
+      "fda_status": "Entering clinic"
+    }
+  ],
+  "cancer_type": "pancreatic cancer",
+  "protein_targets": [
+    "KRAS",
+    "KRAS G12D",
+    "CD44"
+  ]
+}
