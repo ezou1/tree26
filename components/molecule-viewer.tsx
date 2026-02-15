@@ -18,7 +18,8 @@ export function MoleculeViewer({
   height = 200,
 }: MoleculeViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const viewerRef = useRef<unknown>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const viewerRef = useRef<any>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
@@ -31,10 +32,11 @@ export function MoleculeViewer({
     }
 
     let cancelled = false
+    setLoading(true)
+    setError(null)
 
     async function init() {
       try {
-        // Dynamic import — 3Dmol needs window/document
         // @ts-expect-error — no type declarations for 3dmol
         const $3Dmol = await import("3dmol/build/3Dmol-min.js")
 
@@ -44,26 +46,42 @@ export function MoleculeViewer({
         containerRef.current.innerHTML = ""
 
         const viewer = $3Dmol.createViewer(containerRef.current, {
-          backgroundColor: "transparent",
+          backgroundColor: "0xffffff",
+          backgroundAlpha: 0,
           antialias: true,
         })
         viewerRef.current = viewer
 
         if (cid) {
-          // Fetch 3D conformer SDF from PubChem
-          const sdfUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/SDF?record_type=3d`
-          const res = await fetch(sdfUrl, {
+          // Try 3D conformer first, fall back to 2D SDF if unavailable
+          let sdf: string | null = null
+          const sdf3dUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/SDF?record_type=3d`
+          const res3d = await fetch(sdf3dUrl, {
             signal: AbortSignal.timeout(15000),
           })
-
-          if (!res.ok) throw new Error(`PubChem SDF: ${res.status}`)
-          const sdf = await res.text()
+          if (res3d.ok) {
+            sdf = await res3d.text()
+          } else {
+            // 3D not available — fetch 2D structure instead
+            const sdf2dUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${cid}/SDF`
+            const res2d = await fetch(sdf2dUrl, {
+              signal: AbortSignal.timeout(15000),
+            })
+            if (res2d.ok) {
+              sdf = await res2d.text()
+            }
+          }
 
           if (cancelled) return
 
-          viewer.addModel(sdf, "sdf")
+          if (sdf) {
+            viewer.addModel(sdf, "sdf")
+          } else if (smiles) {
+            viewer.addModel(smiles, "smi")
+          } else {
+            throw new Error("No structure available")
+          }
         } else if (smiles) {
-          // Use SMILES — 3Dmol can parse it but quality is lower
           viewer.addModel(smiles, "smi")
         }
 
@@ -88,7 +106,29 @@ export function MoleculeViewer({
 
     return () => {
       cancelled = true
-      viewerRef.current = null
+      // Properly dispose the 3Dmol viewer to prevent memory leaks
+      if (viewerRef.current) {
+        try {
+          viewerRef.current.removeAllModels()
+          viewerRef.current.clear()
+          // Release WebGL context to free GPU memory
+          const canvas = containerRef.current?.querySelector("canvas")
+          if (canvas) {
+            const gl =
+              canvas.getContext("webgl") || canvas.getContext("webgl2")
+            if (gl) {
+              const ext = gl.getExtension("WEBGL_lose_context")
+              if (ext) ext.loseContext()
+            }
+          }
+        } catch {
+          // ignore cleanup errors
+        }
+        viewerRef.current = null
+      }
+      if (containerRef.current) {
+        containerRef.current.innerHTML = ""
+      }
     }
   }, [cid, smiles])
 

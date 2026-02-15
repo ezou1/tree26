@@ -132,17 +132,18 @@ export async function pickBestStructure(
 ): Promise<PdbCandidate | null> {
   if (candidates.length === 0) return null
 
-  // Enrich with metadata (check first 5 candidates)
-  const enriched: PdbCandidate[] = []
-  for (const c of candidates.slice(0, 5)) {
-    const meta = await getPdbMetadata(c.pdbId)
-    enriched.push({
-      ...c,
-      resolution: meta.resolution,
-      hasLigands: meta.hasLigands,
-      title: meta.title,
+  // Enrich with metadata in parallel (check first 5 candidates)
+  const enriched = await Promise.all(
+    candidates.slice(0, 5).map(async (c) => {
+      const meta = await getPdbMetadata(c.pdbId)
+      return {
+        ...c,
+        resolution: meta.resolution,
+        hasLigands: meta.hasLigands,
+        title: meta.title,
+      }
     })
-  }
+  )
 
   // Sort: ligands first, then by resolution (lower is better)
   enriched.sort((a, b) => {

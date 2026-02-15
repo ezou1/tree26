@@ -24,6 +24,7 @@ export interface Drug {
   confidenceScore: number | null
   proteinTarget: string | null
   round: number
+  trialStatusForTargets?: string
 }
 
 export interface LiteratureReview {

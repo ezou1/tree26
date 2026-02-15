@@ -2,12 +2,9 @@ import { NextResponse } from "next/server"
 import { queryPerplexity, parseJsonResponse } from "@/lib/perplexity"
 import { lookupSmiles, search3dSimilar } from "@/lib/pubchem"
 import type { ReasoningDecision, DockingTarget, DockingResult, Ligand } from "@/lib/types"
+import { shortenDrugName } from "@/lib/types"
 
 export const maxDuration = 120
-
-function delay(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
 
 export async function POST(req: Request) {
   try {
@@ -50,19 +47,24 @@ export async function POST(req: Request) {
         }
       }
 
-      for (const cid of seedCids) {
-        await delay(250)
-        const similar = await search3dSimilar(cid, 10)
-        for (const c of similar) {
+      // Search all seed CIDs in parallel
+      const similarResults = await Promise.allSettled(
+        seedCids.map((cid) => search3dSimilar(cid, 20))
+      )
+
+      for (let i = 0; i < seedCids.length; i++) {
+        const r = similarResults[i]
+        if (r.status !== "fulfilled") continue
+        const cid = seedCids[i]
+        for (const c of r.value) {
           if (!c.smiles) continue
           const lig: Ligand = {
-            name: c.iupacName || `CID_${c.cid}`,
+            name: shortenDrugName(c.iupacName, c.cid),
             smiles: c.smiles,
             mechanism: `3D-similar to CID ${cid} (ST≥0.80, CT≥0.50)`,
             fdaStatus: "Unknown — requires verification",
             source: `pubchem_3dsim_cid_${c.cid}_from_${cid}`,
           }
-          // Add to all proteins
           for (const protein of proteins) {
             if (!newLigandsByProtein[protein]) newLigandsByProtein[protein] = []
             newLigandsByProtein[protein].push(lig)
@@ -89,10 +91,17 @@ export async function POST(req: Request) {
         }
       }
 
-      // Look up SMILES for each drug
-      for (const drugName of drugNames) {
-        await delay(250)
-        const result = await lookupSmiles(drugName)
+      // Look up SMILES for all drugs in parallel
+      const lookupResults = await Promise.allSettled(
+        drugNames.map(async (drugName) => {
+          const result = await lookupSmiles(drugName)
+          return { drugName, result }
+        })
+      )
+
+      for (const r of lookupResults) {
+        if (r.status !== "fulfilled") continue
+        const { drugName, result } = r.value
         if (!result?.smiles) continue
 
         const lig: Ligand = {

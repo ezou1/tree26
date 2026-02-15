@@ -6,6 +6,7 @@ export interface ReviewDrug {
   mechanism: string
   fdaStatus: string
   category: string
+  trialStatusForTargets?: string
 }
 
 export interface Ligand {
@@ -69,6 +70,23 @@ export interface DisplayDrug {
   confidenceRaw: number | null
   proteinTarget: string | null
   round: number
+  trialStatusForTargets?: string
+}
+
+// Chat types
+export interface ChatMessage {
+  id: string
+  role: "system" | "user" | "assistant"
+  content: string
+  timestamp: number
+  actions?: ChatAction[]
+}
+
+export interface ChatAction {
+  id: string
+  label: string
+  value: string
+  variant?: "primary" | "secondary" | "outline"
 }
 
 // SSE event types for docking streaming
@@ -101,6 +119,21 @@ export type DockSSEEvent =
   | DockSSETargetComplete
   | DockSSEComplete
   | DockSSEError
+
+/**
+ * Shorten a drug name — if longer than maxLen, fall back to CID_xxx format.
+ * Handles IUPAC names, complex chemical names, etc.
+ */
+export function shortenDrugName(
+  name: string | undefined | null,
+  cid?: number | null,
+  maxLen: number = 30
+): string {
+  if (!name || name.length > maxLen) {
+    return cid ? `CID_${cid}` : name || "Unknown"
+  }
+  return name
+}
 
 // Helper: parse FDA status string into display category
 export function parseFdaCategory(
@@ -142,6 +175,7 @@ export function reviewDrugToDisplay(
     confidenceRaw: null,
     proteinTarget: null,
     round: 0,
+    trialStatusForTargets: drug.trialStatusForTargets,
   }
 }
 

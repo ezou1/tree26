@@ -17,7 +17,7 @@ Test mode:
 
 Environment variables:
     RUNPOD_API_KEY      - Your RunPod API key
-    RUNPOD_ENDPOINT_ID  - Your RunPod serverless endpoint ID (default: 5h7ezi9wyaqk5u)
+    RUNPOD_ENDPOINT_ID  - Your RunPod serverless endpoint ID (default: a15lcnozlsx6f8)
 """
 
 import argparse
@@ -42,7 +42,7 @@ except ImportError:
 # Configuration
 # ---------------------------------------------------------------------------
 
-DEFAULT_ENDPOINT_ID = "5h7ezi9wyaqk5u"
+DEFAULT_ENDPOINT_ID = "a15lcnozlsx6f8"
 INPUT_FILE = "agent2_output.json"
 OUTPUT_FILE = "agent3_output.json"
 

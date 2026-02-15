@@ -59,6 +59,35 @@ export async function lookupSmiles(
 ): Promise<PubChemCompound | null> {
   if (!drugName) return null
 
+  // Handle CID_xxx names — look up by CID directly
+  const cidMatch = drugName.match(/^CID_(\d+)$/)
+  if (cidMatch) {
+    const cid = cidMatch[1]
+    try {
+      const url = `${PUBCHEM_BASE}/compound/cid/${cid}/property/IsomericSMILES,CanonicalSMILES,IUPACName,MolecularFormula/JSON`
+      const res = await fetch(url, { signal: AbortSignal.timeout(15000) })
+      if (!res.ok) return null
+      const data = await res.json()
+      const props = data?.PropertyTable?.Properties?.[0]
+      if (!props) return null
+      const smiles =
+        props?.CanonicalSMILES ||
+        props?.IsomericSMILES ||
+        props?.ConnectivitySMILES ||
+        props?.SMILES ||
+        ""
+      if (!smiles) return null
+      return {
+        cid: props.CID,
+        smiles,
+        iupacName: props.IUPACName || "",
+        molecularFormula: props.MolecularFormula || "",
+      }
+    } catch {
+      return null
+    }
+  }
+
   // Build candidate name variants
   const variants: string[] = [drugName]
 

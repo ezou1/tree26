@@ -73,14 +73,17 @@ export async function POST(req: Request) {
             const jobIds: string[] = []
             for (let i = 0; i < chunks.length; i++) {
               try {
+                const currentLigand = chunks[i][0]
+                const origLigand = safeToOriginal[currentLigand.name]
                 const jobId = await submitJob(pdbContentB64, chunks[i])
                 jobIds.push(jobId)
                 send({
                   type: "progress",
                   protein,
-                  drugIndex: i * 10,
+                  drugIndex: i + 1,
                   drugTotal: dockLigands.length,
-                  message: `Submitted chunk ${i + 1}/${chunks.length} for ${protein}`,
+                  currentDrug: origLigand?.name || currentLigand.name,
+                  message: `Docking ${origLigand?.name || currentLigand.name} against ${protein} (${i + 1}/${dockLigands.length})`,
                 })
               } catch (err) {
                 send({
@@ -116,9 +119,10 @@ export async function POST(req: Request) {
                 send({
                   type: "progress",
                   protein,
-                  drugIndex: Math.min((i + 1) * 10, dockLigands.length),
+                  drugIndex: i + 1,
                   drugTotal: dockLigands.length,
-                  message: `Chunk ${i + 1}/${jobIds.length} complete for ${protein}`,
+                  currentDrug: null,
+                  message: `Completed ${i + 1}/${jobIds.length} for ${protein}`,
                 })
               } catch (err) {
                 send({
